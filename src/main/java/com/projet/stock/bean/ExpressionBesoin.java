@@ -28,12 +28,11 @@ public class ExpressionBesoin implements Serializable {
     private String reference;
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date dateExpressionBesoin;
-    
+
     @OneToOne
     private EntiteAdministrative entiteAdministrative;
     @OneToOne
     private Personnel personnel;
-     
 
     public Long getId() {
         return id;
@@ -74,7 +73,6 @@ public class ExpressionBesoin implements Serializable {
     public void setPersonnel(Personnel personnel) {
         this.personnel = personnel;
     }
-    
 
     @Override
     public int hashCode() {
@@ -100,5 +98,5 @@ public class ExpressionBesoin implements Serializable {
     public String toString() {
         return "com.projet.stock.bean.ExpressionBesoin[ id=" + id + " ]";
     }
-    
+
 }

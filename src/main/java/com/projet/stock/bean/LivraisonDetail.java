@@ -10,9 +10,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 
 /**
  *
@@ -27,11 +25,12 @@ public class LivraisonDetail implements Serializable {
     private Long id;
     private Double prix;
     private Double qte;
-    
-    @ManyToOne
-    private Magasin magasin;
+
     @ManyToOne
     private Produit produit;
+
+    @ManyToOne
+    private Magasin magasin;
 
     public Double getPrix() {
         return prix;
@@ -64,9 +63,6 @@ public class LivraisonDetail implements Serializable {
     public void setProduit(Produit produit) {
         this.produit = produit;
     }
-    
-    
-    
 
     public Long getId() {
         return id;
@@ -100,5 +96,5 @@ public class LivraisonDetail implements Serializable {
     public String toString() {
         return "com.projet.stock.bean.LivraisonDetail[ id=" + id + " ]";
     }
-    
+
 }

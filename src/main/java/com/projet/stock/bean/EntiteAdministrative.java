@@ -23,8 +23,7 @@ public class EntiteAdministrative implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String nom;
-    
-     
+
     public Long getId() {
         return id;
     }
@@ -40,8 +39,6 @@ public class EntiteAdministrative implements Serializable {
     public void setNom(String nom) {
         this.nom = nom;
     }
-    
-    
 
     @Override
     public int hashCode() {
@@ -67,5 +64,5 @@ public class EntiteAdministrative implements Serializable {
     public String toString() {
         return "com.projet.stock.bean.EntiteAdministrative[ id=" + id + " ]";
     }
-    
+
 }

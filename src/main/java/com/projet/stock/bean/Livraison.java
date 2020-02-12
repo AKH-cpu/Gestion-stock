@@ -11,6 +11,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
 /**
@@ -25,10 +26,21 @@ public class Livraison implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private Date dateLivraison;
-    @OneToOne
-    private ExpressionBesoin expressionBesoin;
     private String reference;
     private Double total;
+    @OneToOne
+    private ExpressionBesoin expressionBesoin;
+    @ManyToOne
+    private Fournisseur fournisseur;
+
+    public Fournisseur getFournisseur() {
+        return fournisseur;
+    }
+
+    public void setFournisseur(Fournisseur fournisseur) {
+        this.fournisseur = fournisseur;
+    }
+    
     
 
     public Long getId() {

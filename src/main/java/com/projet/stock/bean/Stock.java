@@ -6,15 +6,11 @@
 package com.projet.stock.bean;
 
 import java.io.Serializable;
-import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 
 /**
  *
@@ -26,12 +22,13 @@ public class Stock implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-   private Long id;
-   private Double qte;
-   private Double qteDiff;
-   @ManyToOne
-   private Magasin magasin;
-   @ManyToOne
+    private Long id;
+    private Double qte;
+    private Double qteDiff;
+
+    @ManyToOne
+    private Magasin magasin;
+    @ManyToOne
     private Produit produit;
 
     public Long getId() {
@@ -94,6 +91,4 @@ public class Stock implements Serializable {
         this.produit = produit;
     }
 
-  
-    
 }

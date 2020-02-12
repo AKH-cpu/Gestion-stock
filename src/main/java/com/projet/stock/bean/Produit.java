@@ -21,15 +21,15 @@ import javax.persistence.OneToMany;
 @Entity
 public class Produit implements Serializable {
 
-    @OneToMany(mappedBy = "produit")
-    private List<ExpressionBesoinDetail> expressionBesoinDetails;
-
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    private String reference;
     private String libelle;
-    private  String reference;
+
+    @OneToMany(mappedBy = "produit")
+    private List<ExpressionBesoinDetail> expressionBesoinDetails;
 
     public List<ExpressionBesoinDetail> getExpressionBesoinDetails() {
         return expressionBesoinDetails;
@@ -62,12 +62,9 @@ public class Produit implements Serializable {
     public void setFamilleProduit(FamilleProduit familleProduit) {
         this.familleProduit = familleProduit;
     }
-    
-    
-    
+
     @ManyToOne
     private FamilleProduit familleProduit;
-    
 
     public Long getId() {
         return id;
@@ -101,5 +98,5 @@ public class Produit implements Serializable {
     public String toString() {
         return "com.projet.stock.bean.Produit[ id=" + id + " ]";
     }
-    
+
 }

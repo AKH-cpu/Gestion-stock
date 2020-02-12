@@ -39,8 +39,6 @@ public class FamilleProduit implements Serializable {
     public void setLibelle(String libelle) {
         this.libelle = libelle;
     }
-    
-    
 
     @Override
     public int hashCode() {
@@ -66,5 +64,5 @@ public class FamilleProduit implements Serializable {
     public String toString() {
         return "com.projet.stock.bean.FamilleProduit[ id=" + id + " ]";
     }
-    
+
 }

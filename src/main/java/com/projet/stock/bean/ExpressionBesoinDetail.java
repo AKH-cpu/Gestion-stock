@@ -25,10 +25,10 @@ public class ExpressionBesoinDetail implements Serializable {
     private Long id;
     private Double qte;
     private Double qteLivre;
-    
+
     @ManyToOne
     private ExpressionBesoin expressionBesoin;
-    
+
     @ManyToOne
     private Produit produit;
 
@@ -71,8 +71,6 @@ public class ExpressionBesoinDetail implements Serializable {
     public void setProduit(Produit produit) {
         this.produit = produit;
     }
-    
-    
 
     @Override
     public int hashCode() {
@@ -98,5 +96,5 @@ public class ExpressionBesoinDetail implements Serializable {
     public String toString() {
         return "com.projet.stock.bean.ExpressionBesoinDetail[ id=" + id + " ]";
     }
-    
+
 }
