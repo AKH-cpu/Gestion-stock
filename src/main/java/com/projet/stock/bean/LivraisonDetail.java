@@ -33,6 +33,41 @@ public class LivraisonDetail implements Serializable {
     @ManyToOne
     private Produit produit;
 
+    public Double getPrix() {
+        return prix;
+    }
+
+    public void setPrix(Double prix) {
+        this.prix = prix;
+    }
+
+    public Double getQte() {
+        return qte;
+    }
+
+    public void setQte(Double qte) {
+        this.qte = qte;
+    }
+
+    public Magasin getMagasin() {
+        return magasin;
+    }
+
+    public void setMagasin(Magasin magasin) {
+        this.magasin = magasin;
+    }
+
+    public Produit getProduit() {
+        return produit;
+    }
+
+    public void setProduit(Produit produit) {
+        this.produit = produit;
+    }
+    
+    
+    
+
     public Long getId() {
         return id;
     }

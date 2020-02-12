@@ -39,6 +39,40 @@ public class Livraison implements Serializable {
         this.id = id;
     }
 
+    public Date getDateLivraison() {
+        return dateLivraison;
+    }
+
+    public void setDateLivraison(Date dateLivraison) {
+        this.dateLivraison = dateLivraison;
+    }
+
+    public ExpressionBesoin getExpressionBesoin() {
+        return expressionBesoin;
+    }
+
+    public void setExpressionBesoin(ExpressionBesoin expressionBesoin) {
+        this.expressionBesoin = expressionBesoin;
+    }
+
+    public String getReference() {
+        return reference;
+    }
+
+    public void setReference(String reference) {
+        this.reference = reference;
+    }
+
+    public Double getTotal() {
+        return total;
+    }
+
+    public void setTotal(Double total) {
+        this.total = total;
+    }
+
+    
+    
     @Override
     public int hashCode() {
         int hash = 0;

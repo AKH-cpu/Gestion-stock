@@ -32,6 +32,16 @@ public class FamilleProduit implements Serializable {
         this.id = id;
     }
 
+    public String getLibelle() {
+        return libelle;
+    }
+
+    public void setLibelle(String libelle) {
+        this.libelle = libelle;
+    }
+    
+    
+
     @Override
     public int hashCode() {
         int hash = 0;

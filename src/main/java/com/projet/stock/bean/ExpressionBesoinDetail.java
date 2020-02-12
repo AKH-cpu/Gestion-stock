@@ -40,6 +40,40 @@ public class ExpressionBesoinDetail implements Serializable {
         this.id = id;
     }
 
+    public Double getQte() {
+        return qte;
+    }
+
+    public void setQte(Double qte) {
+        this.qte = qte;
+    }
+
+    public Double getQteLivre() {
+        return qteLivre;
+    }
+
+    public void setQteLivre(Double qteLivre) {
+        this.qteLivre = qteLivre;
+    }
+
+    public ExpressionBesoin getExpressionBesoin() {
+        return expressionBesoin;
+    }
+
+    public void setExpressionBesoin(ExpressionBesoin expressionBesoin) {
+        this.expressionBesoin = expressionBesoin;
+    }
+
+    public Produit getProduit() {
+        return produit;
+    }
+
+    public void setProduit(Produit produit) {
+        this.produit = produit;
+    }
+    
+    
+
     @Override
     public int hashCode() {
         int hash = 0;

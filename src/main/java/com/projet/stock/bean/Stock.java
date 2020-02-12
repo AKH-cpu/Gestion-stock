@@ -62,9 +62,38 @@ public class Stock implements Serializable {
         return true;
     }
 
-    @Override
-    public String toString() {
-        return "com.projet.stock.bean.Stock[ id=" + id + " ]";
+    public Double getQte() {
+        return qte;
     }
+
+    public void setQte(Double qte) {
+        this.qte = qte;
+    }
+
+    public Double getQteDiff() {
+        return qteDiff;
+    }
+
+    public void setQteDiff(Double qteDiff) {
+        this.qteDiff = qteDiff;
+    }
+
+    public Magasin getMagasin() {
+        return magasin;
+    }
+
+    public void setMagasin(Magasin magasin) {
+        this.magasin = magasin;
+    }
+
+    public Produit getProduit() {
+        return produit;
+    }
+
+    public void setProduit(Produit produit) {
+        this.produit = produit;
+    }
+
+  
     
 }

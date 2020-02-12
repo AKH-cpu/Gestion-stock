@@ -43,6 +43,39 @@ public class ExpressionBesoin implements Serializable {
         this.id = id;
     }
 
+    public String getReference() {
+        return reference;
+    }
+
+    public void setReference(String reference) {
+        this.reference = reference;
+    }
+
+    public Date getDateExpressionBesoin() {
+        return dateExpressionBesoin;
+    }
+
+    public void setDateExpressionBesoin(Date dateExpressionBesoin) {
+        this.dateExpressionBesoin = dateExpressionBesoin;
+    }
+
+    public EntiteAdministrative getEntiteAdministrative() {
+        return entiteAdministrative;
+    }
+
+    public void setEntiteAdministrative(EntiteAdministrative entiteAdministrative) {
+        this.entiteAdministrative = entiteAdministrative;
+    }
+
+    public Personnel getPersonnel() {
+        return personnel;
+    }
+
+    public void setPersonnel(Personnel personnel) {
+        this.personnel = personnel;
+    }
+    
+
     @Override
     public int hashCode() {
         int hash = 0;

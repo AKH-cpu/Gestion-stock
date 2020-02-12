@@ -30,6 +30,40 @@ public class Produit implements Serializable {
     private Long id;
     private String libelle;
     private  String reference;
+
+    public List<ExpressionBesoinDetail> getExpressionBesoinDetails() {
+        return expressionBesoinDetails;
+    }
+
+    public void setExpressionBesoinDetails(List<ExpressionBesoinDetail> expressionBesoinDetails) {
+        this.expressionBesoinDetails = expressionBesoinDetails;
+    }
+
+    public String getLibelle() {
+        return libelle;
+    }
+
+    public void setLibelle(String libelle) {
+        this.libelle = libelle;
+    }
+
+    public String getReference() {
+        return reference;
+    }
+
+    public void setReference(String reference) {
+        this.reference = reference;
+    }
+
+    public FamilleProduit getFamilleProduit() {
+        return familleProduit;
+    }
+
+    public void setFamilleProduit(FamilleProduit familleProduit) {
+        this.familleProduit = familleProduit;
+    }
+    
+    
     
     @ManyToOne
     private FamilleProduit familleProduit;
