@@ -11,6 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 
 /**
  *
@@ -23,22 +24,16 @@ public class LivraisonDetail implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private Double prix;
     private Double qte;
+    
+    @OneToOne
+    private Livraison livraison;
 
     @ManyToOne
     private Produit produit;
 
     @ManyToOne
     private Magasin magasin;
-
-    public Double getPrix() {
-        return prix;
-    }
-
-    public void setPrix(Double prix) {
-        this.prix = prix;
-    }
 
     public Double getQte() {
         return qte;
@@ -51,6 +46,15 @@ public class LivraisonDetail implements Serializable {
     public Magasin getMagasin() {
         return magasin;
     }
+
+    public Livraison getLivraison() {
+        return livraison;
+    }
+
+    public void setLivraison(Livraison livraison) {
+        this.livraison = livraison;
+    }
+    
 
     public void setMagasin(Magasin magasin) {
         this.magasin = magasin;

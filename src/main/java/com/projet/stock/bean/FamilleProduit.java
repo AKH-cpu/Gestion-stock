@@ -6,10 +6,12 @@
 package com.projet.stock.bean;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 /**
  *
@@ -23,6 +25,8 @@ public class FamilleProduit implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String libelle;
+    @OneToMany
+    private List<Produit> produits;
 
     public Long getId() {
         return id;
@@ -40,12 +44,22 @@ public class FamilleProduit implements Serializable {
         this.libelle = libelle;
     }
 
+    public List<Produit> getProduits() {
+        return produits;
+    }
+
+    public void setProduits(List<Produit> produits) {
+        this.produits = produits;
+    }
+    
+
     @Override
     public int hashCode() {
         int hash = 0;
         hash += (id != null ? id.hashCode() : 0);
         return hash;
     }
+    
 
     @Override
     public boolean equals(Object object) {

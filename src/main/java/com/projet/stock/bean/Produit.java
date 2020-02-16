@@ -27,7 +27,13 @@ public class Produit implements Serializable {
     private Long id;
     private String reference;
     private String libelle;
-
+    private Double prixUnitaireHT;
+    private Double tauxTVA;
+    private Double prixUnitaireTTC;
+    
+    @ManyToOne
+    private FamilleProduit familleProduit;
+    
     @OneToMany(mappedBy = "produit")
     private List<ExpressionBesoinDetail> expressionBesoinDetails;
 
@@ -63,8 +69,31 @@ public class Produit implements Serializable {
         this.familleProduit = familleProduit;
     }
 
-    @ManyToOne
-    private FamilleProduit familleProduit;
+    public Double getPrixUnitaireHT() {
+        return prixUnitaireHT;
+    }
+
+    public void setPrixUnitaireHT(Double prixUnitaireHT) {
+        this.prixUnitaireHT = prixUnitaireHT;
+    }
+
+    public Double getTauxTVA() {
+        return tauxTVA;
+    }
+
+    public void setTauxTVA(Double tauxTVA) {
+        this.tauxTVA = tauxTVA;
+    }
+
+    public Double getPrixUnitaireTTC() {
+        return prixUnitaireTTC;
+    }
+
+    public void setPrixUnitaireTTC(Double prixUnitaireTTC) {
+        this.prixUnitaireTTC = prixUnitaireTTC;
+    }
+
+    
 
     public Long getId() {
         return id;
