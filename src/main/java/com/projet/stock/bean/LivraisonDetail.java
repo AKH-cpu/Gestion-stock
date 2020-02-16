@@ -24,6 +24,7 @@ public class LivraisonDetail implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    private String reference;
     private Double qte;
     
     @OneToOne
@@ -67,6 +68,16 @@ public class LivraisonDetail implements Serializable {
     public void setProduit(Produit produit) {
         this.produit = produit;
     }
+
+    public String getReference() {
+        return reference;
+    }
+
+    public void setReference(String reference) {
+        this.reference = reference;
+    }
+    
+    
 
     public Long getId() {
         return id;

@@ -15,5 +15,6 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface LivraisonDetailRepository extends JpaRepository<LivraisonDetail,Long>{
+    LivraisonDetail findByReference(String reference);
     
 }
