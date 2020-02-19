@@ -25,6 +25,7 @@ public class Magasin implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String nom;
+    private String reference;
     @ManyToOne
     private EntiteAdministrative entiteAdministrative;
 
@@ -35,6 +36,16 @@ public class Magasin implements Serializable {
     public void setNom(String nom) {
         this.nom = nom;
     }
+
+    public String getReference() {
+        return reference;
+    }
+
+    public void setReference(String reference) {
+        this.reference = reference;
+    }
+    
+    
 
     public EntiteAdministrative getEntiteAdministrative() {
         return entiteAdministrative;
