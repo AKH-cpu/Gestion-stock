@@ -27,7 +27,7 @@ public class ProduitRest {
     @Autowired
     ProduitService produitService;
 
-    @GetMapping("/reference")
+    @GetMapping("/reference/{reference}")
     public Produit findByReference(@PathVariable String reference) {
         return produitService.findByReference(reference);
     }

@@ -24,17 +24,24 @@ public class ProduitServiceImpl implements ProduitService {
 
     @Override
     public Produit findByReference(String reference) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return produitRepository.findByReference(reference);
     }
 
     @Override
-    public int save(Produit livraisonDetail) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public int save(Produit produit) {
+        Produit foundedProduit = findByReference(produit.getReference());
+        if (foundedProduit != null) {
+            return -1;
+        } else {
+            produitRepository.save(produit);
+            return 1;
+        }
+
     }
 
     @Override
     public List<Produit> findAll() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return produitRepository.findAll();
     }
 
 }

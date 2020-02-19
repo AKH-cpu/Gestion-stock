@@ -5,6 +5,7 @@
  */
 package com.projet.stock.service.impl;
 
+import com.projet.stock.bean.ExpressionBesoin;
 import com.projet.stock.bean.Livraison;
 import com.projet.stock.repository.LivraisonRepository;
 import com.projet.stock.service.facade.LivraisonService;
@@ -24,17 +25,24 @@ public class LivraisonServiceImpl implements LivraisonService {
 
     @Override
     public Livraison findbyReference(String reference) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return livraisonRepository.findByReference(reference);
     }
 
     @Override
     public int save(Livraison livraison) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Livraison foundedLivraison = findbyReference(livraison.getReference());
+
+        if (foundedLivraison != null) {
+            return -1;
+        } else {
+            livraisonRepository.save(livraison);
+            return 1;
+        }
     }
 
     @Override
     public List<Livraison> findAll() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return livraisonRepository.findAll();
     }
 
 }
