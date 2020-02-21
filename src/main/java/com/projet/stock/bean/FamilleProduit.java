@@ -14,7 +14,6 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
 /**
- *
  * @author AKH
  */
 @Entity
@@ -51,7 +50,7 @@ public class FamilleProduit implements Serializable {
     public void setProduits(List<Produit> produits) {
         this.produits = produits;
     }
-    
+
 
     @Override
     public int hashCode() {
@@ -59,7 +58,7 @@ public class FamilleProduit implements Serializable {
         hash += (id != null ? id.hashCode() : 0);
         return hash;
     }
-    
+
 
     @Override
     public boolean equals(Object object) {

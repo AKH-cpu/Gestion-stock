@@ -6,18 +6,23 @@
 package com.projet.stock.service.facade;
 
 import com.projet.stock.bean.Produit;
+import org.springframework.data.repository.query.Param;
+
 import java.util.List;
 
 /**
- *
  * @author AKH
  */
 public interface ProduitService {
 
     Produit findByReference(String reference);
 
+    int deleteByReference(String reference);
+
     int save(Produit livraisonDetail);
 
     List<Produit> findAll();
+
+    List<Produit> findByLibelleFamille(String libelle);
 
 }

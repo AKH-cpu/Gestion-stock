@@ -7,17 +7,13 @@ package com.projet.stock.ws.rest;
 
 import com.projet.stock.bean.Produit;
 import com.projet.stock.service.facade.ProduitService;
+
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
- *
  * @author AKH
  */
 @RestController
@@ -32,6 +28,11 @@ public class ProduitRest {
         return produitService.findByReference(reference);
     }
 
+    @DeleteMapping("/reference/{reference}")
+    public int deleteByReference(@PathVariable String reference) {
+        return produitService.deleteByReference(reference);
+    }
+
     @PostMapping("/")
     public int save(@RequestBody Produit produit) {
         return produitService.save(produit);
@@ -42,4 +43,8 @@ public class ProduitRest {
         return produitService.findAll();
     }
 
+    @GetMapping("/familleProduit/libelle/{libelle}")
+    public List<Produit> findByLibelleFamille(@PathVariable String libelle) {
+        return produitService.findByLibelleFamille(libelle);
+    }
 }

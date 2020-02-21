@@ -12,7 +12,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 /**
- *
  * @author AKH
  */
 @Entity
@@ -22,6 +21,7 @@ public class EntiteAdministrative implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    private String reference;
     private String nom;
 
     public Long getId() {
@@ -38,6 +38,14 @@ public class EntiteAdministrative implements Serializable {
 
     public void setNom(String nom) {
         this.nom = nom;
+    }
+
+    public String getReference() {
+        return reference;
+    }
+
+    public void setReference(String reference) {
+        this.reference = reference;
     }
 
     @Override

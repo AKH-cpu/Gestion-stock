@@ -15,7 +15,6 @@ import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 
 /**
- *
  * @author AKH
  */
 @Entity

@@ -13,7 +13,6 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
 /**
- *
  * @author AKH
  */
 @Entity

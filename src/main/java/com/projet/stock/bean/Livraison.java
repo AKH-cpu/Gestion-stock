@@ -16,7 +16,6 @@ import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 
 /**
- *
  * @author AKH
  */
 @Entity
@@ -30,7 +29,7 @@ public class Livraison implements Serializable {
     private Date dateLivraison;
     private String reference;
     private Double total;
-    
+
     @OneToOne
     private ExpressionBesoin expressionBesoin;
     @ManyToOne
@@ -43,8 +42,6 @@ public class Livraison implements Serializable {
     public void setFournisseur(Fournisseur fournisseur) {
         this.fournisseur = fournisseur;
     }
-    
-    
 
     public Long getId() {
         return id;
@@ -86,8 +83,7 @@ public class Livraison implements Serializable {
         this.total = total;
     }
 
-    
-    
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -112,5 +108,5 @@ public class Livraison implements Serializable {
     public String toString() {
         return "com.projet.stock.bean.Livraison[ id=" + id + " ]";
     }
-    
+
 }
