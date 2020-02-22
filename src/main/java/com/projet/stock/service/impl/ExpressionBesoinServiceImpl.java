@@ -7,7 +7,7 @@ package com.projet.stock.service.impl;
 
 import com.projet.stock.bean.Produit;
 import com.projet.stock.repository.ExpressionBesoinRepository;
-import com.projet.stock.service.ExpressionBesoinService;
+import com.projet.stock.service.facade.ExpressionBesoinService;
 import java.util.Date;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
