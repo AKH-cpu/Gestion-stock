@@ -31,6 +31,8 @@ public class Livraison implements Serializable {
     private String reference;
     private Double total;
     
+    
+ 
     @OneToOne
     private ExpressionBesoin expressionBesoin;
     @ManyToOne
