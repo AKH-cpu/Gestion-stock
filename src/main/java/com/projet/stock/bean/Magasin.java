@@ -24,9 +24,23 @@ public class Magasin implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    private String refarence;
+    
     private String nom;
     @ManyToOne
     private EntiteAdministrative entiteAdministrative;
+
+    public String getRefarence() {
+        return refarence;
+    }
+
+    public void setRefarence(String refarence) {
+        this.refarence = refarence;
+    }
+    
+    
+    
+    
 
     public String getNom() {
         return nom;
