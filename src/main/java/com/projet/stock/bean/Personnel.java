@@ -29,7 +29,23 @@ public class Personnel implements Serializable {
     private String telephone;
     private String fonction ;
 
-    @OneToOne(mappedBy = "chef")
+    public String getFonction() {
+        return fonction;
+    }
+
+    public void setFonction(String fonction) {
+        this.fonction = fonction;
+    }
+
+    public EntiteAdministrative getEntiteAdministrative() {
+        return entiteAdministrative;
+    }
+
+    public void setEntiteAdministrative(EntiteAdministrative entiteAdministrative) {
+        this.entiteAdministrative = entiteAdministrative;
+    }
+
+    
     @ManyToOne
     private EntiteAdministrative entiteAdministrative;
 

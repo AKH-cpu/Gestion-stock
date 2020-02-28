@@ -22,15 +22,24 @@ import org.springframework.stereotype.Service;
 public class MagasinServiceImpl implements MagasinService {
 
     @Autowired
-    MagasinDao magasinDao;
+    private MagasinDao magasinDao;
+    
+    
     @Autowired
-    EntiteAdministrativeService entiteAdService;
+    private EntiteAdministrativeService entiteAdministrativeService;
 
     @Override
-    public Magasin findByReference(String refernce) {
-        return magasinDao.findByRefernce(refernce);
+    public Magasin findByReference(String reference) {
+        return magasinDao.findByReference(reference);
 
     }
+
+    @Override
+    public Magasin deleteByReference(String reference) {
+        return magasinDao.deleteByReference(reference);
+    }
+
+    
 
     @Override
     public List<Magasin> findAll() {
@@ -39,8 +48,8 @@ public class MagasinServiceImpl implements MagasinService {
 
     @Override
     public int save(Magasin magasin) {
-        Magasin foundedMagasin = magasinDao.findByRefernce(magasin.getRefarence());
-        EntiteAdministrative foundedEntite = entiteAdService.findbyNom(magasin.getEntiteAdministrative().getNom());
+        Magasin foundedMagasin = magasinDao.findByReference(magasin.getReference());
+        EntiteAdministrative foundedEntite = entiteAdministrativeService.findByReference(magasin.getEntiteAdministrative().getReference());
 
         if (foundedMagasin != null) {
             //magasin deja existe

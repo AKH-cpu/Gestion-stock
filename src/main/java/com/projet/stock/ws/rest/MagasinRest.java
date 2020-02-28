@@ -27,9 +27,9 @@ public class MagasinRest {
     @Autowired
     MagasinService magasinService;
     
-    @GetMapping("/referece/{reference}")
-    public Magasin findByReference(@PathVariable String refernce){
-        return magasinService.findByReference(refernce);
+    @GetMapping("/reference/{reference}")
+    public Magasin findByReference(@PathVariable String reference){
+        return magasinService.findByReference(reference);
     }
     
     @GetMapping("/findAll")

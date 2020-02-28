@@ -24,9 +24,40 @@ public class EntiteAdministrative implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    private String reference;
     private Long id;
     private String nom;
+    
+//    @@OneToOne
+//    private ExpressionBesoin expressionBesoin;
+
+    public String getReference() {
+        return reference;
+    }
+
+    public void setReference(String reference) {
+        this.reference = reference;
+    }
+
+    
+    public Personnel getChef() {
+        return chef;
+    }
+
+    public void setChef(Personnel chef) {
+        this.chef = chef;
+    }
+
+    public List<Personnel> getEmploye() {
+        return employe;
+    }
+
+    public void setEmploye(List<Personnel> employe) {
+        this.employe = employe;
+    }
+    
  
+    
     @OneToOne
     private Personnel chef;
 

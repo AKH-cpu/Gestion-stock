@@ -6,6 +6,7 @@
 package com.projet.stock.service.facade;
 
 import com.projet.stock.bean.EntiteAdministrative;
+import java.util.List;
 
 /**
  *
@@ -13,6 +14,7 @@ import com.projet.stock.bean.EntiteAdministrative;
  */
 public interface EntiteAdministrativeService {
     
-    public EntiteAdministrative findbyNom(String nom);
-    
+    public EntiteAdministrative findByReference(String reference);
+    public EntiteAdministrative deleteByReference(String reference);
+    public List<EntiteAdministrative> findAll();
 }

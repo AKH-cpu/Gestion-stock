@@ -16,7 +16,8 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface MagasinDao extends JpaRepository<Magasin, Long>{
     
-    public Magasin findByRefernce(String reference);
+    public Magasin findByReference(String reference);
     
+    public Magasin deleteByReference(String reference);
     
 }
