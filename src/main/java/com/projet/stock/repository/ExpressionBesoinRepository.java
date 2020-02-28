@@ -18,10 +18,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ExpressionBesoinRepository extends JpaRepository<ExpressionBesoin, Long> {
 
-    public String findByReference(String reference);
-    
-    //this is a test,n
+    public ExpressionBesoin findByReference(String reference);
 
-    public Date findBydateExpressionBesoin(Date dateExpressionBesoin);
-
+    public ExpressionBesoin findBydateExpressionBesoin(Date dateExpressionBesoin);
 }

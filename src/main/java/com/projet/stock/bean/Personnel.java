@@ -10,6 +10,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 
 /**
  *
@@ -25,6 +27,11 @@ public class Personnel implements Serializable {
     private String code;
     private String nom;
     private String telephone;
+    private String fonction ;
+
+    @OneToOne(mappedBy = "chef")
+    @ManyToOne
+    private EntiteAdministrative entiteAdministrative;
 
     public String getNom() {
         return nom;

@@ -16,9 +16,10 @@ import org.springframework.stereotype.Repository;
  * @author anoir
  */
 @Repository
-public interface ExpressionBesoinDetailRepository extends JpaRepository<ExpressionBesoinDetail, Long>{
-    
-    public List<Produit> findByQte(Double qte);
-    public List<Produit> findByQteLivre(Double qteLivre);
-    
+public interface ExpressionBesoinDetailRepository extends JpaRepository<ExpressionBesoinDetail, Long> {
+
+    public List<ExpressionBesoinDetail> findByQte(Double qte);
+
+    public List<ExpressionBesoinDetail> findByQteLivre(Double qteLivre);
+
 }

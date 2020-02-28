@@ -5,8 +5,10 @@
  */
 package com.projet.stock.service.facade;
 
+import com.projet.stock.bean.ExpressionBesoin;
 import com.projet.stock.bean.Produit;
 import java.util.Date;
+import java.util.List;
 
 /**
  *
@@ -14,10 +16,10 @@ import java.util.Date;
  */
 public interface ExpressionBesoinService {
 
-    public String findByReference(String reference);
+    ExpressionBesoin findByReference(String reference);
 
-    public Date findBydateExpressionBesoin(Date dateExpressionBesoin);
+    ExpressionBesoin findBydateExpressionBesoin(Date dateExpressionBesoin);
 
-    public int save(Produit produit);
+    int save(ExpressionBesoin expressionBesoin);
 
 }

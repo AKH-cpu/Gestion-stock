@@ -6,6 +6,7 @@
 package com.projet.stock.repository;
 
 import com.projet.stock.bean.Personnel;
+import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -15,9 +16,8 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface PersonnelRepository extends JpaRepository<Personnel, Long> {
-    
-    public Personnel findByCode(String code); 
-    
-    
-    
+
+    public Personnel findByCode(String code);
+
+    List<Personnel> findByFonction(String fonction);
 }

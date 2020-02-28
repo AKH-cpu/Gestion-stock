@@ -5,10 +5,21 @@
  */
 package com.projet.stock.service.facade;
 
+import com.projet.stock.bean.Personnel;
+import java.util.List;
+
 /**
  *
  * @author anoir
  */
 public interface PersonnelService {
+
+    List<Personnel> findAll();
+
+    Personnel findByCode(String code);
     
+    List<Personnel> findByFonction(String fonction);
+    
+    int save(Personnel personnel);
+
 }
