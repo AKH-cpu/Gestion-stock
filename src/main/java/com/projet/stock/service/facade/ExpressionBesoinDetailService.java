@@ -5,9 +5,7 @@
  */
 package com.projet.stock.service.facade;
 
-import com.projet.stock.bean.ExpressionBesoin;
 import com.projet.stock.bean.ExpressionBesoinDetail;
-import com.projet.stock.bean.Produit;
 import java.util.List;
 
 /**

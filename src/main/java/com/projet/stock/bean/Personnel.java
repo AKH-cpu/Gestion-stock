@@ -11,7 +11,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 
 /**
  *
@@ -27,14 +26,21 @@ public class Personnel implements Serializable {
     private String code;
     private String nom;
     private String telephone;
-    private String fonction ;
+    private String fonction;
 
-    @OneToOne(mappedBy = "chef")
     @ManyToOne
     private EntiteAdministrative entiteAdministrative;
 
     public String getNom() {
         return nom;
+    }
+
+    public EntiteAdministrative getEntiteAdministrative() {
+        return entiteAdministrative;
+    }
+
+    public void setEntiteAdministrative(EntiteAdministrative entiteAdministrative) {
+        this.entiteAdministrative = entiteAdministrative;
     }
 
     public void setNom(String nom) {
@@ -56,8 +62,6 @@ public class Personnel implements Serializable {
     public void setTelephone(String telephone) {
         this.telephone = telephone;
     }
-    
-    
 
     public Long getId() {
         return id;
@@ -91,5 +95,5 @@ public class Personnel implements Serializable {
     public String toString() {
         return "com.projet.stock.bean.Personnel[ id=" + id + " ]";
     }
-    
+
 }

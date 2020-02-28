@@ -5,20 +5,17 @@
  */
 package com.projet.stock.repository;
 
-import com.projet.stock.bean.ExpressionBesoinDetail;
-import java.util.List;
+import com.projet.stock.bean.EntiteAdministrative;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 /**
  *
- * @author anoir
+ * @author lenovo
  */
 @Repository
-public interface ExpressionBesoinDetailRepository extends JpaRepository<ExpressionBesoinDetail, Long> {
+public interface EntiteAdministrativeRepository extends JpaRepository<EntiteAdministrative, Long>{
 
-    public List<ExpressionBesoinDetail> findByQte(Double qte);
-
-    public List<ExpressionBesoinDetail> findByQteLivre(Double qteLivre);
+    EntiteAdministrative findByNom(String nom);
 
 }

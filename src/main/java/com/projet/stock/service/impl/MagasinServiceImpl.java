@@ -7,12 +7,12 @@ package com.projet.stock.service.impl;
 
 import com.projet.stock.bean.EntiteAdministrative;
 import com.projet.stock.bean.Magasin;
-import com.projet.stock.repository.MagasinDao;
 import com.projet.stock.service.facade.EntiteAdministrativeService;
 import com.projet.stock.service.facade.MagasinService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import com.projet.stock.repository.MagasinRepository;
 
 /**
  *
@@ -22,25 +22,25 @@ import org.springframework.stereotype.Service;
 public class MagasinServiceImpl implements MagasinService {
 
     @Autowired
-    MagasinDao magasinDao;
+    private MagasinRepository magasinRepository;
     @Autowired
-    EntiteAdministrativeService entiteAdService;
+    private EntiteAdministrativeService entiteAdministrativeService;
 
     @Override
     public Magasin findByReference(String refernce) {
-        return magasinDao.findByRefernce(refernce);
+        return magasinRepository.findByReference(refernce);
 
     }
 
     @Override
     public List<Magasin> findAll() {
-        return magasinDao.findAll();
+        return magasinRepository.findAll();
     }
 
     @Override
     public int save(Magasin magasin) {
-        Magasin foundedMagasin = magasinDao.findByRefernce(magasin.getRefarence());
-        EntiteAdministrative foundedEntite = entiteAdService.findbyNom(magasin.getEntiteAdministrative().getNom());
+        Magasin foundedMagasin = magasinRepository.findByReference(magasin.getRefarence());
+        EntiteAdministrative foundedEntite = entiteAdministrativeService.findByNom(magasin.getEntiteAdministrative().getNom());
 
         if (foundedMagasin != null) {
             //magasin deja existe
@@ -49,9 +49,8 @@ public class MagasinServiceImpl implements MagasinService {
             //entite not found
             return -2;
         } else {
-            magasinDao.save(magasin);
+            magasinRepository.save(magasin);
             return 1;
         }
     }
-
 }

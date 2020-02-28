@@ -14,9 +14,9 @@ import org.springframework.stereotype.Repository;
  * @author lenovo
  */
 @Repository
-public interface MagasinDao extends JpaRepository<Magasin, Long>{
+public interface MagasinRepository extends JpaRepository<Magasin, Long>{
     
-    public Magasin findByRefernce(String reference);
+    public Magasin findByReference(String reference);
     
     
 }

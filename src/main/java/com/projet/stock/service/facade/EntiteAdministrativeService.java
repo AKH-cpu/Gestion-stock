@@ -13,6 +13,6 @@ import com.projet.stock.bean.EntiteAdministrative;
  */
 public interface EntiteAdministrativeService {
     
-    public EntiteAdministrative findbyNom(String nom);
+    public EntiteAdministrative findByNom(String nom);
     
 }

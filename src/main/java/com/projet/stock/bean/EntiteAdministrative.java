@@ -33,6 +33,22 @@ public class EntiteAdministrative implements Serializable {
     @OneToMany(mappedBy = "entiteAdministrative")
     private List<Personnel> employe;
 
+    public Personnel getChef() {
+        return chef;
+    }
+
+    public void setChef(Personnel chef) {
+        this.chef = chef;
+    }
+
+    public List<Personnel> getEmploye() {
+        return employe;
+    }
+
+    public void setEmploye(List<Personnel> employe) {
+        this.employe = employe;
+    }
+
     public Long getId() {
         return id;
     }
