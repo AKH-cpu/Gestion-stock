@@ -14,9 +14,11 @@ import java.util.List;
  */
 public interface MagasinService {
     
-    public Magasin findByReference(String refernce);
+    public Magasin findByReference(String reference);
     public List<Magasin> findAll();
     public int save (Magasin magasin);
+    
+    //public Magasin deleteByReference(String reference);
     
     
 }

@@ -30,13 +30,17 @@ public class Magasin implements Serializable {
     @ManyToOne
     private EntiteAdministrative entiteAdministrative;
 
-    public String getRefarence() {
+    public String getReference() {
         return reference;
     }
 
-    public void setRefarence(String reference) {
+    public void setReference(String reference) {
         this.reference = reference;
     }
+
+    
+
+    
     
     
     

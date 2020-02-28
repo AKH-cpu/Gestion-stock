@@ -28,11 +28,12 @@ public class Personnel implements Serializable {
     private String telephone;
     private String fonction;
 
-    @ManyToOne
-    private EntiteAdministrative entiteAdministrative;
+    public String getFonction() {
+        return fonction;
+    }
 
-    public String getNom() {
-        return nom;
+    public void setFonction(String fonction) {
+        this.fonction = fonction;
     }
 
     public EntiteAdministrative getEntiteAdministrative() {
@@ -41,6 +42,13 @@ public class Personnel implements Serializable {
 
     public void setEntiteAdministrative(EntiteAdministrative entiteAdministrative) {
         this.entiteAdministrative = entiteAdministrative;
+    }
+
+    @ManyToOne
+    private EntiteAdministrative entiteAdministrative;
+
+    public String getNom() {
+        return nom;
     }
 
     public void setNom(String nom) {
