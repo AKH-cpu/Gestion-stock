@@ -12,12 +12,14 @@ import com.projet.stock.repository.LivraisonDetailRepository;
 import com.projet.stock.service.facade.LivraisonDetailService;
 import com.projet.stock.service.facade.LivraisonService;
 import com.projet.stock.service.facade.ProduitService;
+
 import java.util.List;
+import java.util.stream.Collectors;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
- *
  * @author AKH
  */
 @Service
@@ -33,31 +35,47 @@ public class LivraisonDetailServiceImpl implements LivraisonDetailService {
     ProduitService produitService;
 
     @Override
-    public LivraisonDetail findbyReference(String reference) {
+    public LivraisonDetail findByReference(String reference) {
         return livraisonDetailRepository.findByReference(reference);
-    }
-
-    @Override
-    public int save(LivraisonDetail livraisonDetail) {
-        LivraisonDetail foundedLivraisonDetail = livraisonDetailRepository.findByReference(livraisonDetail.getReference());
-        Livraison livraison = livraisonService.findbyReference(livraisonDetail.getLivraison().getReference());
-        Produit produit = produitService.findByReference(livraisonDetail.getProduit().getReference());
-        //Magasin magasin=magasinService.findByReference(livraisonDetail.getMagasin().getReference());
-
-        if (foundedLivraisonDetail != null) {
-            return -1;
-        } else {
-            livraisonDetail.setLivraison(livraison);
-            livraisonDetail.setProduit(produit);
-            // il manque le magasin ici
-            livraisonDetailRepository.save(livraisonDetail);
-            return 1;
-        }
     }
 
     @Override
     public List<LivraisonDetail> findAll() {
         return livraisonDetailRepository.findAll();
+    }
+
+    @Override
+    public boolean validateLivraisonDetail(Livraison livraison, List<LivraisonDetail> livraisonDetails) {
+        List<LivraisonDetail> valideProduits = livraisonDetails.stream().filter(
+                vp -> produitService.findByReference(vp.getProduit().getReference()) != null).collect(Collectors.toList()
+        );
+        return valideProduits.size() == livraisonDetails.size();
+    }
+
+    @Override
+    public int save(Livraison livraison, List<LivraisonDetail> livraisonDetails) {
+        if (validateLivraisonDetail(livraison, livraisonDetails)) {
+            livraisonDetails.forEach(l -> {
+                l.setLivraison(livraison);
+                Produit produit = produitService.findByReference(l.getProduit().getReference());
+                l.setProduit(produit);
+                livraisonDetailRepository.save(l);
+            });
+            return 1;
+        } else {
+            return -1;
+        }
+    }
+
+    @Override
+    public List<LivraisonDetail> findByLivraisonReference(String reference) {
+        return livraisonDetailRepository.findByLivraisonReference(reference);
+    }
+
+    @Override
+    public int deleteByLivraisonReference(String reference) {
+
+        return 0;
     }
 
 }

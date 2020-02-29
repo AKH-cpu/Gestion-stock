@@ -62,7 +62,7 @@ public class ProduitServiceImpl implements ProduitService {
         return produitRepository.findAll();
     }
 
-    // service qui permet de trouver tous les produits d'une famille d'un produit donée
+    // service qui permet de trouver tous les produits d'une famille Produits
     @Override
     public List<Produit> findByLibelleFamille(String libelle) {
         return produitRepository.findByLibelleFamille(libelle);

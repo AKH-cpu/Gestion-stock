@@ -21,11 +21,14 @@ public interface ProduitRepository extends JpaRepository<Produit, Long> {
 
     Produit findByReference(String reference);
 
+    //????
     int deleteByReference(String reference);
 
-    @Query(value = "SELECT p.id,p.reference,p.libelle FROM produit p,famille_produit f WHERE f.id=p.famille_produit AND f.libelle=:libelle", nativeQuery = true)
-    List<Produit> findByLibelleFamille(@Param("libelle") String libelle);
+    // put it in livDetailRe
+    @Query(value = "SELECT p.id,p.reference,p.libelle FROM Produit p,Famille_produit f WHERE f.id=p.famille_produit AND f.libelle=:libelle", nativeQuery = true)
+    List<Produit> findByLibelleFamille(@Param(value = "libelle") String libelle);
 
+    // delete detail first
 
 
 }

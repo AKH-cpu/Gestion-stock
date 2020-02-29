@@ -7,13 +7,8 @@ package com.projet.stock.bean;
 
 import java.io.Serializable;
 import java.util.Date;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
-import javax.persistence.Temporal;
+import java.util.List;
+import javax.persistence.*;
 
 /**
  * @author AKH
@@ -34,6 +29,16 @@ public class Livraison implements Serializable {
     private ExpressionBesoin expressionBesoin;
     @ManyToOne
     private Fournisseur fournisseur;
+    @OneToMany
+    private List<LivraisonDetail> livraisonDetails;
+
+    public List<LivraisonDetail> getLivraisonDetails() {
+        return livraisonDetails;
+    }
+
+    public void setLivraisonDetails(List<LivraisonDetail> livraisonDetails) {
+        this.livraisonDetails = livraisonDetails;
+    }
 
     public Fournisseur getFournisseur() {
         return fournisseur;
@@ -98,10 +103,7 @@ public class Livraison implements Serializable {
             return false;
         }
         Livraison other = (Livraison) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
+        return (this.id != null || other.id == null) && (this.id == null || this.id.equals(other.id));
     }
 
     @Override

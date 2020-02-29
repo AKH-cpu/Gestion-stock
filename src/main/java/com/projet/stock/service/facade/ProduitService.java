@@ -19,10 +19,12 @@ public interface ProduitService {
 
     int deleteByReference(String reference);
 
-    int save(Produit livraisonDetail);
+    int save(Produit produit);
 
     List<Produit> findAll();
 
     List<Produit> findByLibelleFamille(String libelle);
+
+
 
 }

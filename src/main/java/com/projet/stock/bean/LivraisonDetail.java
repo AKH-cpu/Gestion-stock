@@ -14,7 +14,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
 /**
- *
  * @author AKH
  */
 @Entity
@@ -26,8 +25,8 @@ public class LivraisonDetail implements Serializable {
     private Long id;
     private String reference;
     private Double qte;
-    
-    @OneToOne
+
+    @ManyToOne
     private Livraison livraison;
 
     @ManyToOne
@@ -55,7 +54,7 @@ public class LivraisonDetail implements Serializable {
     public void setLivraison(Livraison livraison) {
         this.livraison = livraison;
     }
-    
+
 
     public void setMagasin(Magasin magasin) {
         this.magasin = magasin;
@@ -76,8 +75,7 @@ public class LivraisonDetail implements Serializable {
     public void setReference(String reference) {
         this.reference = reference;
     }
-    
-    
+
 
     public Long getId() {
         return id;
@@ -101,10 +99,7 @@ public class LivraisonDetail implements Serializable {
             return false;
         }
         LivraisonDetail other = (LivraisonDetail) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
+        return (this.id != null || other.id == null) && (this.id == null || this.id.equals(other.id));
     }
 
     @Override

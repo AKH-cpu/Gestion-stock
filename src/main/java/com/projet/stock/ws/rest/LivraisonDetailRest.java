@@ -5,6 +5,7 @@
  */
 package com.projet.stock.ws.rest;
 
+import com.projet.stock.bean.Livraison;
 import com.projet.stock.bean.LivraisonDetail;
 import com.projet.stock.service.facade.LivraisonDetailService;
 import java.util.List;
@@ -28,13 +29,8 @@ public class LivraisonDetailRest {
     LivraisonDetailService livraisonDetailService;
 
     @GetMapping("/reference/{reference}")
-    public LivraisonDetail findbyReference(@PathVariable String reference) {
-        return livraisonDetailService.findbyReference(reference);
-    }
-
-    @PostMapping("/")
-    public int save(@RequestBody LivraisonDetail livraisonDetail) {
-        return livraisonDetailService.save(livraisonDetail);
+    public LivraisonDetail findByReference(@PathVariable String reference) {
+        return livraisonDetailService.findByReference(reference);
     }
 
     @GetMapping("/")
@@ -42,4 +38,18 @@ public class LivraisonDetailRest {
         return livraisonDetailService.findAll();
     }
 
+    @GetMapping("/validate")
+    public boolean validateLivraisonDetail(Livraison livraison, List<LivraisonDetail> livraisonDetails) {
+        return livraisonDetailService.validateLivraisonDetail(livraison, livraisonDetails);
+    }
+
+    @PostMapping("/")
+    public int save(Livraison livraison, List<LivraisonDetail> livraisonDetails) {
+        return livraisonDetailService.save(livraison, livraisonDetails);
+    }
+
+    @GetMapping("/livraison/reference/{reference}")
+    public List<LivraisonDetail> findByLivraisonReference(@PathVariable String reference) {
+        return livraisonDetailService.findByLivraisonReference(reference);
+    }
 }

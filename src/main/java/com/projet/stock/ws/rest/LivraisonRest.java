@@ -7,17 +7,14 @@ package com.projet.stock.ws.rest;
 
 import com.projet.stock.bean.Livraison;
 import com.projet.stock.service.facade.LivraisonService;
+
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.data.repository.query.Param;
+import org.springframework.web.bind.annotation.*;
 
 /**
- *
  * @author AKH
  */
 @RestController
@@ -28,18 +25,23 @@ public class LivraisonRest {
     LivraisonService livraisonService;
 
     @GetMapping("/reference/{reference}")
-    public Livraison findbyReference(@PathVariable String reference) {
-        return livraisonService.findbyReference(reference);
+    public Livraison findByReference(@PathVariable String reference) {
+        return livraisonService.findByReference(reference);
     }
 
     @PostMapping("/")
     public int save(@RequestBody Livraison livraison) {
-        return livraisonService.save(livraison);
+        return livraisonService.save(livraison, livraison.getLivraisonDetails());
     }
 
     @GetMapping("/")
     public List<Livraison> findAll() {
         return livraisonService.findAll();
+    }
+
+    @DeleteMapping("/reference/{reference}")
+    public int deleteByReference(@PathVariable String reference) {
+        return livraisonService.deleteByReference(reference);
     }
 
 }

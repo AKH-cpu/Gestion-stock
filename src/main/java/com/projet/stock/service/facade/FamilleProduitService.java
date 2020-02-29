@@ -6,14 +6,16 @@
 package com.projet.stock.service.facade;
 
 import com.projet.stock.bean.FamilleProduit;
+
 import java.util.List;
 
 /**
- *
  * @author KHALID
  */
 public interface FamilleProduitService {
     public FamilleProduit findByLibelle(String libelle);
+
     public List<FamilleProduit> findAll();
+
     public int save(FamilleProduit familleProduit);
 }

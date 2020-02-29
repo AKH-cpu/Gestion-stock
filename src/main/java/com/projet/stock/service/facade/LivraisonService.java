@@ -6,17 +6,22 @@
 package com.projet.stock.service.facade;
 
 import com.projet.stock.bean.Livraison;
+import com.projet.stock.bean.LivraisonDetail;
+import org.springframework.data.repository.query.Param;
+
 import java.util.List;
 
 /**
- *
  * @author AKH
  */
 public interface LivraisonService {
 
-    Livraison findbyReference(String reference);
-
-    int save(Livraison livraison);
+    Livraison findByReference(String reference);
 
     List<Livraison> findAll();
+
+    int save(Livraison livraison, List<LivraisonDetail> livraisonDetails);
+
+    int deleteByReference(String reference);
+
 }

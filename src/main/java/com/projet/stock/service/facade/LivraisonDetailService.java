@@ -5,19 +5,26 @@
  */
 package com.projet.stock.service.facade;
 
+import com.projet.stock.bean.Livraison;
 import com.projet.stock.bean.LivraisonDetail;
+
 import java.util.List;
 
 /**
- *
  * @author AKH
  */
 public interface LivraisonDetailService {
 
-    LivraisonDetail findbyReference(String reference);
-
-    int save(LivraisonDetail livraisonDetail);
+    LivraisonDetail findByReference(String reference);
 
     List<LivraisonDetail> findAll();
+
+     boolean validateLivraisonDetail(Livraison livraison, List<LivraisonDetail> livraisonDetails);
+
+    int save(Livraison livraison, List<LivraisonDetail> livraisonDetails);
+
+    List<LivraisonDetail> findByLivraisonReference(String reference);
+
+    int deleteByLivraisonReference(String reference);
 
 }
