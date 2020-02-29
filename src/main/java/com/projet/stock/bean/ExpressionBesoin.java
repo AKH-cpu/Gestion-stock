@@ -7,10 +7,12 @@ package com.projet.stock.bean;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 
@@ -33,8 +35,30 @@ public class ExpressionBesoin implements Serializable {
     @OneToOne
     private Personnel personnel;
 
+    @OneToMany(mappedBy = "expressionBesoin")
+    private List<ExpressionBesoinDetail> expressionBesoinDetails;
+
+    @OneToOne(mappedBy = "expressionBesoin")
+    private Livraison livraison;
+
     public Long getId() {
         return id;
+    }
+
+    public List<ExpressionBesoinDetail> getExpressionBesoinDetails() {
+        return expressionBesoinDetails;
+    }
+
+    public void setExpressionBesoinDetails(List<ExpressionBesoinDetail> expressionBesoinDetails) {
+        this.expressionBesoinDetails = expressionBesoinDetails;
+    }
+
+    public Livraison getLivraison() {
+        return livraison;
+    }
+
+    public void setLivraison(Livraison livraison) {
+        this.livraison = livraison;
     }
 
     public void setId(Long id) {

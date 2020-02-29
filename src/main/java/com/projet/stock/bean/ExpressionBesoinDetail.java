@@ -25,11 +25,20 @@ public class ExpressionBesoinDetail implements Serializable {
     private Double qte;
     private Double qteLivre;
 
+    
     @ManyToOne
     private ExpressionBesoin expressionBesoin;
 
     @ManyToOne
     private Produit produit;
+
+    public ExpressionBesoin getExpressionBesoin() {
+        return expressionBesoin;
+    }
+
+    public void setExpressionBesoin(ExpressionBesoin expressionBesoin) {
+        this.expressionBesoin = expressionBesoin;
+    }
 
     public Long getId() {
         return id;
@@ -55,13 +64,13 @@ public class ExpressionBesoinDetail implements Serializable {
         this.qteLivre = qteLivre;
     }
 
-    public ExpressionBesoin getExpressionBesoin() {
-        return expressionBesoin;
-    }
-
-    public void setExpressionBesoin(ExpressionBesoin expressionBesoin) {
-        this.expressionBesoin = expressionBesoin;
-    }
+//    public ExpressionBesoin getExpressionBesoin() {
+//        return expressionBesoin;
+//    }
+//
+//    public void setExpressionBesoin(ExpressionBesoin expressionBesoin) {
+//        this.expressionBesoin = expressionBesoin;
+//    }
 
     public Produit getProduit() {
         return produit;

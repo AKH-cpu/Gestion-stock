@@ -24,10 +24,28 @@ public class Magasin implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    private String reference;
+    
     private String nom;
     private String reference;
     @ManyToOne
     private EntiteAdministrative entiteAdministrative;
+
+    public String getReference() {
+        return reference;
+    }
+
+    public void setReference(String reference) {
+        this.reference = reference;
+    }
+
+    
+
+    
+    
+    
+    
+    
 
     public String getNom() {
         return nom;
