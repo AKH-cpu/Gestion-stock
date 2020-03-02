@@ -11,7 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-
+import javax.persistence.OneToMany;
 
 /**
  *
@@ -25,10 +25,21 @@ public class Magasin implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String reference;
-    
+
     private String nom;
     @ManyToOne
     private EntiteAdministrative entiteAdministrative;
+
+//    @OneToMany (mappedBy = "magasin")
+//    private Produit produit;
+//
+//    public Produit getProduit() {
+//        return produit;
+//    }
+//
+//    public void setProduit(Produit produit) {
+//        this.produit = produit;
+//    }
 
     public String getReference() {
         return reference;
@@ -37,14 +48,6 @@ public class Magasin implements Serializable {
     public void setReference(String reference) {
         this.reference = reference;
     }
-
-    
-
-    
-    
-    
-    
-    
 
     public String getNom() {
         return nom;
@@ -61,8 +64,6 @@ public class Magasin implements Serializable {
     public void setEntiteAdministrative(EntiteAdministrative entiteAdministrative) {
         this.entiteAdministrative = entiteAdministrative;
     }
-    
-    
 
     public Long getId() {
         return id;
@@ -96,5 +97,5 @@ public class Magasin implements Serializable {
     public String toString() {
         return "com.projet.stock.bean.Magasin[ id=" + id + " ]";
     }
-    
+
 }

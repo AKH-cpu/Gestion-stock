@@ -35,7 +35,7 @@ public class EntiteAdministrative implements Serializable {
 
     @OneToMany(mappedBy = "entiteAdministrative")
     private List<Personnel> employe;
-
+    
     public String getReference() {
         return reference;
     }
