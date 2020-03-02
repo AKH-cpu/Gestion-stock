@@ -74,9 +74,20 @@ public class FamilleProduit implements Serializable {
         return true;
     }
 
+    public FamilleProduit() {
+    }
+
+    public FamilleProduit(Long id, String libelle, List<Produit> produits) {
+        this.id = id;
+        this.libelle = libelle;
+        this.produits = produits;
+    }
+
     @Override
     public String toString() {
-        return "com.projet.stock.bean.FamilleProduit[ id=" + id + " ]";
+        return "FamilleProduit{" + "id=" + id + ", libelle=" + libelle + ", produits=" + produits + '}';
     }
+
+    
 
 }

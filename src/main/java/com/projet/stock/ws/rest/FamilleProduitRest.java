@@ -9,6 +9,7 @@ import com.projet.stock.bean.FamilleProduit;
 import com.projet.stock.service.facade.FamilleProduitService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -40,6 +41,12 @@ public class FamilleProduitRest {
     public int save(@RequestBody FamilleProduit familleProduit) {
         return familleProduitService.save(familleProduit);
     }
+
+    @DeleteMapping("/libelle/{libelle}")
+    public int deleteByLibelle(String libelle) {
+        return familleProduitService.deleteByLibelle(libelle);
+    }
+    
     
     
 }

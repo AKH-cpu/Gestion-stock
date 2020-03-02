@@ -18,4 +18,5 @@ import org.springframework.stereotype.Repository;
 public interface FournisseurRepository extends JpaRepository<Fournisseur, Long>{
     
     public Fournisseur findByReference(String reference);
+    public int deleteByReference(String reference);
 }

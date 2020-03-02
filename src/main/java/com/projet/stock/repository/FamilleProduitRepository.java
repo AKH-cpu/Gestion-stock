@@ -16,4 +16,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface FamilleProduitRepository extends JpaRepository<FamilleProduit,Long>{
     public FamilleProduit findByLibelle(String libelle);
+    public int deleteByLibelle(String libelle);
 }
