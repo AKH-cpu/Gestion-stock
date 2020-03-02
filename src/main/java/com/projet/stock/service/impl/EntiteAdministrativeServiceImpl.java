@@ -8,6 +8,7 @@ package com.projet.stock.service.impl;
 import com.projet.stock.service.facade.*;
 import com.projet.stock.bean.EntiteAdministrative;
 import com.projet.stock.repository.EntiteAdministrativeRepository;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,10 +21,36 @@ public class EntiteAdministrativeServiceImpl implements EntiteAdministrativeServ
 
     @Autowired
     private EntiteAdministrativeRepository entiteAdministrativeRepository;
+    
     @Override
-    public EntiteAdministrative findByNom(String nom) {
-        return entiteAdministrativeRepository.findByNom(nom);
+    public EntiteAdministrative findByReference(String reference) {
+        return entiteAdministrativeRepository.findByReference(reference);
     }
+
+//    
+
+    @Override
+    public List<EntiteAdministrative> findAll() {
+        return entiteAdministrativeRepository.findAll();
+    }
+
+    @Override
+    public int save(EntiteAdministrative entiteAdministrative) {
+        EntiteAdministrative foundedEntite = entiteAdministrativeRepository.findByReference(entiteAdministrative.getReference());
+        if (foundedEntite != null){
+            //entite existe deja 
+            return -1;
+        }else if (entiteAdministrative.getNom() == null || entiteAdministrative.getChef()== null){
+            //l'entite dois avoir un chef 
+            return -2;
+        }else{
+            entiteAdministrativeRepository.save(entiteAdministrative);
+            return 1;
+        }
+    }
+    
+    
+    
     
    
     

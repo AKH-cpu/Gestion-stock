@@ -14,6 +14,9 @@ import java.util.List;
  */
 public interface EntiteAdministrativeService {
     
-    public EntiteAdministrative findByNom(String nom);
+    public EntiteAdministrative findByReference(String reference);
+    public List<EntiteAdministrative> findAll();
+    public int save (EntiteAdministrative entiteAdministrative);
+//    public EntiteAdministrative deleteByReference(String reference);
     
 }

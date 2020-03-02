@@ -5,8 +5,8 @@
  */
 package com.projet.stock.ws.rest;
 
-import com.projet.stock.bean.Magasin;
-import com.projet.stock.service.facade.MagasinService;
+import com.projet.stock.bean.EntiteAdministrative;
+import com.projet.stock.service.facade.EntiteAdministrativeService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,24 +21,24 @@ import org.springframework.web.bind.annotation.RestController;
  * @author lenovo
  */
 @RestController
-@RequestMapping("Stock-api/Magasin")
-public class MagasinRest {
+@RequestMapping("stock-api/EntiteAdministrative")
+public class EntiteAdministrativeRest {
     
     @Autowired
-    MagasinService magasinService;
+    EntiteAdministrativeService entiteAdministrativeService;
     
     @GetMapping("/reference/{reference}")
-    public Magasin findByReference(@PathVariable String reference){
-        return magasinService.findByReference(reference);
+    public EntiteAdministrative findByReference(@PathVariable String reference){
+        return entiteAdministrativeService.findByReference(reference);
     }
     
     @GetMapping("/findAll")
-    public List<Magasin> findAll(){
-        return magasinService.findAll();
+    public List<EntiteAdministrative> findAll(){
+        return entiteAdministrativeService.findAll();
     }
     
     @PostMapping("/")
-    public int save (@RequestBody Magasin magasin){
-        return magasinService.save(magasin);
+    public int save (@RequestBody EntiteAdministrative entiteAdministrative){
+        return entiteAdministrativeService.save(entiteAdministrative);
     }
 }

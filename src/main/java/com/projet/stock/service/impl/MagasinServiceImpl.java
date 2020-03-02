@@ -40,7 +40,7 @@ public class MagasinServiceImpl implements MagasinService {
     @Override
     public int save(Magasin magasin) {
         Magasin foundedMagasin = magasinRepository.findByReference(magasin.getReference());
-        EntiteAdministrative foundedEntite = entiteAdministrativeService.findByNom(magasin.getEntiteAdministrative().getNom());
+        EntiteAdministrative foundedEntite = entiteAdministrativeService.findByReference(magasin.getEntiteAdministrative().getReference());
 
         if (foundedMagasin != null) {
             //magasin deja existe
