@@ -9,6 +9,7 @@ import com.projet.stock.bean.Fournisseur;
 import com.projet.stock.service.facade.FournisseurService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -40,6 +41,11 @@ public class FournisseurRest {
     @PostMapping("/")
     public int save(@RequestBody Fournisseur fournisseur) {
         return fournisseurService.save(fournisseur);
+    }
+
+    @DeleteMapping("/reference/{reference}")
+    public int deleteByReference(String reference) {
+        return fournisseurService.deleteByReference(reference);
     }
     
     

@@ -107,9 +107,24 @@ public class Fournisseur implements Serializable {
         return true;
     }
 
+    public Fournisseur() {
+    }
+
+    public Fournisseur(Long id, String reference, String ville, String adresse, String mail, String nom, String telephone) {
+        this.id = id;
+        this.reference = reference;
+        this.ville = ville;
+        this.adresse = adresse;
+        this.mail = mail;
+        this.nom = nom;
+        this.telephone = telephone;
+    }
+
     @Override
     public String toString() {
-        return "com.projet.stock.bean.Fournisseur[ id=" + id + " ]";
+        return "Fournisseur{" + "id=" + id + ", reference=" + reference + ", ville=" + ville + ", adresse=" + adresse + ", mail=" + mail + ", nom=" + nom + ", telephone=" + telephone + '}';
     }
+
+    
     
 }

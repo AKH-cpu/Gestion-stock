@@ -41,5 +41,10 @@ public class FamilleProduitServiceImpl implements FamilleProduitService{
             return 1;
         }
     }
+
+    @Override
+    public int deleteByLibelle(String libelle) {
+        return familleProduitRepository.deleteByLibelle(libelle);
+    }
     
 }

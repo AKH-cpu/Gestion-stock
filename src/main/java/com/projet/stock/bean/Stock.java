@@ -23,6 +23,7 @@ public class Stock implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    private String reference;
     private Double qte;
     private Double qteDiff;
 
@@ -30,6 +31,14 @@ public class Stock implements Serializable {
     private Magasin magasin;
     @ManyToOne
     private Produit produit;
+
+    public String getReference() {
+        return reference;
+    }
+
+    public void setReference(String reference) {
+        this.reference = reference;
+    }
 
     public Long getId() {
         return id;
@@ -91,4 +100,22 @@ public class Stock implements Serializable {
         this.produit = produit;
     }
 
+    public Stock() {
+    }
+
+    public Stock(Long id, String reference, Double qte, Double qteDiff, Magasin magasin, Produit produit) {
+        this.id = id;
+        this.reference = reference;
+        this.qte = qte;
+        this.qteDiff = qteDiff;
+        this.magasin = magasin;
+        this.produit = produit;
+    }
+
+    @Override
+    public String toString() {
+        return "Stock{" + "id=" + id + ", reference=" + reference + ", qte=" + qte + ", qteDiff=" + qteDiff + ", magasin=" + magasin + ", produit=" + produit + '}';
+    }
+
+    
 }

@@ -42,5 +42,10 @@ public class FournisseurServiceImpl implements FournisseurService{
            return 1;
        }
     }
+
+    @Override
+    public int deleteByReference(String reference) {
+      return fournisseurRepository.deleteByReference(reference);
+    }
     
 }
