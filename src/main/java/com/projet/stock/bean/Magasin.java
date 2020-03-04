@@ -6,6 +6,7 @@
 package com.projet.stock.bean;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -30,8 +31,8 @@ public class Magasin implements Serializable {
     @ManyToOne
     private EntiteAdministrative entiteAdministrative;
 
-//    @OneToMany (mappedBy = "magasin")
-//    private Produit produit;
+    @OneToMany
+    private List<Produit> produits;
 //
 //    public Produit getProduit() {
 //        return produit;
