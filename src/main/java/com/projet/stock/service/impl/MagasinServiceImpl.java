@@ -53,4 +53,18 @@ public class MagasinServiceImpl implements MagasinService {
             return 1;
         }
     }
+
+    @Override
+    public int deleteByReference(String reference) {
+        Magasin foundedMagasin = magasinRepository.findByReference(reference);
+        if (foundedMagasin == null) {
+            return -1;
+        }else {
+            magasinRepository.deleteByReference(reference);
+        return 1;
+        }
+        
+    }
+    
+    
 }

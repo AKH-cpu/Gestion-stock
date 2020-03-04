@@ -33,15 +33,17 @@ public class Magasin implements Serializable {
 
     @OneToMany
     private List<Produit> produits;
-//
-//    public Produit getProduit() {
-//        return produit;
-//    }
-//
-//    public void setProduit(Produit produit) {
-//        this.produit = produit;
-//    }
 
+
+    public List<Produit> getProduits() {
+        return produits;
+    }
+
+    public void setProduits(List<Produit> produits) {
+        this.produits = produits;
+    }
+
+    
     public String getReference() {
         return reference;
     }

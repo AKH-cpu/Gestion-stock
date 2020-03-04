@@ -9,6 +9,7 @@ import com.projet.stock.bean.Magasin;
 import com.projet.stock.service.facade.MagasinService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -40,5 +41,10 @@ public class MagasinRest {
     @PostMapping("/")
     public int save (@RequestBody Magasin magasin){
         return magasinService.save(magasin);
+    }
+    
+    @DeleteMapping("/deleteMagasin/reference/{reference}")
+    public int deleteByReference(String reference){
+        return magasinService.deleteByReference(reference);
     }
 }

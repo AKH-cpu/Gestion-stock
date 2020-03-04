@@ -7,6 +7,7 @@ package com.projet.stock.service.facade;
 
 import com.projet.stock.bean.Magasin;
 import java.util.List;
+import org.springframework.data.jpa.repository.Query;
 
 /**
  *
@@ -17,8 +18,8 @@ public interface MagasinService {
     public Magasin findByReference(String reference);
     public List<Magasin> findAll();
     public int save (Magasin magasin);
+    public int deleteByReference(String reference);
     
-    //public Magasin deleteByReference(String reference);
     
     
 }
