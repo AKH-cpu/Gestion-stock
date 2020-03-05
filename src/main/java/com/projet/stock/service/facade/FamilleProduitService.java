@@ -6,6 +6,7 @@
 package com.projet.stock.service.facade;
 
 import com.projet.stock.bean.FamilleProduit;
+import com.projet.stock.bean.Produit;
 
 import java.util.List;
 
@@ -17,6 +18,6 @@ public interface FamilleProduitService {
 
     public List<FamilleProduit> findAll();
 
-    public int save(FamilleProduit familleProduit);
+    public int save(FamilleProduit familleProduit,List<Produit> produits);
     public int deleteByLibelle(String libelle);
 }
