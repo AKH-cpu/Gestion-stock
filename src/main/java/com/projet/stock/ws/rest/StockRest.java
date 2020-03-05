@@ -5,8 +5,8 @@
  */
 package com.projet.stock.ws.rest;
 
-import com.projet.stock.bean.Fournisseur;
-import com.projet.stock.service.facade.FournisseurService;
+import com.projet.stock.bean.Stock;
+import com.projet.stock.service.facade.StockService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -22,31 +22,35 @@ import org.springframework.web.bind.annotation.RestController;
  * @author KHALID
  */
 @RestController
-@RequestMapping("/Fournisseur-stock/fournisseur")
-public class FournisseurRest {
-    
+@RequestMapping("/Stock/stock")
+public class StockRest {
     @Autowired
-    private FournisseurService fournisseurService;
+    private StockService stockService;
 
     @GetMapping("/reference/{reference}")
-    public Fournisseur findByReference(@PathVariable String reference) {
-        return fournisseurService.findByReference(reference);
+    public Stock findByReference(@PathVariable String reference) {
+        return stockService.findByReference(reference);
     }
-
-    @GetMapping("/")
-    public List<Fournisseur> findAll() {
-        return fournisseurService.findAll();
-    }
-
-    @PostMapping("/")
-    public int save(@RequestBody Fournisseur fournisseur) {
-        return fournisseurService.save(fournisseur);
-    }
-
     @DeleteMapping("/reference/{reference}")
-    public int deleteByReference(String reference) {
-        return fournisseurService.deleteByReference(reference);
+    public int deleteByReference(@PathVariable String reference) {
+        return stockService.deleteByReference(reference);
     }
+    
+    @GetMapping("/")
+    public List<Stock> findAll() {
+        return stockService.findAll();
+    }
+    
+    @PostMapping("/")
+    public int save(@RequestBody Stock stock) {
+        return stockService.save(stock);
+    }
+
+    @GetMapping("/reference/like/{reference}")
+    public List<Stock> findByReferenceLike(String reference) {
+        return stockService.findByReferenceLike(reference);
+    }
+    
     
     
 }

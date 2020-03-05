@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @author KHALID
  */
 @RestController
-@RequestMapping("FamilleProduit-stock/familleProduit")
+@RequestMapping("/FamilleProduit-stock/familleProduit")
 public class FamilleProduitRest {
     @Autowired
     private FamilleProduitService familleProduitService;
@@ -39,7 +39,7 @@ public class FamilleProduitRest {
 
     @PostMapping("/")
     public int save(@RequestBody FamilleProduit familleProduit) {
-        return familleProduitService.save(familleProduit);
+        return familleProduitService.save(familleProduit,familleProduit.getProduits());
     }
 
     @DeleteMapping("/libelle/{libelle}")
