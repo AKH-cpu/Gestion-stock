@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @author KHALID
  */
 @RestController
-@RequestMapping("/Stock/stock")
+@RequestMapping("Stock/stock")
 public class StockRest {
     @Autowired
     private StockService stockService;
