@@ -6,13 +6,11 @@
 package com.projet.stock.service.impl;
 
 import com.projet.stock.bean.ExpressionBesoin;
-import com.projet.stock.bean.Produit;
 import com.projet.stock.repository.ExpressionBesoinRepository;
-import com.projet.stock.service.facade.ExpressionBesoinDetailService;
 import com.projet.stock.service.facade.ExpressionBesoinService;
 import com.projet.stock.service.facade.ProduitService;
 import java.util.Date;
-import java.util.List;
+import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,7 +24,7 @@ public class ExpressionBesoinServiceImpl implements ExpressionBesoinService {
     @Autowired
     private ExpressionBesoinRepository expressionBesoinRepository;
     @Autowired
-    private ProduitService produitService ;
+    private ProduitService produitService;
 
     @Override
     public ExpressionBesoin findByReference(String reference) {
@@ -41,14 +39,26 @@ public class ExpressionBesoinServiceImpl implements ExpressionBesoinService {
     @Override
     public int save(ExpressionBesoin expressionBesoin) {
         ExpressionBesoin foundedexpressionBesoin1 = expressionBesoinRepository.findByReference(expressionBesoin.getReference());
-        if(foundedexpressionBesoin1 != null)
-            return -1 ;
-        else {
+        if (foundedexpressionBesoin1 != null) {
+            return -1;
+        } else {
             expressionBesoin.setDateExpressionBesoin(new Date());
             expressionBesoinRepository.save(foundedexpressionBesoin1);
             return 1;
         }
     }
 
+    @Override
+    @Transactional
+    public int deleteByReference(String Reference) {
+        ExpressionBesoin foundedexpressionBesoin1 = expressionBesoinRepository.findByReference(Reference);
+
+        if (foundedexpressionBesoin1 == null) {
+            return -1;
+        } else {
+            expressionBesoinRepository.deleteByReference(Reference);
+            return 1;
+        }
+    }
 
 }

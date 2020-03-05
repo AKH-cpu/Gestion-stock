@@ -10,7 +10,14 @@ import org.hibernate.mapping.ToOne;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Temporal;
 
 /**
  * @author AKH
@@ -25,6 +32,26 @@ public class ExpressionBesoin implements Serializable {
     private String reference;
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date dateExpressionBesoin;
+    private String etat;
+
+    public ExpressionBesoin(Long id, String reference, Date dateExpressionBesoin, String etat, EntiteAdministrative entiteAdministrative, Personnel personnel, List<ExpressionBesoinDetail> expressionBesoinDetails, Livraison livraison) {
+        this.id = id;
+        this.reference = reference;
+        this.dateExpressionBesoin = dateExpressionBesoin;
+        this.etat = etat;
+        this.entiteAdministrative = entiteAdministrative;
+        this.personnel = personnel;
+        this.expressionBesoinDetails = expressionBesoinDetails;
+        this.livraison = livraison;
+    }
+
+    public String getEtat() {
+        return etat;
+    }
+
+    public void setEtat(String etat) {
+        this.etat = etat;
+    }
 
     @ManyToOne
     private EntiteAdministrative entiteAdministrative;

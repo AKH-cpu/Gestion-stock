@@ -6,14 +6,13 @@
 package com.projet.stock.ws.rest;
 
 import com.projet.stock.bean.ExpressionBesoin;
-import com.projet.stock.bean.ExpressionBesoinDetail;
 import com.projet.stock.service.facade.ExpressionBesoinService;
 import java.util.Date;
-import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -42,4 +41,10 @@ public class ExpressionBesoinRest {
     public int save(@RequestBody ExpressionBesoin expressionBesoin) {
         return expressionBesoinService.save(expressionBesoin);
     }
+
+    @PutMapping("/Reference/{Reference}")
+    public int deleteByReference(@PathVariable String Reference) {
+        return expressionBesoinService.deleteByReference(Reference);
+    }
+    
 }

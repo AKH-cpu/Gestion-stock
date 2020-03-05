@@ -22,6 +22,7 @@ public class ExpressionBesoinDetail implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    private String reference;
     private Double qte;
     private Double qteLivre;
 
@@ -30,6 +31,15 @@ public class ExpressionBesoinDetail implements Serializable {
 
     @ManyToOne
     private Produit produit;
+
+    public ExpressionBesoinDetail(Long id, String reference, Double qte, Double qteLivre, ExpressionBesoin expressionBesoin, Produit produit) {
+        this.id = id;
+        this.reference = reference;
+        this.qte = qte;
+        this.qteLivre = qteLivre;
+        this.expressionBesoin = expressionBesoin;
+        this.produit = produit;
+    }
 
     public ExpressionBesoin getExpressionBesoin() {
         return expressionBesoin;
@@ -41,6 +51,14 @@ public class ExpressionBesoinDetail implements Serializable {
 
     public Long getId() {
         return id;
+    }
+
+    public String getReference() {
+        return reference;
+    }
+
+    public void setReference(String reference) {
+        this.reference = reference;
     }
 
     public void setId(Long id) {
@@ -70,7 +88,6 @@ public class ExpressionBesoinDetail implements Serializable {
 //    public void setExpressionBesoin(ExpressionBesoin expressionBesoin) {
 //        this.expressionBesoin = expressionBesoin;
 //    }
-
     public Produit getProduit() {
         return produit;
     }

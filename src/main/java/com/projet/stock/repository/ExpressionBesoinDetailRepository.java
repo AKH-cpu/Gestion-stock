@@ -17,8 +17,12 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ExpressionBesoinDetailRepository extends JpaRepository<ExpressionBesoinDetail, Long> {
 
-    public List<ExpressionBesoinDetail> findByQte(Double qte);
+    List<ExpressionBesoinDetail> findByQte(Double qte);
 
-    public List<ExpressionBesoinDetail> findByQteLivre(Double qteLivre);
+    List<ExpressionBesoinDetail> findByQteLivre(Double qteLivre);
+
+    int deleteByReference(String Reference);
+
+    ExpressionBesoinDetail findByReference(String Reference);
 
 }

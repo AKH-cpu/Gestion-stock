@@ -15,12 +15,18 @@ import java.util.List;
 public interface ExpressionBesoinDetailService {
 
     List<ExpressionBesoinDetail> findAll();
-    
+
     List<ExpressionBesoinDetail> findByQte(Double qte);
 
     List<ExpressionBesoinDetail> findByQteLivre(Double qteLivre);
 
+    public ExpressionBesoinDetail findByReference(String Reference);
+
     List<ExpressionBesoinDetail> findEDBOnHold();
 
     int save(ExpressionBesoinDetail expressionBesoinDetail);
+
+    int deleteByReference(String Reference);
+
+    // infos sur produit en besoin
 }

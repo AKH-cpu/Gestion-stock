@@ -22,4 +22,6 @@ public interface ExpressionBesoinService {
 
     int save(ExpressionBesoin expressionBesoin);
 
+    int deleteByReference(String Reference);
+
 }

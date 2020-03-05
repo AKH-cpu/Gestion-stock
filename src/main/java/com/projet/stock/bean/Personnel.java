@@ -6,6 +6,7 @@
 package com.projet.stock.bean;
 
 import java.io.Serializable;
+import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -26,9 +27,36 @@ public class Personnel implements Serializable {
     private String nom;
     private String telephone;
     private String fonction;
+    private Double seniorityScore;
+    private Double salary;
+    private Double yearsExp;
+    private String codeChef;
+    private Date date_embauche;
 
     @ManyToOne
     private EntiteAdministrative entiteAdministrative;
+
+    public Personnel(Long id, String code, String nom, String telephone, String fonction, Double seniorityScore, Double salary, Double yearsExp, String codeChef, Date date_embauche, EntiteAdministrative entiteAdministrative) {
+        this.id = id;
+        this.code = code;
+        this.nom = nom;
+        this.telephone = telephone;
+        this.fonction = fonction;
+        this.seniorityScore = seniorityScore;
+        this.salary = salary;
+        this.yearsExp = yearsExp;
+        this.codeChef = codeChef;
+        this.date_embauche = date_embauche;
+        this.entiteAdministrative = entiteAdministrative;
+    }
+
+    public Date getDate_embauche() {
+        return date_embauche;
+    }
+
+    public void setDate_embauche(Date date_embauche) {
+        this.date_embauche = date_embauche;
+    }
 
     public String getFonction() {
         return fonction;
@@ -44,6 +72,30 @@ public class Personnel implements Serializable {
 
     public void setEntiteAdministrative(EntiteAdministrative entiteAdministrative) {
         this.entiteAdministrative = entiteAdministrative;
+    }
+
+    public Double getSeniorityScore() {
+        return seniorityScore;
+    }
+
+    public void setSeniorityScore(Double seniorityScore) {
+        this.seniorityScore = seniorityScore;
+    }
+
+    public Double getSalary() {
+        return salary;
+    }
+
+    public void setSalary(Double salary) {
+        this.salary = salary;
+    }
+
+    public Double getYearsExp() {
+        return yearsExp;
+    }
+
+    public void setYearsExp(Double yearsExp) {
+        this.yearsExp = yearsExp;
     }
 
     public String getNom() {
@@ -76,6 +128,14 @@ public class Personnel implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getCodeChef() {
+        return codeChef;
+    }
+
+    public void setCodeChef(String codeChef) {
+        this.codeChef = codeChef;
     }
 
     @Override

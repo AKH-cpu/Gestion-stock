@@ -17,7 +17,22 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface PersonnelRepository extends JpaRepository<Personnel, Long> {
 
-    public Personnel findByCode(String code);
+    Personnel findByCode(String code);
+
+    Personnel findBySeniorityScore(Double seniorityScore);
+
+    Personnel findBySeniorityScoreGreaterThanEqual(Double value);
+
+    Personnel findBySalary(Double salary);
+
+    Personnel findByYearsExp(Double yearsExp);
+
+    List<Personnel> findByCodeChef(String codeChef);
+
+    List<Personnel> findByEntiteAdministrativeNom(String nom);
 
     List<Personnel> findByFonction(String fonction);
+
+    int deleteByCode(String code);
+
 }

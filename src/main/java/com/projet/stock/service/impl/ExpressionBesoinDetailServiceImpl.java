@@ -5,17 +5,16 @@
  */
 package com.projet.stock.service.impl;
 
-import com.projet.stock.bean.ExpressionBesoin;
 import com.projet.stock.bean.ExpressionBesoinDetail;
 import com.projet.stock.bean.Livraison;
 import com.projet.stock.bean.Produit;
 import com.projet.stock.repository.ExpressionBesoinDetailRepository;
-import com.projet.stock.repository.ExpressionBesoinRepository;
 import com.projet.stock.service.facade.ExpressionBesoinDetailService;
 import com.projet.stock.service.facade.LivraisonService;
 import com.projet.stock.service.facade.ProduitService;
 import java.util.ArrayList;
 import java.util.List;
+import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,15 +23,15 @@ import org.springframework.stereotype.Service;
  * @author anoir
  */
 @Service
-public class ExpressionBesoinDetailServiceImpl implements ExpressionBesoinDetailService{
+public class ExpressionBesoinDetailServiceImpl implements ExpressionBesoinDetailService {
 
     @Autowired
-    private ExpressionBesoinDetailRepository expressionBesoinDetailRepository ;
+    private ExpressionBesoinDetailRepository expressionBesoinDetailRepository;
     @Autowired
     private ProduitService produitService;
     @Autowired
-    private LivraisonService livraisonService ;
-    
+    private LivraisonService livraisonService;
+
     @Override
     public List<ExpressionBesoinDetail> findByQte(Double qte) {
         return expressionBesoinDetailRepository.findByQte(qte);
@@ -44,27 +43,32 @@ public class ExpressionBesoinDetailServiceImpl implements ExpressionBesoinDetail
     }
 
     @Override
+    public ExpressionBesoinDetail findByReference(String Reference) {
+        return expressionBesoinDetailRepository.findByReference(Reference);
+    }
+
+    @Override
     public int save(ExpressionBesoinDetail expressionBesoinDetail) {
         Produit foundedproduct = produitService.findByReference(expressionBesoinDetail.getProduit().getReference());
-        Livraison foundedlivraison = livraisonService.findByReference(expressionBesoinDetail.getExpressionBesoin().getLivraison().getReference());
-        
-        if(foundedproduct == null)
-            return -1 ;
-        else if(foundedlivraison != null)
-            return -2 ;
-        else {
+        Livraison foundedlivraison = livraisonService.findbyReference(expressionBesoinDetail.getExpressionBesoin().getLivraison().getReference());
+
+        if (foundedproduct == null) {
+            return -1;
+        } else if (foundedlivraison != null) {
+            return -2;
+        } else {
             expressionBesoinDetailRepository.save(expressionBesoinDetail);
             return 1;
         }
-        
+
     }
 
     @Override
     public List<ExpressionBesoinDetail> findEDBOnHold() {
-       // Produit foundedproduct = produitService.findByReference(expressionBesoinDetail.getProduit().getReference());
+        // Produit foundedproduct = produitService.findByReference(expressionBesoinDetail.getProduit().getReference());
         List<ExpressionBesoinDetail> EDBOnHold = new ArrayList<>();
         for (ExpressionBesoinDetail expressionBesoinDetails : expressionBesoinDetailRepository.findAll()) {
-            if(!produitService.findAll().contains(expressionBesoinDetails.getProduit())){
+            if (!produitService.findAll().contains(expressionBesoinDetails.getProduit())) {
                 EDBOnHold.add(expressionBesoinDetails);
             }
         }
@@ -75,9 +79,18 @@ public class ExpressionBesoinDetailServiceImpl implements ExpressionBesoinDetail
     public List<ExpressionBesoinDetail> findAll() {
         return expressionBesoinDetailRepository.findAll();
     }
-    
-    
-    
-   
-    
+
+    @Override
+    @Transactional
+    public int deleteByReference(String Reference) {
+        ExpressionBesoinDetail foundedexpressionBesoin1Detail = expressionBesoinDetailRepository.findByReference(Reference);
+
+        if (foundedexpressionBesoin1Detail == null) {
+            return -1;
+        } else {
+            expressionBesoinDetailRepository.deleteByReference(Reference);
+            return 1;
+        }
+    }
+
 }

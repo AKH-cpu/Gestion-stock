@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -51,5 +52,17 @@ public class ExpressionBesoinDetailRest {
     public int save(@RequestBody ExpressionBesoinDetail expressionBesoinDetail) {
         return expressionBesoinDetailService.save(expressionBesoinDetail);
     }
+
+    @GetMapping("/Reference/{Reference}")
+    public ExpressionBesoinDetail findByReference(@PathVariable String Reference) {
+        return expressionBesoinDetailService.findByReference(Reference);
+    }
+
+    @PutMapping("/Reference/{Reference}")
+    public int deleteByReference(@PathVariable String Reference) {
+        return expressionBesoinDetailService.deleteByReference(Reference);
+    }
+    
+    
 
 }

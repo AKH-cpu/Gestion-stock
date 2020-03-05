@@ -6,7 +6,6 @@
 package com.projet.stock.repository;
 
 import com.projet.stock.bean.ExpressionBesoin;
-import com.projet.stock.bean.Produit;
 import java.util.Date;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
@@ -21,4 +20,6 @@ public interface ExpressionBesoinRepository extends JpaRepository<ExpressionBeso
     public ExpressionBesoin findByReference(String reference);
 
     public ExpressionBesoin findBydateExpressionBesoin(Date dateExpressionBesoin);
+
+    int deleteByReference(String Reference);
 }
