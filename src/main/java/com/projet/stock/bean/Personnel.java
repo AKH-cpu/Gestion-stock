@@ -12,6 +12,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.Temporal;
 
 /**
  * @author AKH
@@ -31,6 +32,7 @@ public class Personnel implements Serializable {
     private Double salary;
     private Double yearsExp;
     private String codeChef;
+    @Temporal(javax.persistence.TemporalType.DATE)
     private Date date_embauche;
 
     @ManyToOne
