@@ -18,6 +18,7 @@ public interface EntiteAdministrativeService {
     public EntiteAdministrative findByReference(String reference);
     public List<EntiteAdministrative> findAll();
     public int save (EntiteAdministrative entiteAdministrative);
-//    public List<Magasin> find
+    public int deleteByReference (String reference);
+    public String deleteAll();
     
 }

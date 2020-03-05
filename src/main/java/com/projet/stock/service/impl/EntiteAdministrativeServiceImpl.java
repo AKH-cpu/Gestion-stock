@@ -26,8 +26,7 @@ public class EntiteAdministrativeServiceImpl implements EntiteAdministrativeServ
     public EntiteAdministrative findByReference(String reference) {
         return entiteAdministrativeRepository.findByReference(reference);
     }
-
-//    
+  
 
     @Override
     public List<EntiteAdministrative> findAll() {
@@ -40,7 +39,7 @@ public class EntiteAdministrativeServiceImpl implements EntiteAdministrativeServ
         if (foundedEntite != null){
             //entite existe deja 
             return -1;
-        }else if (entiteAdministrative.getNom() == null || entiteAdministrative.getChef()== null){
+        }else if (entiteAdministrative.getNom() == null ){
             //l'entite dois avoir un chef 
             return -2;
         }else{
@@ -48,7 +47,25 @@ public class EntiteAdministrativeServiceImpl implements EntiteAdministrativeServ
             return 1;
         }
     }
-    
+
+    @Override
+    public int deleteByReference(String reference) {
+        EntiteAdministrative foundedEntite = entiteAdministrativeRepository.findByReference(reference);
+        if (foundedEntite == null){
+            return -1;   
+        }else {
+            
+            entiteAdministrativeRepository.delete(foundedEntite);
+            return 1;
+        }
+        
+    }
+
+    @Override
+    public String deleteAll() {
+        entiteAdministrativeRepository.deleteAll();
+        return "the entities are deleted";
+    }
     
     
     

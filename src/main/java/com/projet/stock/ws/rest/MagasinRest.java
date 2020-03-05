@@ -38,13 +38,19 @@ public class MagasinRest {
         return magasinService.findAll();
     }
     
+    
+    @DeleteMapping("/deleteAll")
+    public String deleteAll(){
+        return magasinService.deleteAll();
+    }
+    
     @PostMapping("/")
     public int save (@RequestBody Magasin magasin){
         return magasinService.save(magasin);
     }
     
-    @DeleteMapping("/deleteMagasin/reference/{reference}")
-    public int deleteByReference(String reference){
+    @DeleteMapping("/delete/{reference}")
+    public int deleteByReference(@PathVariable String reference){
         return magasinService.deleteByReference(reference);
     }
 }

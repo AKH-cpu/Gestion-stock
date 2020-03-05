@@ -19,6 +19,7 @@ public interface MagasinService {
     public List<Magasin> findAll();
     public int save (Magasin magasin);
     public int deleteByReference(String reference);
+    public String deleteAll();
     
     
     

@@ -25,6 +25,7 @@ public class MagasinServiceImpl implements MagasinService {
     private MagasinRepository magasinRepository;
     @Autowired
     private EntiteAdministrativeService entiteAdministrativeService;
+    
 
     @Override
     public Magasin findByReference(String refernce) {
@@ -41,6 +42,7 @@ public class MagasinServiceImpl implements MagasinService {
     public int save(Magasin magasin) {
         Magasin foundedMagasin = magasinRepository.findByReference(magasin.getReference());
         EntiteAdministrative foundedEntite = entiteAdministrativeService.findByReference(magasin.getEntiteAdministrative().getReference());
+//        List<Produit> prouduits = 
 
         if (foundedMagasin != null) {
             //magasin deja existe
@@ -49,6 +51,7 @@ public class MagasinServiceImpl implements MagasinService {
             //entite not found
             return -2;
         } else {
+            magasin.setEntiteAdministrative(foundedEntite);
             magasinRepository.save(magasin);
             return 1;
         }
@@ -60,11 +63,16 @@ public class MagasinServiceImpl implements MagasinService {
         if (foundedMagasin == null) {
             return -1;
         }else {
-            magasinRepository.deleteByReference(reference);
+            magasinRepository.delete(foundedMagasin);
         return 1;
         }
         
     }
-    
+
+    @Override
+    public String deleteAll() {
+        magasinRepository.deleteAll();
+        return "Magasins are deleted";
+    }
     
 }

@@ -9,6 +9,7 @@ import com.projet.stock.bean.EntiteAdministrative;
 import com.projet.stock.service.facade.EntiteAdministrativeService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -32,6 +33,12 @@ public class EntiteAdministrativeRest {
         return entiteAdministrativeService.findByReference(reference);
     }
     
+    
+    @DeleteMapping("/deleteAll")
+    public String deleteAll(){
+        return entiteAdministrativeService.deleteAll();
+    }
+    
     @GetMapping("/findAll")
     public List<EntiteAdministrative> findAll(){
         return entiteAdministrativeService.findAll();
@@ -40,5 +47,10 @@ public class EntiteAdministrativeRest {
     @PostMapping("/")
     public int save (@RequestBody EntiteAdministrative entiteAdministrative){
         return entiteAdministrativeService.save(entiteAdministrative);
+    }
+    
+    @DeleteMapping("/delete/{reference}")
+    public int deleteByReference(@PathVariable String reference){
+        return entiteAdministrativeService.deleteByReference(reference);
     }
 }
