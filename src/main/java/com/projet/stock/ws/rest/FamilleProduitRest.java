@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @author KHALID
  */
 @RestController
-@RequestMapping("/FamilleProduit-stock/familleProduit")
+@RequestMapping("FamilleProduit-stock/familleProduit")
 public class FamilleProduitRest {
     @Autowired
     private FamilleProduitService familleProduitService;
