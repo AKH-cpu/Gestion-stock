@@ -34,7 +34,7 @@ public class FournisseurServiceImpl implements FournisseurService{
     @Override
     public int save(Fournisseur fournisseur) {
         
-       Fournisseur f=fournisseurRepository.findByReference(fournisseur.getReference());
+       Fournisseur f=findByReference(fournisseur.getReference());
         
        if(f!=null) return -1;
        else{

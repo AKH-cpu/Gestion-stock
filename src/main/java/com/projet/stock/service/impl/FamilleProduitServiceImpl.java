@@ -59,7 +59,7 @@ public class FamilleProduitServiceImpl implements FamilleProduitService{
              Produit foundedProduit=produitService.findByReference(produit.getReference());
              if(foundedProduit!=null) res.add(produit);
         }
-          return res.size()==familleProduit.getProduits().size();
+          return res.size()==produits.size();
     }
     
 }
