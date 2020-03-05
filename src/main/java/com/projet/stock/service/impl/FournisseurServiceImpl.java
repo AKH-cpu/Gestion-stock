@@ -8,24 +8,22 @@ package com.projet.stock.service.impl;
 import com.projet.stock.bean.Fournisseur;
 import com.projet.stock.repository.FournisseurRepository;
 import com.projet.stock.service.facade.FournisseurService;
-
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
+ *
  * @author KHALID
  */
 @Service
-public class FournisseurServiceImpl implements FournisseurService {
+public class FournisseurServiceImpl implements FournisseurService{
 
     @Autowired
     private FournisseurRepository fournisseurRepository;
-
     @Override
     public Fournisseur findByReference(String reference) {
-        return fournisseurRepository.findByReference(reference);
+         return fournisseurRepository.findByReference(reference);
     }
 
     @Override
@@ -35,14 +33,19 @@ public class FournisseurServiceImpl implements FournisseurService {
 
     @Override
     public int save(Fournisseur fournisseur) {
-
-        Fournisseur f = fournisseurRepository.findByReference(fournisseur.getReference());
-
-        if (f != null) return -1;
-        else {
-            fournisseurRepository.save(fournisseur);
-            return 1;
-        }
+        
+       Fournisseur f=fournisseurRepository.findByReference(fournisseur.getReference());
+        
+       if(f!=null) return -1;
+       else{
+           fournisseurRepository.save(fournisseur);
+           return 1;
+       }
     }
 
+    @Override
+    public int deleteByReference(String reference) {
+      return fournisseurRepository.deleteByReference(reference);
+    }
+    
 }

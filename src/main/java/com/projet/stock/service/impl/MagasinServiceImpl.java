@@ -9,14 +9,13 @@ import com.projet.stock.bean.EntiteAdministrative;
 import com.projet.stock.bean.Magasin;
 import com.projet.stock.service.facade.EntiteAdministrativeService;
 import com.projet.stock.service.facade.MagasinService;
-
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.projet.stock.repository.MagasinRepository;
 
 /**
+ *
  * @author lenovo
  */
 @Service
@@ -54,4 +53,18 @@ public class MagasinServiceImpl implements MagasinService {
             return 1;
         }
     }
+
+    @Override
+    public int deleteByReference(String reference) {
+        Magasin foundedMagasin = magasinRepository.findByReference(reference);
+        if (foundedMagasin == null) {
+            return -1;
+        }else {
+            magasinRepository.deleteByReference(reference);
+        return 1;
+        }
+        
+    }
+    
+    
 }

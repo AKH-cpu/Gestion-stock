@@ -16,6 +16,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface EntiteAdministrativeRepository extends JpaRepository<EntiteAdministrative, Long>{
 
-    EntiteAdministrative findByReference(String reference);
-
+    public EntiteAdministrative findByReference(String reference);
 }

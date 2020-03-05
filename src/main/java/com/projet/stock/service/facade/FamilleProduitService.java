@@ -18,4 +18,5 @@ public interface FamilleProduitService {
     public List<FamilleProduit> findAll();
 
     public int save(FamilleProduit familleProduit);
+    public int deleteByLibelle(String libelle);
 }

@@ -6,21 +6,20 @@
 package com.projet.stock.service.facade;
 
 import com.projet.stock.bean.Magasin;
-
 import java.util.List;
+import org.springframework.data.jpa.repository.Query;
 
 /**
+ *
  * @author lenovo
  */
 public interface MagasinService {
-
+    
     public Magasin findByReference(String reference);
-
     public List<Magasin> findAll();
-
-    public int save(Magasin magasin);
-
-    //public Magasin deleteByReference(String reference);
-
-
+    public int save (Magasin magasin);
+    public int deleteByReference(String reference);
+    
+    
+    
 }
