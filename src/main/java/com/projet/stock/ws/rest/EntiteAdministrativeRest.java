@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @author lenovo
  */
 @RestController
-@RequestMapping("stock-api/EntiteAdministrative")
+@RequestMapping("gestion-stock-v1/EntiteAdministrative")
 public class EntiteAdministrativeRest {
     
     @Autowired
