@@ -40,7 +40,7 @@ public class FamilleProduitServiceImpl implements FamilleProduitService{
     public int save(FamilleProduit familleProduit,List<Produit> produits) {
         FamilleProduit f=familleProduitRepository.findByLibelle(familleProduit.getLibelle());
         if(f!=null) return -1;
-        else if(!validateProduits(familleProduit, produits)) return -2;
+        else if(!validateProduits(produits)) return -2;
         else {
             familleProduit.setProduits(produits);
             familleProduitRepository.save(familleProduit);
@@ -53,7 +53,7 @@ public class FamilleProduitServiceImpl implements FamilleProduitService{
         return familleProduitRepository.deleteByLibelle(libelle);
     }
     
-    public boolean validateProduits(FamilleProduit familleProduit, List<Produit> produits){
+    public boolean validateProduits(List<Produit> produits){
         List<Produit> res=new ArrayList<>();
            for (Produit produit : produits) {
              Produit foundedProduit=produitService.findByReference(produit.getReference());

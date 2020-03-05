@@ -15,9 +15,7 @@ import java.util.List;
  */
 public interface FamilleProduitService {
     public FamilleProduit findByLibelle(String libelle);
-
     public List<FamilleProduit> findAll();
-
     public int save(FamilleProduit familleProduit,List<Produit> produits);
     public int deleteByLibelle(String libelle);
 }
