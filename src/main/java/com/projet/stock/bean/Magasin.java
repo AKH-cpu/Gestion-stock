@@ -6,11 +6,13 @@
 package com.projet.stock.bean;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 
 /**
@@ -28,6 +30,19 @@ public class Magasin implements Serializable {
 
     @ManyToOne
     private EntiteAdministrative entiteAdministrative;
+    
+    @OneToMany
+    List<Produit> produits;
+
+    public List<Produit> getProduits() {
+        return produits;
+    }
+
+    public void setProduits(List<Produit> produits) {
+        this.produits = produits;
+    }
+    
+    
 
     public String getReference() {
         return reference;

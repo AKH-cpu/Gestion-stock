@@ -52,6 +52,7 @@ public class EntiteAdministrativeServiceImpl implements EntiteAdministrativeServ
     public int deleteByReference(String reference) {
         EntiteAdministrative foundedEntite = entiteAdministrativeRepository.findByReference(reference);
         if (foundedEntite == null){
+            //"Entite not found"
             return -1;   
         }else {
             
