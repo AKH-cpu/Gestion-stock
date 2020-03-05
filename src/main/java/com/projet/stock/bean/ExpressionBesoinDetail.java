@@ -25,7 +25,6 @@ public class ExpressionBesoinDetail implements Serializable {
     private Double qte;
     private Double qteLivre;
 
-    
     @ManyToOne
     private ExpressionBesoin expressionBesoin;
 
@@ -86,6 +85,7 @@ public class ExpressionBesoinDetail implements Serializable {
         hash += (id != null ? id.hashCode() : 0);
         return hash;
     }
+
 
     @Override
     public boolean equals(Object object) {

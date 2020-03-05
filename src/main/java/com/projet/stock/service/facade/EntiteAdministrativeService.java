@@ -6,14 +6,14 @@
 package com.projet.stock.service.facade;
 
 import com.projet.stock.bean.EntiteAdministrative;
+
 import java.util.List;
 
 /**
- *
  * @author lenovo
  */
 public interface EntiteAdministrativeService {
-    
-    public EntiteAdministrative findByNom(String nom);
-    
+
+    EntiteAdministrative findByReference(String reference);
+
 }

@@ -12,19 +12,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
- *
  * @author lenovo
  */
 @Service
-public class EntiteAdministrativeServiceImpl implements EntiteAdministrativeService{
+public class EntiteAdministrativeServiceImpl implements EntiteAdministrativeService {
 
     @Autowired
     private EntiteAdministrativeRepository entiteAdministrativeRepository;
+
+
     @Override
-    public EntiteAdministrative findByNom(String nom) {
-        return entiteAdministrativeRepository.findByNom(nom);
+    public EntiteAdministrative findByReference(String reference) {
+        return entiteAdministrativeRepository.findByReference(reference);
     }
-    
-   
-    
 }

@@ -13,7 +13,6 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
 /**
- *
  * @author AKH
  */
 @Entity
@@ -27,6 +26,9 @@ public class Personnel implements Serializable {
     private String nom;
     private String telephone;
     private String fonction;
+
+    @ManyToOne
+    private EntiteAdministrative entiteAdministrative;
 
     public String getFonction() {
         return fonction;
@@ -43,9 +45,6 @@ public class Personnel implements Serializable {
     public void setEntiteAdministrative(EntiteAdministrative entiteAdministrative) {
         this.entiteAdministrative = entiteAdministrative;
     }
-
-    @ManyToOne
-    private EntiteAdministrative entiteAdministrative;
 
     public String getNom() {
         return nom;

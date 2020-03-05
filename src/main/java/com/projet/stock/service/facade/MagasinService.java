@@ -6,19 +6,21 @@
 package com.projet.stock.service.facade;
 
 import com.projet.stock.bean.Magasin;
+
 import java.util.List;
 
 /**
- *
  * @author lenovo
  */
 public interface MagasinService {
-    
+
     public Magasin findByReference(String reference);
+
     public List<Magasin> findAll();
-    public int save (Magasin magasin);
-    
+
+    public int save(Magasin magasin);
+
     //public Magasin deleteByReference(String reference);
-    
-    
+
+
 }

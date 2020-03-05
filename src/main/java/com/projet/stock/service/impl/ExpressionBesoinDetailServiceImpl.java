@@ -46,7 +46,7 @@ public class ExpressionBesoinDetailServiceImpl implements ExpressionBesoinDetail
     @Override
     public int save(ExpressionBesoinDetail expressionBesoinDetail) {
         Produit foundedproduct = produitService.findByReference(expressionBesoinDetail.getProduit().getReference());
-        Livraison foundedlivraison = livraisonService.findbyReference(expressionBesoinDetail.getExpressionBesoin().getLivraison().getReference());
+        Livraison foundedlivraison = livraisonService.findByReference(expressionBesoinDetail.getExpressionBesoin().getLivraison().getReference());
         
         if(foundedproduct == null)
             return -1 ;

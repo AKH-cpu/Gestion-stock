@@ -33,8 +33,7 @@ public class Produit implements Serializable {
     
     @ManyToOne
     private FamilleProduit familleProduit;
-    
-    
+
     @OneToMany(mappedBy = "produit")
     private List<ExpressionBesoinDetail> expressionBesoinDetails;
 

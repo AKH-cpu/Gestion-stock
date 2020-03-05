@@ -5,6 +5,8 @@
  */
 package com.projet.stock.bean;
 
+import org.hibernate.mapping.ToOne;
+
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -25,7 +27,7 @@ public class Livraison implements Serializable {
     private String reference;
     private Double total;
 
-    @OneToOne
+    @ManyToOne
     private ExpressionBesoin expressionBesoin;
     @ManyToOne
     private Fournisseur fournisseur;

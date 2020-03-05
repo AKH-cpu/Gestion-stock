@@ -5,16 +5,12 @@
  */
 package com.projet.stock.bean;
 
+import org.hibernate.mapping.ToOne;
+
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.Temporal;
+import javax.persistence.*;
 
 /**
  * @author AKH
@@ -30,16 +26,18 @@ public class ExpressionBesoin implements Serializable {
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date dateExpressionBesoin;
 
-    @OneToOne
+    @ManyToOne
     private EntiteAdministrative entiteAdministrative;
-    @OneToOne
+    @ManyToOne
     private Personnel personnel;
+
 
     @OneToMany(mappedBy = "expressionBesoin")
     private List<ExpressionBesoinDetail> expressionBesoinDetails;
 
     @OneToOne(mappedBy = "expressionBesoin")
     private Livraison livraison;
+
 
     public Long getId() {
         return id;

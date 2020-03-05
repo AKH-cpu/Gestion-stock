@@ -74,7 +74,6 @@ public class LivraisonDetailServiceImpl implements LivraisonDetailService {
 
     @Override
     public int deleteByLivraisonReference(String reference) {
-
         return 0;
     }
 

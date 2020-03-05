@@ -7,12 +7,7 @@ package com.projet.stock.bean;
 
 import java.io.Serializable;
 import java.util.List;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 
 /**
  * @author AKH
@@ -23,25 +18,45 @@ public class EntiteAdministrative implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private String reference;
     private Long id;
     private String reference;
     private String nom;
 
-//    @@OneToOne
-//    private ExpressionBesoin expressionBesoin;
+    @OneToMany(mappedBy = "entiteAdministrative")
+    private List<ExpressionBesoin> expressionBesoins;
+
+    @OneToMany(mappedBy = "entiteAdministrative")
+    private List<Magasin> magasins;
+
+
+    @OneToMany(mappedBy = "entiteAdministrative")
+    private List<Personnel> employes;
+
     @OneToOne
     private Personnel chef;
 
-    @OneToMany(mappedBy = "entiteAdministrative")
-    private List<Personnel> employe;
-
-    public String getReference() {
-        return reference;
+    public List<Personnel> getEmployes() {
+        return employes;
     }
 
-    public void setReference(String reference) {
-        this.reference = reference;
+    public void setEmployes(List<Personnel> employes) {
+        this.employes = employes;
+    }
+
+    public List<ExpressionBesoin> getExpressionBesoins() {
+        return expressionBesoins;
+    }
+
+    public void setExpressionBesoins(List<ExpressionBesoin> expressionBesoins) {
+        this.expressionBesoins = expressionBesoins;
+    }
+
+    public List<Magasin> getMagasins() {
+        return magasins;
+    }
+
+    public void setMagasins(List<Magasin> magasins) {
+        this.magasins = magasins;
     }
 
     public Personnel getChef() {
@@ -50,14 +65,6 @@ public class EntiteAdministrative implements Serializable {
 
     public void setChef(Personnel chef) {
         this.chef = chef;
-    }
-
-    public List<Personnel> getEmploye() {
-        return employe;
-    }
-
-    public void setEmploye(List<Personnel> employe) {
-        this.employe = employe;
     }
 
     public Long getId() {

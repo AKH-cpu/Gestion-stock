@@ -9,13 +9,14 @@ import com.projet.stock.bean.EntiteAdministrative;
 import com.projet.stock.bean.Magasin;
 import com.projet.stock.service.facade.EntiteAdministrativeService;
 import com.projet.stock.service.facade.MagasinService;
+
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.projet.stock.repository.MagasinRepository;
 
 /**
- *
  * @author lenovo
  */
 @Service
@@ -40,7 +41,7 @@ public class MagasinServiceImpl implements MagasinService {
     @Override
     public int save(Magasin magasin) {
         Magasin foundedMagasin = magasinRepository.findByReference(magasin.getReference());
-        EntiteAdministrative foundedEntite = entiteAdministrativeService.findByNom(magasin.getEntiteAdministrative().getNom());
+        EntiteAdministrative foundedEntite = entiteAdministrativeService.findByReference(magasin.getEntiteAdministrative().getReference());
 
         if (foundedMagasin != null) {
             //magasin deja existe

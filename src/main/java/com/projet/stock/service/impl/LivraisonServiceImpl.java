@@ -5,10 +5,12 @@
  */
 package com.projet.stock.service.impl;
 
+import com.projet.stock.bean.ExpressionBesoin;
 import com.projet.stock.bean.Fournisseur;
 import com.projet.stock.bean.Livraison;
 import com.projet.stock.bean.LivraisonDetail;
 import com.projet.stock.repository.LivraisonRepository;
+import com.projet.stock.service.facade.ExpressionBesoinService;
 import com.projet.stock.service.facade.FournisseurService;
 import com.projet.stock.service.facade.LivraisonDetailService;
 import com.projet.stock.service.facade.LivraisonService;
@@ -34,6 +36,9 @@ public class LivraisonServiceImpl implements LivraisonService {
     @Autowired
     LivraisonDetailService livraisonDetailService;
 
+    @Autowired
+    ExpressionBesoinService expressionBesoinService;
+
     @Override
     public Livraison findByReference(String reference) {
         return livraisonRepository.findByReference(reference);
@@ -47,21 +52,18 @@ public class LivraisonServiceImpl implements LivraisonService {
 
     @Override
     public int save(Livraison livraison, List<LivraisonDetail> livraisonDetails) {
-
         Livraison foundedLivraison = findByReference(livraison.getReference());
         Fournisseur fournisseur = fournisseurService.findByReference(livraison.getFournisseur().getReference());
+        ExpressionBesoin expressionBesoin = expressionBesoinService.findByReference(livraison.getExpressionBesoin().getReference());
         if (foundedLivraison != null) {
             return -1;
         } else if (fournisseur == null) {
             return -2;
-      /*  } else if (livraison.getExpressionBesoin() == null) {
+        } else if (expressionBesoin == null) {
             return -3;
-
-       */
         } else {
-            // manque d'expressionBesoin;
-            livraison.setExpressionBesoin(livraison.getExpressionBesoin());
             livraison.setFournisseur(fournisseur);
+            livraison.setExpressionBesoin(expressionBesoin);
             livraisonRepository.save(livraison);
             livraisonDetailService.save(livraison, livraisonDetails);
             return 1;
