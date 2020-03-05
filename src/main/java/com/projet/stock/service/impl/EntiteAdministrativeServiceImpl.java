@@ -67,6 +67,11 @@ public class EntiteAdministrativeServiceImpl implements EntiteAdministrativeServ
         entiteAdministrativeRepository.deleteAll();
         return "the entities are deleted";
     }
+
+    @Override
+    public EntiteAdministrative findByNom(String nom) {
+        return entiteAdministrativeRepository.findByNom(nom);
+    }
     
     
     

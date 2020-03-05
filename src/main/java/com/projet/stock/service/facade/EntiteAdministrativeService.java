@@ -14,11 +14,17 @@ import java.util.List;
  * @author lenovo
  */
 public interface EntiteAdministrativeService {
-    
+
     public EntiteAdministrative findByReference(String reference);
+
     public List<EntiteAdministrative> findAll();
-    public int save (EntiteAdministrative entiteAdministrative);
-    public int deleteByReference (String reference);
+
+    public int save(EntiteAdministrative entiteAdministrative);
+
+    public int deleteByReference(String reference);
+
     public String deleteAll();
-    
+
+    public EntiteAdministrative findByNom(String nom);
+
 }
