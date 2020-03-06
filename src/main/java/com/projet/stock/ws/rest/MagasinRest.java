@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -52,5 +53,16 @@ public class MagasinRest {
     @DeleteMapping("/delete/{reference}")
     public int deleteByReference(@PathVariable String reference){
         return magasinService.deleteByReference(reference);
+    }
+    
+    
+    @PutMapping("/insertToMagasin/produit/{reference}/magasin/{refMagasin}")
+    public int insertProduitToMagasin(@PathVariable String reference,@PathVariable String refMagasin){
+        return magasinService.insertProduitToMagasin(reference, refMagasin);
+    }
+    
+    @PutMapping("/deleteFromMagasin/produit/{reference}/magasin/{refMagasin}")
+    public int deleteProduitFromMagasin(@PathVariable String reference,@PathVariable String refMagasin){
+        return magasinService.deleteProduitFromMagasin(reference, refMagasin);
     }
 }

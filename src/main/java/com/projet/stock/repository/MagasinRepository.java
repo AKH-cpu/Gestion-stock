@@ -19,7 +19,7 @@ public interface MagasinRepository extends JpaRepository<Magasin, Long> {
 
     public Magasin findByReference(String reference);
 
-    @Query(value = "delete from magasin where 	reference = reference", nativeQuery = true)
-    public int deleteByReference(String reference);
-
+//    @Query(value = "delete from magasin where 	reference = reference", nativeQuery = true)
+//    public int deleteByReference(String reference);
+    
 }

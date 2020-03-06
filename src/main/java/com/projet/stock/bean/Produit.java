@@ -40,7 +40,7 @@ public class Produit implements Serializable {
     public List<ExpressionBesoinDetail> getExpressionBesoinDetails() {
         return expressionBesoinDetails;
     }
-
+    
     public void setExpressionBesoinDetails(List<ExpressionBesoinDetail> expressionBesoinDetails) {
         this.expressionBesoinDetails = expressionBesoinDetails;
     }

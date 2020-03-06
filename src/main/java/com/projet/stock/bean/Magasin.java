@@ -27,23 +27,47 @@ public class Magasin implements Serializable {
     private Long id;
     private String reference;
     private String nom;
+    private int nbrMAxProduit;
+    
+    @OneToMany
+    private List<Produit> produitsMagasin;
 
+    public int getNbrMAxProduit() {
+        return nbrMAxProduit;
+    }
+
+    public void setNbrMAxProduit(int nbrMAxProduit) {
+        this.nbrMAxProduit = nbrMAxProduit;
+    }
+
+    public List<Produit> getProduitsMagasin() {
+        return produitsMagasin;
+    }
+
+    public void setProduitsMagasin(List<Produit> produitsMagasin) {
+        this.produitsMagasin = produitsMagasin;
+    }
+    
+    
+    
+    
     @ManyToOne
     private EntiteAdministrative entiteAdministrative;
     
+
     @OneToMany
-    List<Produit> produits;
+    List<Stock> produitMagasin;
 
-    public List<Produit> getProduits() {
-        return produits;
+    public List<Stock> getProduitMagasin() {
+        return produitMagasin;
     }
 
-    public void setProduits(List<Produit> produits) {
-        this.produits = produits;
+    public void setProduitMagasin(List<Stock> produitMagasin) {
+        this.produitMagasin = produitMagasin;
     }
     
     
-
+    
     public String getReference() {
         return reference;
     }

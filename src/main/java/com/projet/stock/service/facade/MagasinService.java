@@ -20,6 +20,9 @@ public interface MagasinService {
     public int save (Magasin magasin);
     public int deleteByReference(String reference);
     public String deleteAll();
+    public int insertProduitToMagasin (String reference, String refMagasin);
+    public int deleteProduitFromMagasin (String reference, String refMagasin);
+    
     
     
     

@@ -39,7 +39,7 @@ public class EntiteAdministrativeServiceImpl implements EntiteAdministrativeServ
         if (foundedEntite != null){
             //entite existe deja 
             return -1;
-        }else if (entiteAdministrative.getNom() == null ){
+        }else if (entiteAdministrative.getNom() == null || entiteAdministrative.getChef() == null ){
             //l'entite dois avoir un chef 
             return -2;
         }else{
