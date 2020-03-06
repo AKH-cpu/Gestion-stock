@@ -31,7 +31,7 @@ public class EntiteAdministrative implements Serializable {
 
     @OneToMany(mappedBy = "entiteAdministrative")
     private List<Personnel> employes;
-
+    
     @OneToOne
     private Personnel chef;
 
