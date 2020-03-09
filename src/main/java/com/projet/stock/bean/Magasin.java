@@ -28,6 +28,16 @@ public class Magasin implements Serializable {
     private String reference;
     private String nom;
     private int nbrMAxProduit;
+    private int nbrProduit;
+
+    public int getNbrProduit() {
+        return nbrProduit;
+    }
+
+    public void setNbrProduit(int nbrProduit) {
+        this.nbrProduit = nbrProduit;
+    }
+    
     
     @OneToMany
     private List<Produit> produitsMagasin;

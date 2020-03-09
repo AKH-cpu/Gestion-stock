@@ -28,7 +28,6 @@ public class MagasinServiceImpl implements MagasinService {
 //    private EntiteAdministrativeService entiteAdministrativeService;
     @Autowired
     private ProduitService ProduitService;
-    
 
     @Override
     public Magasin findByReference(String refernce) {
@@ -45,7 +44,7 @@ public class MagasinServiceImpl implements MagasinService {
     public int save(Magasin magasin) {
         Magasin foundedMagasin = magasinRepository.findByReference(magasin.getReference());
         EntiteAdministrative foundedEntite = magasin.getEntiteAdministrative();
-        
+
         if (foundedMagasin != null) {
             //magasin deja existe
             //"magasin alredy existed"
@@ -54,16 +53,12 @@ public class MagasinServiceImpl implements MagasinService {
             //entite not found
             //Entite associated with this Magasin is not found
             return -2;
-            
-        }else if (foundedEntite.getChef() == null) {
-            
+
+        } else if (foundedEntite.getChef() == null) {
+
             //chaque entite dois avoir un chef
             return -3;
-        }
-            
-        
-
-        else {
+        } else {
             magasin.setEntiteAdministrative(foundedEntite);
             magasin.getEntiteAdministrative().setChef(foundedEntite.getChef());
             magasinRepository.save(magasin);
@@ -74,69 +69,72 @@ public class MagasinServiceImpl implements MagasinService {
     @Override
     public int deleteByReference(String reference) {
         Magasin foundedMagasin = magasinRepository.findByReference(reference);
-       
+
         if (foundedMagasin == null) {
             //No Magasin matched with this reference
             return -1;
-        }else {
+        } else {
             magasinRepository.delete(foundedMagasin);
-        return 1;
+            return 1;
         }
-        
+
     }
 
     @Override
     public String deleteAll() {
-            magasinRepository.deleteAll();
+        magasinRepository.deleteAll();
         return "Magasins are deleted";
-        
+
     }
 
     @Override
     public int insertProduitToMagasin(String reference, String refMagasin) {
         Magasin foundedMagasin = magasinRepository.findByReference(refMagasin);
         List<Produit> produits = ProduitService.findAll();
-        if(foundedMagasin != null){
-            
-            for (Produit p : produits){
-            if (p.getReference().equals(reference)){
-               
-                foundedMagasin.getProduitsMagasin().add(p);
-                foundedMagasin.setNbrMAxProduit(foundedMagasin.getNbrMAxProduit()+1);
-                return 1;
-                
+
+        if (foundedMagasin != null) {
+
+            while (foundedMagasin.getNbrProduit() < foundedMagasin.getNbrMAxProduit()) {
+
+                for (Produit p : produits) {
+                    if (p.getReference().equals(reference)) {
+
+                        foundedMagasin.getProduitsMagasin().add(p);
+                        foundedMagasin.setNbrMAxProduit(foundedMagasin.getNbrProduit() + 1);
+                        return 1;
+
+                    }
+
+                }
+
             }
-               
+
         }
-            
-        }return -1;
-        
-                
+        return -1;
     }
 
     @Override
     public int deleteProduitFromMagasin(String reference, String refMagasin) {
         Magasin foundedMagasin = magasinRepository.findByReference(refMagasin);
-        if (foundedMagasin != null){
-            for (Produit p : foundedMagasin.getProduitsMagasin()){
-            if (p.getReference().equals(reference)){
-               
-                foundedMagasin.getProduitsMagasin().remove(p);
-                foundedMagasin.setNbrMAxProduit(foundedMagasin.getNbrMAxProduit()-1);
-                
-                return 1;
-                
+        if (foundedMagasin != null) {
+            while (foundedMagasin.getNbrProduit() > 0) {
+
+                for (Produit p : foundedMagasin.getProduitsMagasin()) {
+                    if (p.getReference().equals(reference)) {
+
+                        foundedMagasin.getProduitsMagasin().remove(p);
+                        foundedMagasin.setNbrMAxProduit(foundedMagasin.getNbrProduit() - 1);
+
+                        return 1;
+
+                    }
+
+                }
+
             }
-               
+
         }
-            
-        }return -1;
+        return -1;
     }
-    
-    
-    
-    
-    
-    
-    
+
 }
