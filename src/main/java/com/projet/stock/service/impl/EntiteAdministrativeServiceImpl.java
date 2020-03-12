@@ -9,6 +9,7 @@ import com.projet.stock.service.facade.*;
 import com.projet.stock.bean.EntiteAdministrative;
 import com.projet.stock.bean.Magasin;
 import com.projet.stock.bean.Personnel;
+import com.projet.stock.bean.Stock;
 import com.projet.stock.repository.EntiteAdministrativeRepository;
 import com.projet.stock.repository.MagasinRepository;
 import java.util.ArrayList;
@@ -105,7 +106,6 @@ public class EntiteAdministrativeServiceImpl implements EntiteAdministrativeServ
         return magasinsLibre;
     }
 
-
     @Override
     public int AddEmployeToMagasin(String code, String refMagasin) {
         Personnel foundedEmploye = personnelService.findByCode(code);
@@ -133,14 +133,14 @@ public class EntiteAdministrativeServiceImpl implements EntiteAdministrativeServ
     public int RemoveEmployeFromMagasin(String code, String refMagasin) {
         Personnel foundedEmploye = personnelService.findByCode(code);
         Magasin foundedMagasin = magasinService.findByReference(refMagasin);
-        if (!isEployeExistInMagasin(code, refMagasin)){
+        if (!isEployeExistInMagasin(code, refMagasin)) {
             //l'employe n'appartient pas à ce magasin
             return -1;
-        }else if (findMagasinByReference(refMagasin)!=1){
+        } else if (findMagasinByReference(refMagasin) != 1) {
             //le magasin not found
             return -2;
-            
-        }else{
+
+        } else {
             List<Personnel> employes = foundedMagasin.getEmployes();
             employes.remove(foundedEmploye);
             foundedMagasin.setEmployes(employes);
@@ -178,10 +178,48 @@ public class EntiteAdministrativeServiceImpl implements EntiteAdministrativeServ
     }
 
     @Override
-    public List<Magasin> magasinBesoinsDeProduits(String refEntite) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public List<Magasin> magasinsBesoinsDeProduits(String refEntite) {
+        EntiteAdministrative foundedEntite = entiteAdministrativeRepository.findByReference(refEntite);
+        //creation d_une liste
+        List<Magasin> magasinsNeededProducts = null;
+        if (foundedEntite != null) {
+            List<Magasin> magasins = foundedEntite.getMagasins();
+            for (Magasin magasin : magasins) {
+                List<Stock> produitsMagasin = magasin.getProduitMagasin();
+                for (Stock produit : produitsMagasin) {
+                    if (produit.getQuantiteMax() > produit.getQte()) {
+                        if (!isMagasinAlredyNeedProduct(magasin, magasinsNeededProducts)) {
+                            magasinsNeededProducts.add(magasin);
+                        }
+                    }
+                }
+
+            }
+
+        }
+        return magasinsNeededProducts;
     }
-    
-    
+
+    //cette methode me permer de tester si magasin est deja dans la liste des magasins qui sont besoins de produits ou non
+    public Boolean isMagasinAlredyNeedProduct(Magasin magasin, List<Magasin> magasinsNeedProduct) {
+        for (Magasin m : magasinsNeedProduct) {
+            if (m == magasin) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public EntiteAdministrative findByPersonnelCodeChef(String codeChef) {
+
+        Personnel foundedChef = personnelService.findByCode(codeChef);
+        if (foundedChef != null) {
+            return foundedChef.getEntiteAdministrative();
+        } else {
+            return null;
+        }
+
+    }
 
 }

@@ -7,6 +7,7 @@ package com.projet.stock.repository;
 
 import com.projet.stock.bean.EntiteAdministrative;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -16,8 +17,9 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface EntiteAdministrativeRepository extends JpaRepository<EntiteAdministrative, Long> {
 
-    EntiteAdministrative findByNom(String nom);
+    public EntiteAdministrative findByNom(String nom);
 
     public EntiteAdministrative findByReference(String reference);
 
+//    public EntiteAdministrative findByPersonnelCodeChef(String codeChef);
 }

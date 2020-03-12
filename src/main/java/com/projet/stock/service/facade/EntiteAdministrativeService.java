@@ -29,13 +29,16 @@ public interface EntiteAdministrativeService {
 
     public List<Magasin> findMagasinLibre(String refEntite);
 
-    public List<Magasin> magasinBesoinsDeProduits(String refEntite);
+    public List<Magasin> magasinsBesoinsDeProduits(String refEntite);
 
     public int AddEmployeToMagasin(String code, String refMagasin);
 
     public int RemoveEmployeFromMagasin(String code, String refMagasin);
-    
-    public int findMagasinByReference (String reference);
-    
+
+    public int findMagasinByReference(String reference);
+
     public Boolean isEployeExistInMagasin(String code, String refMagasin);
+
+    public EntiteAdministrative findByPersonnelCodeChef(String codeChef);
+
 }
