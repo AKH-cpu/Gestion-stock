@@ -27,4 +27,15 @@ public interface EntiteAdministrativeService {
 
     public EntiteAdministrative findByNom(String nom);
 
+    public List<Magasin> findMagasinLibre(String refEntite);
+
+    public List<Magasin> magasinBesoinsDeProduits(String refEntite);
+
+    public int AddEmployeToMagasin(String code, String refMagasin);
+
+    public int RemoveEmployeFromMagasin(String code, String refMagasin);
+    
+    public int findMagasinByReference (String reference);
+    
+    public Boolean isEployeExistInMagasin(String code, String refMagasin);
 }

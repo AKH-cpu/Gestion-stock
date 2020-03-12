@@ -14,7 +14,6 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
-
 /**
  * @author AKH
  */
@@ -29,7 +28,32 @@ public class Magasin implements Serializable {
     private String nom;
     private int nbrMAxProduit;
     private int nbrProduit;
+    private int nbrMaxEmploye;
+    private int nbremploye;
 
+    //liste dial les employes li khdmin fkola magasin
+    
+    @OneToMany
+    private List<Personnel> employes;
+    
+    @OneToMany
+    private List<Produit> produitsMagasin;
+    
+    @ManyToOne
+    private EntiteAdministrative entiteAdministrative;
+    
+    @OneToMany
+    List<Stock> produitMagasin;
+
+    public List<Personnel> getEmployes() {
+        return employes;
+    }
+
+    public void setEmployes(List<Personnel> employes) {
+        this.employes = employes;
+    }
+    
+    
     public int getNbrProduit() {
         return nbrProduit;
     }
@@ -37,10 +61,8 @@ public class Magasin implements Serializable {
     public void setNbrProduit(int nbrProduit) {
         this.nbrProduit = nbrProduit;
     }
+
     
-    
-    @OneToMany
-    private List<Produit> produitsMagasin;
 
     public int getNbrMAxProduit() {
         return nbrMAxProduit;
@@ -57,16 +79,10 @@ public class Magasin implements Serializable {
     public void setProduitsMagasin(List<Produit> produitsMagasin) {
         this.produitsMagasin = produitsMagasin;
     }
-    
-    
-    
-    
-    @ManyToOne
-    private EntiteAdministrative entiteAdministrative;
+
     
 
-    @OneToMany
-    List<Stock> produitMagasin;
+    
 
     public List<Stock> getProduitMagasin() {
         return produitMagasin;
@@ -75,9 +91,23 @@ public class Magasin implements Serializable {
     public void setProduitMagasin(List<Stock> produitMagasin) {
         this.produitMagasin = produitMagasin;
     }
-    
-    
-    
+
+    public int getNbrMaxEmploye() {
+        return nbrMaxEmploye;
+    }
+
+    public void setNbrMaxEmploye(int nbrMaxEmploye) {
+        this.nbrMaxEmploye = nbrMaxEmploye;
+    }
+
+    public int getNbremploye() {
+        return nbremploye;
+    }
+
+    public void setNbremploye(int nbremploye) {
+        this.nbremploye = nbremploye;
+    }
+
     public String getReference() {
         return reference;
     }
@@ -101,7 +131,6 @@ public class Magasin implements Serializable {
     public void setEntiteAdministrative(EntiteAdministrative entiteAdministrative) {
         this.entiteAdministrative = entiteAdministrative;
     }
-
 
     public Long getId() {
         return id;

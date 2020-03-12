@@ -25,13 +25,28 @@ public class Stock implements Serializable {
     private Long id;
     private String reference;
     private Double qte;
+    ////////////////chno kat9ssed bhad l'attribu
     private Double qteDiff;
+    
+    //hada ana li zdthom (bartaouch)
+    private int quantiteMax;
 
+    
     @ManyToOne
     private Magasin magasin;
     @ManyToOne
     private Produit produit;
 
+    public int getQuantiteMax() {
+        return quantiteMax;
+    }
+
+    public void setQuantiteMax(int quantiteMax) {
+        this.quantiteMax = quantiteMax;
+    }
+
+    
+    
     public String getReference() {
         return reference;
     }
