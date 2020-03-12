@@ -90,7 +90,7 @@ public class EntiteAdministrativeServiceImpl implements EntiteAdministrativeServ
     public List<Magasin> findMagasinLibre(String reference) {
         EntiteAdministrative foundedEntite = entiteAdministrativeRepository.findByReference(reference);
         //Creation d une liste vide dont je vais stocker les magasins vide de produits
-        List<Magasin> magasinsLibre = new ArrayList<>();
+        List<Magasin> magasinsLibre = null;
         if (foundedEntite != null) {
             //get les magasins de l entite associer
             List<Magasin> magasins = foundedEntite.getMagasins();
@@ -133,12 +133,17 @@ public class EntiteAdministrativeServiceImpl implements EntiteAdministrativeServ
     public int RemoveEmployeFromMagasin(String code, String refMagasin) {
         Personnel foundedEmploye = personnelService.findByCode(code);
         Magasin foundedMagasin = magasinService.findByReference(refMagasin);
-        if (!isEployeExistInMagasin(code, refMagasin)) {
-            //l'employe n'appartient pas à ce magasin
+        if (foundedEmploye == null) {
+            //l'employe n'existe pas 
             return -1;
+
         } else if (findMagasinByReference(refMagasin) != 1) {
             //le magasin not found
+
             return -2;
+        } else if (!isEployeExistInMagasin(code, refMagasin)) {
+            //l'employe n'appartient pas à ce magasin
+            return -3;
 
         } else {
             List<Personnel> employes = foundedMagasin.getEmployes();
