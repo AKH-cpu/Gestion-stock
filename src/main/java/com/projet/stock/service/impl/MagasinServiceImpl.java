@@ -8,6 +8,7 @@ package com.projet.stock.service.impl;
 import com.projet.stock.bean.EntiteAdministrative;
 import com.projet.stock.bean.Magasin;
 import com.projet.stock.bean.Produit;
+import com.projet.stock.bean.Stock;
 import com.projet.stock.service.facade.MagasinService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -99,7 +100,8 @@ public class MagasinServiceImpl implements MagasinService {
                 for (Produit p : produits) {
                     if (p.getReference().equals(reference)) {
 
-                        foundedMagasin.getProduitsMagasin().add(p);
+                        Stock s = new Stock(Long.MIN_VALUE, foundedMagasin, p);
+                        foundedMagasin.getProduitsMagasin().add(s);
                         foundedMagasin.setNbrMAxProduit(foundedMagasin.getNbrProduit() + 1);
                         return 1;
 
@@ -119,10 +121,10 @@ public class MagasinServiceImpl implements MagasinService {
         if (foundedMagasin != null) {
             while (foundedMagasin.getNbrProduit() > 0) {
 
-                for (Produit p : foundedMagasin.getProduitsMagasin()) {
-                    if (p.getReference().equals(reference)) {
+                for (Stock s : foundedMagasin.getProduitsMagasin()) {
+                    if (s.getProduit().getReference().equals(reference)) {
 
-                        foundedMagasin.getProduitsMagasin().remove(p);
+                        foundedMagasin.getProduitsMagasin().remove(s);
                         foundedMagasin.setNbrMAxProduit(foundedMagasin.getNbrProduit() - 1);
 
                         return 1;

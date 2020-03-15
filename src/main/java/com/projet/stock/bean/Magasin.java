@@ -32,18 +32,16 @@ public class Magasin implements Serializable {
     private int nbremploye;
 
     //liste dial les employes li khdmin fkola magasin
-    
     @OneToMany
     private List<Personnel> employes;
-    
-    @OneToMany
-    private List<Produit> produitsMagasin;
-    
+
+//    @OneToMany
+//    private List<Produit> produitsMagasin;
     @ManyToOne
     private EntiteAdministrative entiteAdministrative;
-    
+
     @OneToMany
-    List<Stock> produitMagasin;
+    List<Stock> produitsMagasin;
 
     public List<Personnel> getEmployes() {
         return employes;
@@ -52,8 +50,7 @@ public class Magasin implements Serializable {
     public void setEmployes(List<Personnel> employes) {
         this.employes = employes;
     }
-    
-    
+
     public int getNbrProduit() {
         return nbrProduit;
     }
@@ -61,8 +58,6 @@ public class Magasin implements Serializable {
     public void setNbrProduit(int nbrProduit) {
         this.nbrProduit = nbrProduit;
     }
-
-    
 
     public int getNbrMAxProduit() {
         return nbrMAxProduit;
@@ -72,24 +67,12 @@ public class Magasin implements Serializable {
         this.nbrMAxProduit = nbrMAxProduit;
     }
 
-    public List<Produit> getProduitsMagasin() {
+    public List<Stock> getProduitsMagasin() {
         return produitsMagasin;
     }
 
-    public void setProduitsMagasin(List<Produit> produitsMagasin) {
+    public void setProduitsMagasin(List<Stock> produitsMagasin) {
         this.produitsMagasin = produitsMagasin;
-    }
-
-    
-
-    
-
-    public List<Stock> getProduitMagasin() {
-        return produitMagasin;
-    }
-
-    public void setProduitMagasin(List<Stock> produitMagasin) {
-        this.produitMagasin = produitMagasin;
     }
 
     public int getNbrMaxEmploye() {

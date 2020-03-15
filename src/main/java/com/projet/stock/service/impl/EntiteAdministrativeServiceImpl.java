@@ -190,7 +190,7 @@ public class EntiteAdministrativeServiceImpl implements EntiteAdministrativeServ
         if (foundedEntite != null) {
             List<Magasin> magasins = foundedEntite.getMagasins();
             for (Magasin magasin : magasins) {
-                List<Stock> produitsMagasin = magasin.getProduitMagasin();
+                List<Stock> produitsMagasin = magasin.getProduitsMagasin();
                 for (Stock produit : produitsMagasin) {
                     if (produit.getQuantiteMax() > produit.getQte()) {
                         if (!isMagasinAlredyNeedProduct(magasin, magasinsNeededProducts)) {

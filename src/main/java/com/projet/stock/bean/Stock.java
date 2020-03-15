@@ -127,6 +127,13 @@ public class Stock implements Serializable {
         this.produit = produit;
     }
 
+    public Stock(Long id, Magasin magasin, Produit produit) {
+        this.id = id;
+        this.magasin = magasin;
+        this.produit = produit;
+    }
+
+    
     @Override
     public String toString() {
         return "Stock{" + "id=" + id + ", reference=" + reference + ", qte=" + qte + ", qteDiff=" + qteDiff + ", magasin=" + magasin + ", produit=" + produit + '}';
