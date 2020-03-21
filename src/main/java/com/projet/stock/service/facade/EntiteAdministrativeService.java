@@ -6,6 +6,7 @@
 package com.projet.stock.service.facade;
 
 import com.projet.stock.bean.EntiteAdministrative;
+import com.projet.stock.bean.Magasin;
 import java.util.List;
 
 /**
