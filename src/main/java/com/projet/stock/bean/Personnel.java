@@ -13,6 +13,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
+import org.springframework.format.annotation.DateTimeFormat;
 
 /**
  * @author AKH
@@ -32,13 +33,19 @@ public class Personnel implements Serializable {
     private Double salary;
     private Double yearsExp;
     private String codeChef;
+    //one month worked = +3 rewardPoints ( 1hr = 0.0125)
+    private Double points;
     @Temporal(javax.persistence.TemporalType.DATE)
-    private Date date_embauche;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date dateEmbauche;
 
     @ManyToOne
     private EntiteAdministrative entiteAdministrative;
 
-    public Personnel(Long id, String code, String nom, String telephone, String fonction, Double seniorityScore, Double salary, Double yearsExp, String codeChef, Date date_embauche, EntiteAdministrative entiteAdministrative) {
+    public Personnel() {
+    }
+
+    public Personnel(Long id, String code, String nom, String telephone, String fonction, Double seniorityScore, Double salary, Double yearsExp, String codeChef, Date dateEmbauche, EntiteAdministrative entiteAdministrative) {
         this.id = id;
         this.code = code;
         this.nom = nom;
@@ -48,16 +55,24 @@ public class Personnel implements Serializable {
         this.salary = salary;
         this.yearsExp = yearsExp;
         this.codeChef = codeChef;
-        this.date_embauche = date_embauche;
+        this.dateEmbauche = dateEmbauche;
         this.entiteAdministrative = entiteAdministrative;
     }
 
-    public Date getDate_embauche() {
-        return date_embauche;
+    public Double getPoints() {
+        return points;
     }
 
-    public void setDate_embauche(Date date_embauche) {
-        this.date_embauche = date_embauche;
+    public void setPoints(Double points) {
+        this.points = points;
+    }
+
+    public Date getDateEmbauche() {
+        return dateEmbauche;
+    }
+
+    public void setDateEmbauche(Date dateEmbauche) {
+        this.dateEmbauche = dateEmbauche;
     }
 
     public String getFonction() {
@@ -164,5 +179,4 @@ public class Personnel implements Serializable {
     public String toString() {
         return "com.projet.stock.bean.Personnel[ id=" + id + " ]";
     }
-
 }

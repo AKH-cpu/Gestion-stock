@@ -5,6 +5,7 @@
  */
 package com.projet.stock.bean;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.*;
@@ -28,21 +29,19 @@ public class EntiteAdministrative implements Serializable {
     @OneToMany(mappedBy = "entiteAdministrative")
     private List<Magasin> magasins;
 
-
-    @OneToMany(mappedBy = "entiteAdministrative")
-    private List<Personnel> employes;
-    
-    @OneToOne
+//    @OneToMany(mappedBy = "entiteAdministrative")
+//    private List<Personnel> employes;
+    @ManyToOne
+    @JsonIgnore
     private Personnel chef;
 
-    public List<Personnel> getEmployes() {
-        return employes;
-    }
-
-    public void setEmployes(List<Personnel> employes) {
-        this.employes = employes;
-    }
-
+//    public List<Personnel> getEmployes() {
+//        return employes;
+//    }
+//
+//    public void setEmployes(List<Personnel> employes) {
+//        this.employes = employes;
+//    }
     public List<ExpressionBesoin> getExpressionBesoins() {
         return expressionBesoins;
     }

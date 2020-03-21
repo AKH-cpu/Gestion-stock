@@ -6,7 +6,6 @@
 package com.projet.stock.service.facade;
 
 import com.projet.stock.bean.ExpressionBesoin;
-import com.projet.stock.bean.Produit;
 import java.util.Date;
 import java.util.List;
 
@@ -23,5 +22,9 @@ public interface ExpressionBesoinService {
     int save(ExpressionBesoin expressionBesoin);
 
     int deleteByReference(String Reference);
+
+    public List<ExpressionBesoin> findAll();
+
+    public List<ExpressionBesoin> findByChef(String codeEmp);
 
 }

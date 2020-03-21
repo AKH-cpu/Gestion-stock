@@ -6,10 +6,14 @@
 package com.projet.stock.service.impl;
 
 import com.projet.stock.bean.ExpressionBesoin;
+import com.projet.stock.bean.Personnel;
 import com.projet.stock.repository.ExpressionBesoinRepository;
 import com.projet.stock.service.facade.ExpressionBesoinService;
+import com.projet.stock.service.facade.PersonnelService;
 import com.projet.stock.service.facade.ProduitService;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,6 +29,8 @@ public class ExpressionBesoinServiceImpl implements ExpressionBesoinService {
     private ExpressionBesoinRepository expressionBesoinRepository;
     @Autowired
     private ProduitService produitService;
+    @Autowired
+    private PersonnelService personnelService;
 
     @Override
     public ExpressionBesoin findByReference(String reference) {
@@ -58,6 +64,28 @@ public class ExpressionBesoinServiceImpl implements ExpressionBesoinService {
         } else {
             expressionBesoinRepository.deleteByReference(Reference);
             return 1;
+        }
+    }
+
+    @Override
+    public List<ExpressionBesoin> findAll() {
+        return expressionBesoinRepository.findAll();
+    }
+    
+       @Override
+    public List<ExpressionBesoin> findByChef(String codeEmp) {
+        Personnel foundedPersonnel = personnelService.findByCode(codeEmp);
+       
+        if (foundedPersonnel == null) {
+            return null;
+        } else {
+            List<ExpressionBesoin> expressionBesoins = new ArrayList<>();
+            for (ExpressionBesoin expressionBesoin : expressionBesoinRepository.findAll()) {
+                if(expressionBesoin.getChef().getCode().equals(codeEmp)){
+                    expressionBesoins.add(expressionBesoin);
+                }
+            }
+            return expressionBesoins;
         }
     }
 

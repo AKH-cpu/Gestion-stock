@@ -5,12 +5,12 @@
  */
 package com.projet.stock.ws.rest;
 
-import com.projet.stock.bean.EntiteAdministrative;
-import com.projet.stock.bean.ExpressionBesoin;
 import com.projet.stock.bean.Personnel;
 import com.projet.stock.service.facade.PersonnelService;
+import java.util.Date;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -26,6 +26,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("stock-api/Personnel")
 public class PersonnelRest {
+
     @Autowired
     private PersonnelService personnelService;
 
@@ -44,7 +45,7 @@ public class PersonnelRest {
         return personnelService.findByFonction(fonction);
     }
 
-    @PostMapping("/personnel/{personnel}")
+    @PostMapping("/")
     public int save(@RequestBody Personnel personnel) {
         return personnelService.save(personnel);
     }
@@ -52,11 +53,6 @@ public class PersonnelRest {
     @GetMapping("/seniorityScore/{seniorityScore}")
     public Personnel findBySeniorityScore(@PathVariable Double seniorityScore) {
         return personnelService.findBySeniorityScore(seniorityScore);
-    }
-
-    @GetMapping("/value/{value}")
-    public Personnel findBySeniorityScoreGreaterThanEqual(@PathVariable Double value) {
-        return personnelService.findBySeniorityScoreGreaterThanEqual(value);
     }
 
     @GetMapping("/salary/{salary}")
@@ -67,11 +63,6 @@ public class PersonnelRest {
     @GetMapping("/yearsExp/{yearsExp}")
     public Personnel findByYearsExp(@PathVariable Double yearsExp) {
         return personnelService.findByYearsExp(yearsExp);
-    }
-
-    @GetMapping("/expressionBesoin/{expressionBesoin}")
-    public Personnel findByEDB(@PathVariable ExpressionBesoin expressionBesoin) {
-        return personnelService.findByEDB(expressionBesoin);
     }
 
     @GetMapping("/nom/{nom}")
@@ -89,15 +80,36 @@ public class PersonnelRest {
         return personnelService.deleteByCode(code);
     }
 
-    @PutMapping("/personnel/{personnel}/oldEA/{oldEA}/newEA/{newEA}")
-    public int transferEmp(@PathVariable Personnel personnel,@PathVariable EntiteAdministrative oldEA,@PathVariable EntiteAdministrative newEA) {
-        return personnelService.transferEmp(personnel, oldEA, newEA);
+    @GetMapping("/referenceEDB/{referenceEDB}")
+    public Personnel findByEDB(@PathVariable String referenceEDB) {
+        return personnelService.findByEDB(referenceEDB);
     }
 
-    @PutMapping("/newChef/{newChef}/oldChef/{oldChef}/entiteAdministrative/{entiteAdministrative}")
-    public int AddChef(@PathVariable Personnel newChef,@PathVariable Personnel oldChef,@PathVariable EntiteAdministrative entiteAdministrative) {
-        return personnelService.AddChef(newChef, oldChef, entiteAdministrative);
+    @PutMapping("/codeEmp/{codeEmp}/newEAReference/{newEAReference}")
+    public int transferEmp(@PathVariable String codeEmp, @PathVariable String newEAReference) {
+        return personnelService.transferEmp(codeEmp, newEAReference);
     }
-    
-    
+
+    @GetMapping("/value/{value}")
+    public List<Personnel> findBySeniorityScoreGreaterThanEqual(@PathVariable Double value) {
+        return personnelService.findBySeniorityScoreGreaterThanEqual(value);
+    }
+
+    @PutMapping("/newChefCode/{newChefCode}/oldChefCode/{oldChefCode}")
+    public int addChef(@PathVariable String newChefCode,@PathVariable String oldChefCode) {
+        return personnelService.addChef(newChefCode, oldChefCode);
+    }
+
+    @GetMapping("/topfive")
+    public List<Personnel> topFiveCondidatesToBePromoted() {
+        return personnelService.topFiveCondidatesToBePromoted();
+    }
+
+    @PutMapping("/codeEmpToupdateSeniorityScore/{codeEmp}")
+    public int updateSeniorityScore(@PathVariable String codeEmp) {
+        return personnelService.updateSeniorityScore(codeEmp);
+    }
+
+  
+
 }

@@ -8,6 +8,7 @@ package com.projet.stock.ws.rest;
 import com.projet.stock.bean.ExpressionBesoin;
 import com.projet.stock.service.facade.ExpressionBesoinService;
 import java.util.Date;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,6 +25,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("stock-api/ExpressionBesoin")
 public class ExpressionBesoinRest {
+
     @Autowired
     private ExpressionBesoinService expressionBesoinService;
 
@@ -46,5 +48,15 @@ public class ExpressionBesoinRest {
     public int deleteByReference(@PathVariable String Reference) {
         return expressionBesoinService.deleteByReference(Reference);
     }
-    
+
+    @GetMapping("/")
+    public List<ExpressionBesoin> findAll() {
+        return expressionBesoinService.findAll();
+    }
+
+    @GetMapping("/codeEmp/{codeEmp}")
+    public List<ExpressionBesoin> findByChef(@PathVariable String codeEmp) {
+        return expressionBesoinService.findByChef(codeEmp);
+    }
+
 }

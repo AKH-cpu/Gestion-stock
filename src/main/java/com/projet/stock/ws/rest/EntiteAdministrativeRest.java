@@ -24,35 +24,34 @@ import org.springframework.web.bind.annotation.RestController;
  * @author lenovo
  */
 @RestController
-@RequestMapping("gestion-stock-v1/EntiteAdministrative")
+@RequestMapping("gestion-stock/EntiteAdministrative")
 public class EntiteAdministrativeRest {
-    
+
     @Autowired
     EntiteAdministrativeService entiteAdministrativeService;
-    
+
     @GetMapping("/reference/{reference}")
-    public EntiteAdministrative findByReference(@PathVariable String reference){
+    public EntiteAdministrative findByReference(@PathVariable String reference) {
         return entiteAdministrativeService.findByReference(reference);
     }
-    
-    
+
     @DeleteMapping("/deleteAll")
-    public String deleteAll(){
+    public String deleteAll() {
         return entiteAdministrativeService.deleteAll();
     }
-    
+
     @GetMapping("/findAll")
-    public List<EntiteAdministrative> findAll(){
+    public List<EntiteAdministrative> findAll() {
         return entiteAdministrativeService.findAll();
     }
-    
+
     @PostMapping("/")
-    public int save (@RequestBody EntiteAdministrative entiteAdministrative){
+    public int save(@RequestBody EntiteAdministrative entiteAdministrative) {
         return entiteAdministrativeService.save(entiteAdministrative);
     }
-    
+
     @DeleteMapping("/delete/{reference}")
-    public int deleteByReference(@PathVariable String reference){
+    public int deleteByReference(@PathVariable String reference) {
         return entiteAdministrativeService.deleteByReference(reference);
     }
     

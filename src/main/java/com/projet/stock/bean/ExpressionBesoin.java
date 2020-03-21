@@ -5,11 +5,10 @@
  */
 package com.projet.stock.bean;
 
-import org.hibernate.mapping.ToOne;
-
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -34,13 +33,25 @@ public class ExpressionBesoin implements Serializable {
     private Date dateExpressionBesoin;
     private String etat;
 
-    public ExpressionBesoin(Long id, String reference, Date dateExpressionBesoin, String etat, EntiteAdministrative entiteAdministrative, Personnel personnel, List<ExpressionBesoinDetail> expressionBesoinDetails, Livraison livraison) {
+    @ManyToOne
+    private Personnel chef;
+
+    @OneToMany(mappedBy = "expressionBesoin")
+    private List<ExpressionBesoinDetail> expressionBesoinDetails;
+
+    @OneToOne(mappedBy = "expressionBesoin")
+    private Livraison livraison;
+
+    @ManyToOne
+    private EntiteAdministrative entiteAdministrative;
+
+    public ExpressionBesoin(Long id, String reference, Date dateExpressionBesoin, String etat, EntiteAdministrative entiteAdministrative, Personnel chef, List<ExpressionBesoinDetail> expressionBesoinDetails, Livraison livraison) {
         this.id = id;
         this.reference = reference;
         this.dateExpressionBesoin = dateExpressionBesoin;
         this.etat = etat;
         this.entiteAdministrative = entiteAdministrative;
-        this.personnel = personnel;
+        this.chef = chef;
         this.expressionBesoinDetails = expressionBesoinDetails;
         this.livraison = livraison;
     }
@@ -52,19 +63,6 @@ public class ExpressionBesoin implements Serializable {
     public void setEtat(String etat) {
         this.etat = etat;
     }
-
-    @ManyToOne
-    private EntiteAdministrative entiteAdministrative;
-    @ManyToOne
-    private Personnel personnel;
-
-
-    @OneToMany(mappedBy = "expressionBesoin")
-    private List<ExpressionBesoinDetail> expressionBesoinDetails;
-
-    @OneToOne(mappedBy = "expressionBesoin")
-    private Livraison livraison;
-
 
     public Long getId() {
         return id;
@@ -114,12 +112,12 @@ public class ExpressionBesoin implements Serializable {
         this.entiteAdministrative = entiteAdministrative;
     }
 
-    public Personnel getPersonnel() {
-        return personnel;
+    public Personnel getChef() {
+        return chef;
     }
 
-    public void setPersonnel(Personnel personnel) {
-        this.personnel = personnel;
+    public void setChef(Personnel chef) {
+        this.chef = chef;
     }
 
     @Override
@@ -130,13 +128,30 @@ public class ExpressionBesoin implements Serializable {
     }
 
     @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof ExpressionBesoin)) {
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
             return false;
         }
-        ExpressionBesoin other = (ExpressionBesoin) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final ExpressionBesoin other = (ExpressionBesoin) obj;
+        if (!Objects.equals(this.reference, other.reference)) {
+            return false;
+        }
+        if (!Objects.equals(this.etat, other.etat)) {
+            return false;
+        }
+        if (!Objects.equals(this.id, other.id)) {
+            return false;
+        }
+        if (!Objects.equals(this.dateExpressionBesoin, other.dateExpressionBesoin)) {
+            return false;
+        }
+        if (!Objects.equals(this.chef, other.chef)) {
             return false;
         }
         return true;
@@ -144,7 +159,7 @@ public class ExpressionBesoin implements Serializable {
 
     @Override
     public String toString() {
-        return "com.projet.stock.bean.ExpressionBesoin[ id=" + id + " ]";
+        return "ExpressionBesoin{" + "id=" + id + ", reference=" + reference + ", dateExpressionBesoin=" + dateExpressionBesoin + ", etat=" + etat + ", chef=" + chef + ", expressionBesoinDetails=" + expressionBesoinDetails + ", livraison=" + livraison + ", entiteAdministrative=" + entiteAdministrative + '}';
     }
 
 }

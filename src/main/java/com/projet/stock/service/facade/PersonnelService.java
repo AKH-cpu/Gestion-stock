@@ -5,8 +5,6 @@
  */
 package com.projet.stock.service.facade;
 
-import com.projet.stock.bean.EntiteAdministrative;
-import com.projet.stock.bean.ExpressionBesoin;
 import com.projet.stock.bean.Personnel;
 import java.util.List;
 
@@ -24,24 +22,34 @@ public interface PersonnelService {
 
     Personnel findBySeniorityScore(Double seniorityScore);
 
-    Personnel findBySeniorityScoreGreaterThanEqual(Double value);
+    List<Personnel> findBySeniorityScoreGreaterThanEqual(Double value);
 
     Personnel findBySalary(Double salary);
 
     Personnel findByYearsExp(Double yearsExp);
 
-    Personnel findByEDB(ExpressionBesoin expressionBesoin);
+    //EDB = Expression De Besoin
+    Personnel findByEDB(String referenceEDB);
 
     List<Personnel> findByEntiteAdministrativeNom(String nom);
-    
+
     List<Personnel> findByCodeChef(String codeChef);
 
     int save(Personnel personnel);
 
     int deleteByCode(String code);
 
-    int transferEmp(Personnel personnel,EntiteAdministrative oldEA, EntiteAdministrative newEA);
+    int transferEmp(String codeEmp, String newEAReference);
 
-    int AddChef(Personnel newChef,Personnel oldChef, EntiteAdministrative entiteAdministrative);
+    int addChef(String newChefCode, String oldChefCode);
 
+    List<Personnel> topFiveCondidatesToBePromoted();
+
+    int updateSeniorityScore(String codeEmp);
+
+    // true if present, false if absent
+    int dailyPointsUpdate(String codeEmp);
+    
+//    int countNumberPerState(String codeEmp, String state);
+    
 }
