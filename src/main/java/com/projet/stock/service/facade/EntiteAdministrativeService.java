@@ -27,7 +27,7 @@ public interface EntiteAdministrativeService {
 
     public EntiteAdministrative findByNom(String nom);
 
-    public List<Magasin> findMagasinLibre(String refEntite);
+    public List<Magasin> findMagasinVide(String refEntite);
 
     public List<Magasin> magasinsBesoinsDeProduits(String refEntite);
 
@@ -40,5 +40,9 @@ public interface EntiteAdministrativeService {
     public Boolean isEployeExistInMagasin(String code, String refMagasin);
 
     public EntiteAdministrative findByPersonnelCodeChef(String codeChef);
+    
+    public List<Magasin> magasinsWithNoEmployes(String refEntite);
+    
+    public List<Magasin> magasinsNeedEmployes(String refEntite);
 
 }

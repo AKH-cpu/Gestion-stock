@@ -57,8 +57,8 @@ public class EntiteAdministrativeRest {
     }
     
     @GetMapping("/findMagasinLibre/refEntite/{refEntite}")
-    public List<Magasin> findMagasinLibre(@PathVariable String refEntite){
-        return entiteAdministrativeService.findMagasinLibre(refEntite);
+    public List<Magasin> findMagasinVide(@PathVariable String refEntite){
+        return entiteAdministrativeService.findMagasinVide(refEntite);
     }
 
     @GetMapping("/findMagasinBesoinsDeProduits/refEntite/{refEntite}")
@@ -91,5 +91,14 @@ public class EntiteAdministrativeRest {
         return entiteAdministrativeService.findByPersonnelCodeChef(codeChef);
     }
     
+    @GetMapping("/findMagasinsNeedEmployes/refEntite/{refEntite}")
+     public List<Magasin> magasinsNeedEmployes(@PathVariable String refEntite){
+         return entiteAdministrativeService.magasinsNeedEmployes(refEntite);
+     }
     
+     @GetMapping("/findMagasinsWithNoEmploye/refEntite/{refEntite}")
+     public List<Magasin> magasinsWithNoEmployes(@PathVariable String refEntite){
+         return entiteAdministrativeService.magasinsWithNoEmployes(refEntite);
+     }
+     
 }

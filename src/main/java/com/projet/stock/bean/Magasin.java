@@ -43,8 +43,8 @@ public class Magasin implements Serializable {
     @ManyToOne
     private EntiteAdministrative entiteAdministrative;
 
-    @OneToMany(mappedBy = "magasin")
-    List<Stock> produitsMagasin;
+//    @OneToMany(mappedBy = "magasin")
+//    List<Stock> produitsMagasin;
 
     public List<Personnel> getEmployes() {
         return employes;
@@ -70,13 +70,13 @@ public class Magasin implements Serializable {
         this.nbrMAxProduit = nbrMAxProduit;
     }
 
-    public List<Stock> getProduitsMagasin() {
-        return produitsMagasin;
-    }
-
-    public void setProduitsMagasin(List<Stock> produitsMagasin) {
-        this.produitsMagasin = produitsMagasin;
-    }
+//    public List<Stock> getProduitsMagasin() {
+//        return produitsMagasin;
+//    }
+//
+//    public void setProduitsMagasin(List<Stock> produitsMagasin) {
+//        this.produitsMagasin = produitsMagasin;
+//    }
 
     public double getNbrMaxEmploye() {
         return nbrMaxEmploye;
