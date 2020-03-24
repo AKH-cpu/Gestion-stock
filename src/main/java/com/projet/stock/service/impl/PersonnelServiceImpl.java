@@ -11,7 +11,6 @@ import com.projet.stock.bean.Personnel;
 import com.projet.stock.repository.PersonnelRepository;
 import com.projet.stock.service.facade.EntiteAdministrativeService;
 import com.projet.stock.service.facade.ExpressionBesoinService;
-import com.projet.stock.service.facade.PersonnelPresenceDetailService;
 import com.projet.stock.service.facade.PersonnelService;
 import java.util.List;
 import javax.transaction.Transactional;
@@ -33,8 +32,6 @@ public class PersonnelServiceImpl implements PersonnelService {
 
     @Autowired
     private EntiteAdministrativeService entiteAdministrativeService;
-    @Autowired
-    private PersonnelPresenceDetailService personnelPresenceDetailService;
 
     @Override
     public List<Personnel> findByFonction(String fonction) {
