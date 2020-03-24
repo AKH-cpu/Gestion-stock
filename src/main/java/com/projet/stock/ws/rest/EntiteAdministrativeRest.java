@@ -87,8 +87,8 @@ public class EntiteAdministrativeRest {
     }
 
     @GetMapping("/findEntiteByChef/codeChef/{codeChef}")
-    public EntiteAdministrative findByPersonnelCodeChef(@PathVariable String codeChef){
-        return entiteAdministrativeService.findByPersonnelCodeChef(codeChef);
+    public EntiteAdministrative findByPersonnelCode(@PathVariable String codeChef){
+        return entiteAdministrativeService.findByPersonnelCode(codeChef);
     }
     
     @GetMapping("/findMagasinsNeedEmployes/refEntite/{refEntite}")

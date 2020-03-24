@@ -5,6 +5,7 @@
  */
 package com.projet.stock.bean;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Entity;
@@ -39,6 +40,8 @@ public class Personnel implements Serializable {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date dateEmbauche;
 
+    //ana zdt hadi bartaouch 
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @ManyToOne
     private EntiteAdministrative entiteAdministrative;
 

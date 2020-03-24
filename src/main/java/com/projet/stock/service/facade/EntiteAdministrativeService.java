@@ -39,7 +39,7 @@ public interface EntiteAdministrativeService {
 
     public Boolean isEployeExistInMagasin(String code, String refMagasin);
 
-    public EntiteAdministrative findByPersonnelCodeChef(String codeChef);
+    public EntiteAdministrative findByPersonnelCode(String codeChef);
     
     public List<Magasin> magasinsWithNoEmployes(String refEntite);
     

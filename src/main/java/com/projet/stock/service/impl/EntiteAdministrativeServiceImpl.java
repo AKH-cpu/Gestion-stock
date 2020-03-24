@@ -59,6 +59,8 @@ public class EntiteAdministrativeServiceImpl implements EntiteAdministrativeServ
             return -2;
         } else {
             entiteAdministrative.setChef(foundedChef);
+            foundedChef.setCodeChef(null);
+            foundedChef.setEntiteAdministrative(entiteAdministrative);
             entiteAdministrativeRepository.save(entiteAdministrative);
             return 1;
         }
@@ -210,14 +212,16 @@ public class EntiteAdministrativeServiceImpl implements EntiteAdministrativeServ
     }
 
     @Override
-    public EntiteAdministrative findByPersonnelCodeChef(String codeChef) {
+    public EntiteAdministrative findByPersonnelCode(String codeChef) {
 
         Personnel foundedChef = personnelService.findByCode(codeChef);
+        System.out.println("CCCCCCCCCCCCCCCCCCCCCCC:   "+foundedChef.getCode()+"fct     "+foundedChef.getFonction());
         if (foundedChef != null) {
             return foundedChef.getEntiteAdministrative();
         } else {
             return null;
         }
+        
     }
 
     @Override

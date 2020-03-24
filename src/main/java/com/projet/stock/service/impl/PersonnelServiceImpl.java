@@ -93,6 +93,8 @@ public class PersonnelServiceImpl implements PersonnelService {
             if (personnel.getFonction().equalsIgnoreCase("chef")) {
                 personnel.setCodeChef(null);
                 personnel.setSeniorityScore((double) 50);
+                //hadi zdtha (bartaouch) 7int makat2assosiach entite l had chef f la base de donnee
+                personnel.setEntiteAdministrative(fEntiteAdministrative);
                 fEntiteAdministrative.setChef(personnel);
                 personnel.setEntiteAdministrative(fEntiteAdministrative);
                 personnelRepository.save(personnel);
