@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("livraison-api/livraison")
 public class LivraisonRest {
 
-    @Autowired
+       @Autowired
     LivraisonService livraisonService;
 
     @GetMapping("/reference/{reference}")
@@ -43,5 +43,4 @@ public class LivraisonRest {
     public int deleteByReference(@PathVariable String reference) {
         return livraisonService.deleteByReference(reference);
     }
-
 }

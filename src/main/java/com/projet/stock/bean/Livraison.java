@@ -5,6 +5,7 @@
  */
 package com.projet.stock.bean;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.hibernate.mapping.ToOne;
 
 import java.io.Serializable;
@@ -18,6 +19,7 @@ import javax.persistence.*;
 @Entity
 public class Livraison implements Serializable {
 
+   
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -27,11 +29,16 @@ public class Livraison implements Serializable {
     private String reference;
     private Double total;
 
-    @ManyToOne
+    @OneToOne
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private ExpressionBesoin expressionBesoin;
+
     @ManyToOne
     private Fournisseur fournisseur;
-    @OneToMany
+
+    
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    @OneToMany(mappedBy = "livraison")
     private List<LivraisonDetail> livraisonDetails;
 
     public List<LivraisonDetail> getLivraisonDetails() {
@@ -112,5 +119,4 @@ public class Livraison implements Serializable {
     public String toString() {
         return "com.projet.stock.bean.Livraison[ id=" + id + " ]";
     }
-
 }

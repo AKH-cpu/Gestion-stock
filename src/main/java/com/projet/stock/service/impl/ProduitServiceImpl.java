@@ -22,12 +22,13 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Service
 public class ProduitServiceImpl implements ProduitService {
-
     @Autowired
     ProduitRepository produitRepository;
 
     @Autowired
     FamilleProduitService familleProduitService;
+    @Autowired
+    ProduitService produitService;
 
     @Override
     public Produit findByReference(String reference) {
@@ -62,9 +63,25 @@ public class ProduitServiceImpl implements ProduitService {
         return produitRepository.findAll();
     }
 
-    // service qui permet de trouver tous les produits d'une famille Produits
     @Override
-    public List<Produit> findByLibelleFamille(String libelle) {
-        return produitRepository.findByLibelleFamille(libelle);
+    public List<Produit> findByFamilleProduitLibelle(String libelle) {
+        return produitRepository.findByFamilleProduitLibelle(libelle);
+    }
+
+    @Override
+    public void update(String reference, Produit produit) {
+        List<Produit> produits = produitRepository.findAll();
+        for (int i = 0; i < produits.size(); i++) {
+            Produit p = produits.get(i);
+            if (p.getReference().equals(reference)) {
+                produits.set(i, produit);
+            }
+        }
+
+    }
+
+    @Override
+    public List<Produit> findByPrixBetween(double prixMin, double prixMax) {
+        return produitRepository.findByPrixBetween(prixMin, prixMax);
     }
 }

@@ -19,16 +19,15 @@ import java.util.List;
 @Repository
 public interface ProduitRepository extends JpaRepository<Produit, Long> {
 
+    
     Produit findByReference(String reference);
 
-    //????
     int deleteByReference(String reference);
 
-    // put it in livDetailRe
-    @Query(value = "SELECT p.id,p.reference,p.libelle FROM Produit p,Famille_produit f WHERE f.id=p.famille_produit AND f.libelle=:libelle", nativeQuery = true)
-    List<Produit> findByLibelleFamille(@Param(value = "libelle") String libelle);
+    List<Produit> findByFamilleProduitLibelle(String libelle);
 
-    // delete detail first
+    @Query(value="SELECT * FROM produit p WHERE p.prix_unitairettc>= :prixMin AND p.prix_unitairettc= :prixMax ", nativeQuery=true)
+    List<Produit> findByPrixBetween(@Param("prixMin") double prixMin, @Param("prixMax") double prixMax);
 
 
 }

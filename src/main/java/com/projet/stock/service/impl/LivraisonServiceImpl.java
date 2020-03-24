@@ -27,7 +27,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class LivraisonServiceImpl implements LivraisonService {
 
-    @Autowired
+      @Autowired
     LivraisonRepository livraisonRepository;
 
     @Autowired
@@ -44,7 +44,6 @@ public class LivraisonServiceImpl implements LivraisonService {
         return livraisonRepository.findByReference(reference);
     }
 
-
     @Override
     public List<Livraison> findAll() {
         return livraisonRepository.findAll();
@@ -52,30 +51,43 @@ public class LivraisonServiceImpl implements LivraisonService {
 
     @Override
     public int save(Livraison livraison, List<LivraisonDetail> livraisonDetails) {
-        Livraison foundedLivraison = findByReference(livraison.getReference());
-        Fournisseur fournisseur = fournisseurService.findByReference(livraison.getFournisseur().getReference());
+        Livraison foundedLivraison = livraisonRepository.findByReference(livraison.getReference());
+       Fournisseur fournisseur = fournisseurService.findByReference(livraison.getFournisseur().getReference());
         ExpressionBesoin expressionBesoin = expressionBesoinService.findByReference(livraison.getExpressionBesoin().getReference());
+        int valide=livraisonDetailService.validateLivraisonDetail(livraison, livraisonDetails);
         if (foundedLivraison != null) {
             return -1;
-        } else if (fournisseur == null) {
+      } else if (fournisseur == null) {
             return -2;
         } else if (expressionBesoin == null) {
             return -3;
+        } else if (valide!=8) {
+            return valide;
         } else {
-            livraison.setFournisseur(fournisseur);
+           livraison.setFournisseur(fournisseur);
             livraison.setExpressionBesoin(expressionBesoin);
-            livraisonRepository.save(livraison);
+           calculerTotale(livraison, livraisonDetails);
+           livraisonRepository.save(livraison);
             livraisonDetailService.save(livraison, livraisonDetails);
+
             return 1;
         }
     }
 
-    @Transactional
     @Override
+    @Transactional
     public int deleteByReference(String reference) {
         int resDetail = livraisonDetailService.deleteByLivraisonReference(reference);
         int resLivraison = livraisonRepository.deleteByReference(reference);
         return resDetail * resLivraison;
+    }
+
+    private void calculerTotale(Livraison livraison, List<LivraisonDetail> livraisonDetails) {
+        double totale = 0;
+        for (LivraisonDetail livraisonDetail : livraisonDetails) {
+            totale += livraisonDetail.getProduit().getPrixUnitaireTTC() * livraisonDetail.getQte();
+        }
+        livraison.setTotal(totale);
     }
 
 

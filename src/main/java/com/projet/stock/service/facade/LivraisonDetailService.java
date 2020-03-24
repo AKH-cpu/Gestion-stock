@@ -19,7 +19,7 @@ public interface LivraisonDetailService {
 
     List<LivraisonDetail> findAll();
 
-     boolean validateLivraisonDetail(Livraison livraison, List<LivraisonDetail> livraisonDetails);
+    int validateLivraisonDetail(Livraison livraison, List<LivraisonDetail> livraisonDetails);
 
     int save(Livraison livraison, List<LivraisonDetail> livraisonDetails);
 

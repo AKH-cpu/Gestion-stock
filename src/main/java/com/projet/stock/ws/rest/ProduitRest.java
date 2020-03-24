@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("produit-api/produit")
 public class ProduitRest {
 
-    @Autowired
+     @Autowired
     ProduitService produitService;
 
     @GetMapping("/reference/{reference}")
@@ -44,7 +44,18 @@ public class ProduitRest {
     }
 
     @GetMapping("/familleProduit/libelle/{libelle}")
-    public List<Produit> findByLibelleFamille(@PathVariable String libelle) {
-        return produitService.findByLibelleFamille(libelle);
+    public List<Produit> findByFamilleProduitLibelle(@PathVariable String libelle) {
+        return produitService.findByFamilleProduitLibelle(libelle);
     }
+
+    @GetMapping("/prixMin/{prixMin}/prixMax/{prixMax}")
+    public List<Produit> findByPrixBetween(@PathVariable double prixMin, @PathVariable double prixMax) {
+        return produitService.findByPrixBetween(prixMin, prixMax);
+    }
+
+    @PutMapping("update/reference/{reference}")
+    public void update(@PathVariable String reference,Produit produit) {
+         produitService.update(reference, produit);
+    }
+    
 }

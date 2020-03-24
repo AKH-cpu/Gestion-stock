@@ -23,5 +23,4 @@ public interface LivraisonService {
     int save(Livraison livraison, List<LivraisonDetail> livraisonDetails);
 
     int deleteByReference(String reference);
-
 }

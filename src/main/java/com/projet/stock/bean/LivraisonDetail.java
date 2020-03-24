@@ -19,6 +19,7 @@ import javax.persistence.OneToOne;
 @Entity
 public class LivraisonDetail implements Serializable {
 
+  
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -26,6 +27,7 @@ public class LivraisonDetail implements Serializable {
     private String reference;
     private Double qte;
 
+    
     @ManyToOne
     private Livraison livraison;
 

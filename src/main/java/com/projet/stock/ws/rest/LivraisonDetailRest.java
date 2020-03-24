@@ -25,7 +25,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("livraisonDetail-api/livraisonDetail")
 public class LivraisonDetailRest {
 
-    @Autowired
+      @Autowired
     LivraisonDetailService livraisonDetailService;
 
     @GetMapping("/reference/{reference}")
@@ -39,7 +39,7 @@ public class LivraisonDetailRest {
     }
 
     @GetMapping("/validate")
-    public boolean validateLivraisonDetail(Livraison livraison, List<LivraisonDetail> livraisonDetails) {
+    public int validateLivraisonDetail(Livraison livraison, List<LivraisonDetail> livraisonDetails) {
         return livraisonDetailService.validateLivraisonDetail(livraison, livraisonDetails);
     }
 
