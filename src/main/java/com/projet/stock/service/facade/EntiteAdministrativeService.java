@@ -31,9 +31,9 @@ public interface EntiteAdministrativeService {
 
     public List<Magasin> magasinsBesoinsDeProduits(String refEntite);
 
-    public int AddEmployeToMagasin(String code, String refMagasin);
+    public int addEmployeToMagasin(String code, String refMagasin);
 
-    public int RemoveEmployeFromMagasin(String code, String refMagasin);
+    public int removeEmployeFromMagasin(String code, String refMagasin);
 
     public int findMagasinByReference(String reference);
 

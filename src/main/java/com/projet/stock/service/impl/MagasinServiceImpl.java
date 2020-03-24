@@ -14,7 +14,11 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.projet.stock.repository.MagasinRepository;
+import com.projet.stock.repository.StockRepository;
+import com.projet.stock.service.facade.EntiteAdministrativeService;
 import com.projet.stock.service.facade.ProduitService;
+import com.projet.stock.service.facade.StockService;
+import java.util.ArrayList;
 
 /**
  *
@@ -30,6 +34,15 @@ public class MagasinServiceImpl implements MagasinService {
     @Autowired
     private ProduitService ProduitService;
 
+    @Autowired
+    private EntiteAdministrativeService entiteAdministrativeService;
+
+    @Autowired
+    private StockService stockService;
+
+    @Autowired
+    private StockRepository stockRepository;
+
     @Override
     public Magasin findByReference(String refernce) {
         return magasinRepository.findByReference(refernce);
@@ -44,7 +57,7 @@ public class MagasinServiceImpl implements MagasinService {
     @Override
     public int save(Magasin magasin) {
         Magasin foundedMagasin = magasinRepository.findByReference(magasin.getReference());
-        EntiteAdministrative foundedEntite = magasin.getEntiteAdministrative();
+        EntiteAdministrative foundedEntite = entiteAdministrativeService.findByReference(magasin.getEntiteAdministrative().getReference());
 
         if (foundedMagasin != null) {
             //magasin deja existe
@@ -61,7 +74,7 @@ public class MagasinServiceImpl implements MagasinService {
             return -3;
         } else {
             magasin.setEntiteAdministrative(foundedEntite);
-            magasin.getEntiteAdministrative().setChef(foundedEntite.getChef());
+//            magasin.getEntiteAdministrative().setChef(foundedEntite.getChef());
             magasinRepository.save(magasin);
             return 1;
         }
@@ -88,55 +101,176 @@ public class MagasinServiceImpl implements MagasinService {
 
     }
 
+//    @Override
+//    public int insertProduitToMagasin(String reference, String refMagasin) {
+//        Magasin foundedMagasin = magasinRepository.findByReference(refMagasin);
+//        List<Produit> produits = ProduitService.findAll();
+//
+//        if (foundedMagasin != null) {
+//
+//            while (foundedMagasin.getNbrProduit() < foundedMagasin.getNbrMAxProduit()) {
+//
+//                for (Produit p : produits) {
+//                    if (p.getReference().equals(reference)) {
+//
+//                        Stock s = new Stock(Long.MIN_VALUE, foundedMagasin, p);
+//                        foundedMagasin.getProduitsMagasin().add(s);
+//                        foundedMagasin.setNbrMAxProduit(foundedMagasin.getNbrProduit() + 1);
+//                        return 1;
+//
+//                    }
+//
+//                }
+//
+//            }
+//
+//        }
+//        return -1;
+//    }
+//    @Override
+//    public int deleteProduitFromMagasin(String reference, String refMagasin) {
+//        Magasin foundedMagasin = magasinRepository.findByReference(refMagasin);
+//        if (foundedMagasin != null) {
+//            while (foundedMagasin.getNbrProduit() > 0) {
+//
+//                for (Stock s : foundedMagasin.getProduitsMagasin()) {
+//                    if (s.getProduit().getReference().equals(reference)) {
+//
+//                        foundedMagasin.getProduitsMagasin().remove(s);
+//                        foundedMagasin.setNbrMAxProduit(foundedMagasin.getNbrProduit() - 1);
+//
+//                        return 1;
+//
+//                    }
+//
+//                }
+//
+//            }
+//
+//        }
+//        return -1;
+//    }
     @Override
-    public int insertProduitToMagasin(String reference, String refMagasin) {
-        Magasin foundedMagasin = magasinRepository.findByReference(refMagasin);
-        List<Produit> produits = ProduitService.findAll();
+    public int addProduitsToMagasin(String refStock, String refProd, String refMag, double quantiteMaxProdInMag, double quantite) {
+        Magasin foundedMagasin = magasinRepository.findByReference(refMag);
+        Produit foundedProduit = ProduitService.findByReference(refProd);
+        Stock foundedStock = stockService.findByReference(refStock);
+        Stock loadStock = findStockByRefMagasinAndRefProduit(refMag, refProd);
 
-        if (foundedMagasin != null) {
+        if (foundedMagasin == null) {
+            return -1;
+        } else if (foundedProduit == null) {
+            return -2;
+        } else if (foundedMagasin.getNbrMAxProduit() < (foundedMagasin.getNbrProduit() + quantite)) {
+            return -4;
+        } else if (foundedStock != null && foundedStock.getMagasin().getReference().equals(refMag) && foundedStock.getProduit().getReference().equals(refProd)) {
 
-            while (foundedMagasin.getNbrProduit() < foundedMagasin.getNbrMAxProduit()) {
+            foundedStock.setQte(foundedStock.getQte() + quantite);
+            foundedMagasin.setNbrProduit(foundedMagasin.getNbrProduit() + quantite);
+            foundedStock.setMagasin(foundedMagasin);
+            foundedStock.setProduit(foundedProduit);
+            stockRepository.save(foundedStock);
+            return 11;
 
-                for (Produit p : produits) {
-                    if (p.getReference().equals(reference)) {
+//        } else if (foundeStock != null) {
+//            return -5;
+        } else {
 
-                        Stock s = new Stock(Long.MIN_VALUE, foundedMagasin, p);
-                        foundedMagasin.getProduitsMagasin().add(s);
-                        foundedMagasin.setNbrMAxProduit(foundedMagasin.getNbrProduit() + 1);
-                        return 1;
+            if (loadStock != null) {
+                loadStock.setQte(loadStock.getQte() + quantite);
+                foundedMagasin.setNbrProduit(foundedMagasin.getNbrProduit() + quantite);
+                loadStock.setMagasin(foundedMagasin);
+                loadStock.setProduit(foundedProduit);
+                stockRepository.save(loadStock);
+            } else {
 
-                    }
+                foundedMagasin.setNbrProduit(foundedMagasin.getNbrProduit() + quantite);
+                Stock stock = new Stock(Long.MIN_VALUE, refStock, quantite, quantiteMaxProdInMag, foundedMagasin, foundedProduit);
 
-                }
+                stock.setMagasin(foundedMagasin);
+                stock.setProduit(foundedProduit);
+                stockService.save(stock);
+                //            List<Stock> magasinsProduits =  foundedMagasin.getProduitsMagasin();
+//            magasinsProduits.add(stock);
 
             }
 
+            return 1;
         }
-        return -1;
+
     }
 
     @Override
-    public int deleteProduitFromMagasin(String reference, String refMagasin) {
-        Magasin foundedMagasin = magasinRepository.findByReference(refMagasin);
-        if (foundedMagasin != null) {
-            while (foundedMagasin.getNbrProduit() > 0) {
+    public int removeProduitsfromMagasin(String refProd, String refMag, double quantiteToRemove) {
+        Magasin foundedMagasin = magasinRepository.findByReference(refMag);
+        Produit foundedProduit = ProduitService.findByReference(refProd);
+        Stock foundedStock = findStockByRefMagasinAndRefProduit(refMag, refProd);
+        
+        if (foundedMagasin == null) {
+            return -1;
+        } else if (foundedProduit == null) {
+            return -2;
+        } else if (foundedStock == null) {
+            return -3; 
+        } else if (foundedStock.getQte() < quantiteToRemove) {
+            return -4;
+        }else {
+            
+            foundedStock.setQte(foundedStock.getQte() - quantiteToRemove);
+            foundedMagasin.setNbrProduit(foundedMagasin.getNbrProduit() - quantiteToRemove);
+            foundedStock.setMagasin(foundedMagasin);
+            foundedStock.setProduit(foundedProduit);
+            stockRepository.save(foundedStock);
+            return 1;
+        }
+        
+        
+    }
 
-                for (Stock s : foundedMagasin.getProduitsMagasin()) {
-                    if (s.getProduit().getReference().equals(reference)) {
+    @Override
+    public boolean isProduitInMagasin(String refMagasin, String refProduit) {
+        return findStockByRefMagasinAndRefProduit(refMagasin, refProduit) != null;
+    }
 
-                        foundedMagasin.getProduitsMagasin().remove(s);
-                        foundedMagasin.setNbrMAxProduit(foundedMagasin.getNbrProduit() - 1);
+    @Override
+    public Stock findStockByRefMagasinAndRefProduit(String refMagasin, String refProduit) {
 
-                        return 1;
+        List<Stock> stokes = stockService.findAll();
 
-                    }
+        for (Stock stoke : stokes) {
+            if (stoke.getMagasin().getReference().equals(refMagasin) && stoke.getProduit().getReference().equals(refProduit)) {
 
-                }
+                return stoke;
 
             }
 
         }
-        return -1;
+        return null;
+    }
+
+    public int updateQuantiteProdInStock(String refStock, String refMag, String refProd, double nvQuantite) {
+        Stock foundedStock = stockService.findByReference(refStock);
+        Magasin foundedMagasin = magasinRepository.findByReference(refMag);
+        Produit foundedProduit = ProduitService.findByReference(refProd);
+        if (foundedMagasin == null) {
+            return -1;
+        } else if (foundedProduit == null) {
+            return -2;
+        } else if (foundedStock == null) {
+            return -3;
+
+        } else if (foundedStock.getMagasin().getReference().equals(refMag) && foundedStock.getProduit().getReference().equals(refProd)) {
+
+            foundedStock.setQte(nvQuantite);
+            foundedStock.setMagasin(foundedMagasin);
+            foundedStock.setProduit(foundedProduit);
+            stockRepository.save(foundedStock);
+
+            return 1;
+        } else {
+            return -1111;
+        }
+
     }
 
 }

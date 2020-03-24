@@ -28,8 +28,8 @@ public class Stock implements Serializable {
     ////////////////chno kat9ssed bhad l'attribu
     private Double qteDiff;
     
-    //hada ana li zdthom (bartaouch)
-    private int quantiteMax;
+    //hada ana li zdthom (bartaouch) quantite max f kolo magasin
+    private double quantiteMax;
 
     
     @ManyToOne
@@ -37,11 +37,11 @@ public class Stock implements Serializable {
     @ManyToOne
     private Produit produit;
 
-    public int getQuantiteMax() {
+    public double getQuantiteMax() {
         return quantiteMax;
     }
 
-    public void setQuantiteMax(int quantiteMax) {
+    public void setQuantiteMax(double quantiteMax) {
         this.quantiteMax = quantiteMax;
     }
 
@@ -118,15 +118,6 @@ public class Stock implements Serializable {
     public Stock() {
     }
 
-    public Stock(Long id, String reference, Double qte, Double qteDiff, Magasin magasin, Produit produit) {
-        this.id = id;
-        this.reference = reference;
-        this.qte = qte;
-        this.qteDiff = qteDiff;
-        this.magasin = magasin;
-        this.produit = produit;
-    }
-
     public Stock(Long id, Magasin magasin, Produit produit) {
         this.id = id;
         this.magasin = magasin;
@@ -138,6 +129,18 @@ public class Stock implements Serializable {
     public String toString() {
         return "Stock{" + "id=" + id + ", reference=" + reference + ", qte=" + qte + ", qteDiff=" + qteDiff + ", magasin=" + magasin + ", produit=" + produit + '}';
     }
+
+
+    public Stock(Long id, String reference, Double qte, double quantiteMax, Magasin magasin, Produit produit) {
+        this.id = id;
+        this.reference = reference;
+        this.qte = qte;
+        this.quantiteMax = quantiteMax;
+        this.magasin = magasin;
+        this.produit = produit;
+    }
+    
+    
 
     
 }

@@ -5,8 +5,10 @@
  */
 package com.projet.stock.bean;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import java.io.Serializable;
 import java.util.List;
+import javax.persistence.Access;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -26,10 +28,10 @@ public class Magasin implements Serializable {
     private Long id;
     private String reference;
     private String nom;
-    private int nbrMAxProduit;
-    private int nbrProduit;
-    private int nbrMaxEmploye;
-    private int nbremploye;
+    private double nbrMAxProduit;
+    private double nbrProduit;
+    private double nbrMaxEmploye;
+    private double nbremploye;
 
     //liste dial les employes li khdmin fkola magasin
     @OneToMany
@@ -37,10 +39,11 @@ public class Magasin implements Serializable {
 
 //    @OneToMany
 //    private List<Produit> produitsMagasin;
+    
     @ManyToOne
     private EntiteAdministrative entiteAdministrative;
 
-    @OneToMany
+    @OneToMany(mappedBy = "magasin")
     List<Stock> produitsMagasin;
 
     public List<Personnel> getEmployes() {
@@ -51,19 +54,19 @@ public class Magasin implements Serializable {
         this.employes = employes;
     }
 
-    public int getNbrProduit() {
+    public double getNbrProduit() {
         return nbrProduit;
     }
 
-    public void setNbrProduit(int nbrProduit) {
+    public void setNbrProduit(double nbrProduit) {
         this.nbrProduit = nbrProduit;
     }
 
-    public int getNbrMAxProduit() {
+    public double getNbrMAxProduit() {
         return nbrMAxProduit;
     }
 
-    public void setNbrMAxProduit(int nbrMAxProduit) {
+    public void setNbrMAxProduit(double nbrMAxProduit) {
         this.nbrMAxProduit = nbrMAxProduit;
     }
 
@@ -75,19 +78,19 @@ public class Magasin implements Serializable {
         this.produitsMagasin = produitsMagasin;
     }
 
-    public int getNbrMaxEmploye() {
+    public double getNbrMaxEmploye() {
         return nbrMaxEmploye;
     }
 
-    public void setNbrMaxEmploye(int nbrMaxEmploye) {
+    public void setNbrMaxEmploye(double nbrMaxEmploye) {
         this.nbrMaxEmploye = nbrMaxEmploye;
     }
 
-    public int getNbremploye() {
+    public double getNbremploye() {
         return nbremploye;
     }
 
-    public void setNbremploye(int nbremploye) {
+    public void setNbremploye(double nbremploye) {
         this.nbremploye = nbremploye;
     }
 

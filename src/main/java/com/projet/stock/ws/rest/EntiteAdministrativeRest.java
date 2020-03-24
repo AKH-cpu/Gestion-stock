@@ -24,34 +24,35 @@ import org.springframework.web.bind.annotation.RestController;
  * @author lenovo
  */
 @RestController
-@RequestMapping("gestion-stock/EntiteAdministrative")
+@RequestMapping("gestion-stock-v1/EntiteAdministrative")
 public class EntiteAdministrativeRest {
-
+    
     @Autowired
     EntiteAdministrativeService entiteAdministrativeService;
-
+    
     @GetMapping("/reference/{reference}")
-    public EntiteAdministrative findByReference(@PathVariable String reference) {
+    public EntiteAdministrative findByReference(@PathVariable String reference){
         return entiteAdministrativeService.findByReference(reference);
     }
-
+    
+    
     @DeleteMapping("/deleteAll")
-    public String deleteAll() {
+    public String deleteAll(){
         return entiteAdministrativeService.deleteAll();
     }
-
+    
     @GetMapping("/findAll")
-    public List<EntiteAdministrative> findAll() {
+    public List<EntiteAdministrative> findAll(){
         return entiteAdministrativeService.findAll();
     }
-
+    
     @PostMapping("/")
-    public int save(@RequestBody EntiteAdministrative entiteAdministrative) {
+    public int save (@RequestBody EntiteAdministrative entiteAdministrative){
         return entiteAdministrativeService.save(entiteAdministrative);
     }
-
+    
     @DeleteMapping("/delete/{reference}")
-    public int deleteByReference(@PathVariable String reference) {
+    public int deleteByReference(@PathVariable String reference){
         return entiteAdministrativeService.deleteByReference(reference);
     }
     
@@ -66,13 +67,13 @@ public class EntiteAdministrativeRest {
     }
 
     @PutMapping("/AddEmployeToMagasin/code/{code}/refMagasin/{refMagasin}")
-    public int AddEmployeToMagasin(@PathVariable String code,@PathVariable String refMagasin){
-        return entiteAdministrativeService.AddEmployeToMagasin(code, refMagasin);
+    public int addEmployeToMagasin(@PathVariable String code,@PathVariable String refMagasin){
+        return entiteAdministrativeService.addEmployeToMagasin(code, refMagasin);
     }
 
     @PutMapping("/RemoveEmployeFromMagasin/code/{code}/refMagasin/{refMagasin}")
-    public int RemoveEmployeFromMagasin(@PathVariable String code,@PathVariable String refMagasin){
-        return entiteAdministrativeService.RemoveEmployeFromMagasin(code, refMagasin);
+    public int removeEmployeFromMagasin(@PathVariable String code,@PathVariable String refMagasin){
+        return entiteAdministrativeService.removeEmployeFromMagasin(code, refMagasin);
     }
 
     @GetMapping("/ifMagasinFoundedByReference/reference/{reference}")

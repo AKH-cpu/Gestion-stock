@@ -49,13 +49,17 @@ public class EntiteAdministrativeServiceImpl implements EntiteAdministrativeServ
     @Override
     public int save(EntiteAdministrative entiteAdministrative) {
         EntiteAdministrative foundedEntite = entiteAdministrativeRepository.findByReference(entiteAdministrative.getReference());
+        Personnel foundedChef = personnelService.findByCode(entiteAdministrative.getChef().getCode());
+//        System.out.println("code : "+foundedChef.getCode()+"Nom : "+foundedChef.getNom()+"fonction : "+foundedChef.getFonction()+"telefone : "+foundedChef.getTelephone());
         if (foundedEntite != null) {
             //entite existe deja 
             return -1;
-        } else if (entiteAdministrative.getNom() == null || entiteAdministrative.getChef() == null) {
             //l'entite dois avoir un chef et un nom
+        }else if(foundedChef == null || entiteAdministrative.getNom()== null)
             return -2;
-        } else {
+        
+        else {
+            entiteAdministrative.setChef(foundedChef);
             entiteAdministrativeRepository.save(entiteAdministrative);
             return 1;
         }
@@ -107,20 +111,20 @@ public class EntiteAdministrativeServiceImpl implements EntiteAdministrativeServ
     }
 
     @Override
-    public int AddEmployeToMagasin(String code, String refMagasin) {
+    public int addEmployeToMagasin(String code, String refMagasin) {
         Personnel foundedEmploye = personnelService.findByCode(code);
         Magasin foundedMagasin = magasinService.findByReference(refMagasin);
         if (foundedEmploye == null) {
             //l'employe n'existe pas 
             return -1;
-        } else if (findMagasinByReference(refMagasin) != 1) {
+        } else if (findMagasinByReference(refMagasin) == -1) {
             // Magasin not found : pas de magasin avec la reference entree
             return -2;
-        } else if (isEployeExistInMagasin(code, refMagasin) || isEployeExistInMagasin(code, refMagasin) == null) {
+        } else if (isEployeExistInMagasin(code, refMagasin) == true || isEployeExistInMagasin(code, refMagasin) == null) {
             //l' employe appartient deja a ce magasin 
             return -3;
         } else {
-            List<Personnel> employes = foundedMagasin.getEmployes();
+            List<Personnel> employes = foundedMagasin.getEmployes() ;
             employes.add(foundedEmploye);
             foundedMagasin.setEmployes(employes);
             magasinRepository.save(foundedMagasin);
@@ -130,7 +134,7 @@ public class EntiteAdministrativeServiceImpl implements EntiteAdministrativeServ
     }
 
     @Override
-    public int RemoveEmployeFromMagasin(String code, String refMagasin) {
+    public int removeEmployeFromMagasin(String code, String refMagasin) {
         Personnel foundedEmploye = personnelService.findByCode(code);
         Magasin foundedMagasin = magasinService.findByReference(refMagasin);
         if (foundedEmploye == null) {
@@ -221,10 +225,8 @@ public class EntiteAdministrativeServiceImpl implements EntiteAdministrativeServ
         Personnel foundedChef = personnelService.findByCode(codeChef);
         if (foundedChef != null) {
             return foundedChef.getEntiteAdministrative();
-        } else {
-            return null;
-        }
-
+        } 
+        else return null;           
     }
 
 }

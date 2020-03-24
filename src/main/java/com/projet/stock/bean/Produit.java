@@ -5,7 +5,6 @@
  */
 package com.projet.stock.bean;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Entity;
@@ -31,13 +30,11 @@ public class Produit implements Serializable {
     private Double prixUnitaireHT;
     private Double tauxTVA;
     private Double prixUnitaireTTC;
-    private String photo;
     
     @ManyToOne
     private FamilleProduit familleProduit;
 
     @OneToMany(mappedBy = "produit")
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private List<ExpressionBesoinDetail> expressionBesoinDetails;
 
     public List<ExpressionBesoinDetail> getExpressionBesoinDetails() {

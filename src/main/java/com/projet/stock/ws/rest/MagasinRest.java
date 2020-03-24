@@ -6,6 +6,7 @@
 package com.projet.stock.ws.rest;
 
 import com.projet.stock.bean.Magasin;
+import com.projet.stock.bean.Stock;
 import com.projet.stock.service.facade.MagasinService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,13 +57,40 @@ public class MagasinRest {
     }
     
     
-    @PutMapping("/insertToMagasin/produit/{reference}/magasin/{refMagasin}")
-    public int insertProduitToMagasin(@PathVariable String reference,@PathVariable String refMagasin){
-        return magasinService.insertProduitToMagasin(reference, refMagasin);
+//    @PutMapping("/insertToMagasin/produit/{reference}/magasin/{refMagasin}")
+//    public int insertProduitToMagasin(@PathVariable String reference,@PathVariable String refMagasin){
+//        return magasinService.insertProduitToMagasin(reference, refMagasin);
+//    }
+//    
+//    @PutMapping("/deleteFromMagasin/produit/{reference}/magasin/{refMagasin}")
+//    public int deleteProduitFromMagasin(@PathVariable String reference,@PathVariable String refMagasin){
+//        return magasinService.deleteProduitFromMagasin(reference, refMagasin);
+//    }
+    
+    @PutMapping("/addProducts/refStock/{refStock}/refProd/{refProd}/refMag/{refMag}/quantiteMaxProdInMag/{quantiteMaxProdInMag}/quantite/{quantite}")
+    public int addProduitsToMagasin(@PathVariable String refStock,@PathVariable String refProd,@PathVariable String refMag,@PathVariable double quantiteMaxProdInMag ,@PathVariable double quantite){
+        return magasinService.addProduitsToMagasin(refStock, refProd, refMag, quantiteMaxProdInMag, quantite);
     }
     
-    @PutMapping("/deleteFromMagasin/produit/{reference}/magasin/{refMagasin}")
-    public int deleteProduitFromMagasin(@PathVariable String reference,@PathVariable String refMagasin){
-        return magasinService.deleteProduitFromMagasin(reference, refMagasin);
+ 
+    @GetMapping("/findStock/refMag/{refMagasin}/refProd/{refProduit}")
+    public Stock findStockByRefMagasinAndRefProduit(@PathVariable String refMagasin,@PathVariable String refProduit){
+        return magasinService.findStockByRefMagasinAndRefProduit(refMagasin, refProduit);
     }
+    
+    @PutMapping("/isProduitInMagasin/{refMagasin}/refProd/{refProduit}")
+    public boolean isProduitInMagasin(@PathVariable String refMagasin,@PathVariable String refProduit){
+        return magasinService.isProduitInMagasin(refMagasin, refProduit);
+    }
+    
+    @PutMapping("/updateQuantiteProdInStock/refStock/{refStock}/refMagasin/{refMag}/refProduit/{refProd}/nvQuantite/{nvQuantite}")
+    public int updateQuantiteProdInStock(@PathVariable String refStock,@PathVariable String refMag,@PathVariable String refProd,@PathVariable double nvQuantite){
+        return magasinService.updateQuantiteProdInStock(refStock, refMag, refProd, nvQuantite);
+    }
+    
+    @PutMapping("/removeProductsFromMagasin/refMag/{refMag}/refProd/{refProd}/quantiteToRemove/{quantiteToRemove}")
+    public int removeProduitsfromMagasin(@PathVariable String refProd,@PathVariable String refMag,@PathVariable double quantiteToRemove){
+        return magasinService.removeProduitsfromMagasin(refProd, refMag, quantiteToRemove);
+    }
+    
 }
