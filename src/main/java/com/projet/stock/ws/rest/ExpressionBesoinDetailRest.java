@@ -9,10 +9,10 @@ import com.projet.stock.bean.ExpressionBesoinDetail;
 import com.projet.stock.service.facade.ExpressionBesoinDetailService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -48,21 +48,24 @@ public class ExpressionBesoinDetailRest {
         return expressionBesoinDetailService.findEDBOnHold();
     }
 
-    @PostMapping("/expressionBesoinDetail/{expressionBesoinDetail}")
-    public int save(@RequestBody ExpressionBesoinDetail expressionBesoinDetail) {
-        return expressionBesoinDetailService.save(expressionBesoinDetail);
+    @GetMapping("/reference/{reference}")
+    public ExpressionBesoinDetail findByReference(@PathVariable String reference) {
+        return expressionBesoinDetailService.findByReference(reference);
     }
 
-    @GetMapping("/Reference/{Reference}")
-    public ExpressionBesoinDetail findByReference(@PathVariable String Reference) {
-        return expressionBesoinDetailService.findByReference(Reference);
+    @PostMapping("/expressionBesoinRef/{expressionBesoinRef}/produitRef/{produitRef}")
+    public int save(@PathVariable String expressionBesoinRef, @PathVariable String produitRef, @RequestBody List<ExpressionBesoinDetail> expressionBesoinDetail) {
+        return expressionBesoinDetailService.save(expressionBesoinRef, produitRef, expressionBesoinDetail);
     }
 
-    @PutMapping("/Reference/{Reference}")
-    public int deleteByReference(@PathVariable String Reference) {
-        return expressionBesoinDetailService.deleteByReference(Reference);
+    @DeleteMapping("/reference/{reference}")
+    public int deleteByReference(@PathVariable String reference) {
+        return expressionBesoinDetailService.deleteByReference(reference);
     }
-    
-    
+
+    @DeleteMapping("/ExpressionBesoin/reference/{reference}")
+    public int deleteByExpressionDeBesoinReference(@PathVariable String reference) {
+        return expressionBesoinDetailService.deleteByExpressionDeBesoinReference(reference);
+    }
 
 }

@@ -21,8 +21,10 @@ public interface ExpressionBesoinDetailRepository extends JpaRepository<Expressi
 
     List<ExpressionBesoinDetail> findByQteLivre(Double qteLivre);
 
-    int deleteByReference(String Reference);
+    int deleteByReference(String reference);
+    
+    int deleteByExpressionDeBesoinReference (String reference);
 
-    ExpressionBesoinDetail findByReference(String Reference);
+    ExpressionBesoinDetail findByReference(String reference);
 
 }

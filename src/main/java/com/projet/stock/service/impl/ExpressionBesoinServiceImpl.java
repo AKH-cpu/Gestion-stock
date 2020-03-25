@@ -8,6 +8,7 @@ package com.projet.stock.service.impl;
 import com.projet.stock.bean.ExpressionBesoin;
 import com.projet.stock.bean.Personnel;
 import com.projet.stock.repository.ExpressionBesoinRepository;
+import com.projet.stock.service.facade.ExpressionBesoinDetailService;
 import com.projet.stock.service.facade.ExpressionBesoinService;
 import com.projet.stock.service.facade.PersonnelService;
 import com.projet.stock.service.facade.ProduitService;
@@ -31,6 +32,8 @@ public class ExpressionBesoinServiceImpl implements ExpressionBesoinService {
     private ProduitService produitService;
     @Autowired
     private PersonnelService personnelService;
+    @Autowired
+    private ExpressionBesoinDetailService expressionBesoinDetailService;
 
     @Override
     public ExpressionBesoin findByReference(String reference) {
@@ -56,14 +59,15 @@ public class ExpressionBesoinServiceImpl implements ExpressionBesoinService {
 
     @Override
     @Transactional
-    public int deleteByReference(String Reference) {
-        ExpressionBesoin foundedexpressionBesoin1 = expressionBesoinRepository.findByReference(Reference);
+    public int deleteByReference(String reference) {
+        ExpressionBesoin foundedexpressionBesoin1 = expressionBesoinRepository.findByReference(reference);
 
         if (foundedexpressionBesoin1 == null) {
             return -1;
         } else {
-            expressionBesoinRepository.deleteByReference(Reference);
-            return 1;
+            int res = expressionBesoinDetailService.deleteByExpressionDeBesoinReference(reference);
+            int res1 = expressionBesoinRepository.deleteByReference(reference);
+            return res + res1;
         }
     }
 
@@ -71,17 +75,17 @@ public class ExpressionBesoinServiceImpl implements ExpressionBesoinService {
     public List<ExpressionBesoin> findAll() {
         return expressionBesoinRepository.findAll();
     }
-    
-       @Override
+
+    @Override
     public List<ExpressionBesoin> findByChef(String codeEmp) {
         Personnel foundedPersonnel = personnelService.findByCode(codeEmp);
-       
+
         if (foundedPersonnel == null) {
             return null;
         } else {
             List<ExpressionBesoin> expressionBesoins = new ArrayList<>();
             for (ExpressionBesoin expressionBesoin : expressionBesoinRepository.findAll()) {
-                if(expressionBesoin.getChef().getCode().equals(codeEmp)){
+                if (expressionBesoin.getChef().getCode().equals(codeEmp)) {
                     expressionBesoins.add(expressionBesoin);
                 }
             }
