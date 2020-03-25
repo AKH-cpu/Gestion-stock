@@ -23,7 +23,7 @@ public interface ExpressionBesoinDetailRepository extends JpaRepository<Expressi
 
     int deleteByReference(String reference);
     
-    int deleteByExpressionDeBesoinReference (String reference);
+    int deleteByExpressionBesoinReference (String reference);
 
     ExpressionBesoinDetail findByReference(String reference);
 

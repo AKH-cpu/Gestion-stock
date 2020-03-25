@@ -64,8 +64,8 @@ public class ExpressionBesoinDetailRest {
     }
 
     @DeleteMapping("/ExpressionBesoin/reference/{reference}")
-    public int deleteByExpressionDeBesoinReference(@PathVariable String reference) {
-        return expressionBesoinDetailService.deleteByExpressionDeBesoinReference(reference);
+    public int deleteByExpressionBesoinReference(@PathVariable String reference) {
+        return expressionBesoinDetailService.deleteByExpressionBesoinReference(reference);
     }
 
 }

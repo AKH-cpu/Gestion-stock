@@ -104,8 +104,8 @@ public class ExpressionBesoinDetailServiceImpl implements ExpressionBesoinDetail
     }
 
     @Override
-    public int deleteByExpressionDeBesoinReference(String reference) {
-        return expressionBesoinDetailRepository.deleteByExpressionDeBesoinReference(reference);
+    public int deleteByExpressionBesoinReference(String reference) {
+        return expressionBesoinDetailRepository.deleteByExpressionBesoinReference(reference);
     }
 
 }

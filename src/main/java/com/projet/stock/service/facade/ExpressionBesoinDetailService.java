@@ -30,7 +30,7 @@ public interface ExpressionBesoinDetailService {
 
     int deleteByReference(String reference);
 
-    int deleteByExpressionDeBesoinReference(String reference);
+    int deleteByExpressionBesoinReference(String reference);
 
     // infos sur produit en besoin
 }

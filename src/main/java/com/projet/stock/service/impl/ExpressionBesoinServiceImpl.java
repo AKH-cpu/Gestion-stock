@@ -29,8 +29,6 @@ public class ExpressionBesoinServiceImpl implements ExpressionBesoinService {
     @Autowired
     private ExpressionBesoinRepository expressionBesoinRepository;
     @Autowired
-    private ProduitService produitService;
-    @Autowired
     private PersonnelService personnelService;
     @Autowired
     private ExpressionBesoinDetailService expressionBesoinDetailService;
@@ -65,7 +63,7 @@ public class ExpressionBesoinServiceImpl implements ExpressionBesoinService {
         if (foundedexpressionBesoin1 == null) {
             return -1;
         } else {
-            int res = expressionBesoinDetailService.deleteByExpressionDeBesoinReference(reference);
+            int res = expressionBesoinDetailService.deleteByExpressionBesoinReference(reference);
             int res1 = expressionBesoinRepository.deleteByReference(reference);
             return res + res1;
         }
