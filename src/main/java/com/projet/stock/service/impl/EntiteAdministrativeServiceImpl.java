@@ -7,12 +7,17 @@ package com.projet.stock.service.impl;
 
 import com.projet.stock.service.facade.*;
 import com.projet.stock.bean.EntiteAdministrative;
+import com.projet.stock.bean.ExpressionBesoin;
+import com.projet.stock.bean.ExpressionBesoinDetail;
 import com.projet.stock.bean.Magasin;
 import com.projet.stock.bean.Personnel;
 import com.projet.stock.bean.Stock;
 import com.projet.stock.repository.EntiteAdministrativeRepository;
+import com.projet.stock.repository.ExpressionBesoinDetailRepository;
+import com.projet.stock.repository.ExpressionBesoinRepository;
 import com.projet.stock.repository.MagasinRepository;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -35,6 +40,12 @@ public class EntiteAdministrativeServiceImpl implements EntiteAdministrativeServ
 
     @Autowired
     private MagasinRepository magasinRepository;
+
+    @Autowired
+    ExpressionBesoinRepository expressionBesoinRepository;
+
+    @Autowired
+    ExpressionBesoinDetailRepository expressionBesoinDetailRepository;
 
     @Override
     public EntiteAdministrative findByReference(String reference) {
@@ -97,6 +108,7 @@ public class EntiteAdministrativeServiceImpl implements EntiteAdministrativeServ
         //Creation d une liste vide dont je vais stocker les magasins vide de produits
         List<Magasin> magasinsLibre = new ArrayList<Magasin>();
         if (foundedEntite == null) {
+            System.out.println("enitite not found");
             return null;
         } else {
             //get les magasins de l entite associer
@@ -167,7 +179,7 @@ public class EntiteAdministrativeServiceImpl implements EntiteAdministrativeServ
 
     @Override
     public Boolean isEployeExistInMagasin(String code, String refMagasin) {
-        if (findMagasinByReference(refMagasin) == 1) {
+        if (findMagasinByReference(refMagasin) == 1 && personnelService.findByCode(code) != null) {
             List<Personnel> employes = magasinService.findByReference(refMagasin).getEmployes();
             for (Personnel employe : employes) {
                 if (employe == personnelService.findByCode(code)) {
@@ -178,7 +190,8 @@ public class EntiteAdministrativeServiceImpl implements EntiteAdministrativeServ
             //employe n'appartient pas a ce mag
             return false;
         } else {
-            //magasin not found
+            //magasin not found || Employe not found
+            System.out.println("Magasin not found Or Employe not found");
             return null;
         }
     }
@@ -199,6 +212,7 @@ public class EntiteAdministrativeServiceImpl implements EntiteAdministrativeServ
         //creation d_une liste
         List<Magasin> magasinsNeededProducts = new ArrayList<>();
         if (foundedEntite == null) {
+            System.out.println("Entite not found");
             return null;
         } else {
             List<Magasin> magasins = foundedEntite.getMagasins();
@@ -215,13 +229,13 @@ public class EntiteAdministrativeServiceImpl implements EntiteAdministrativeServ
     public EntiteAdministrative findByPersonnelCode(String codeChef) {
 
         Personnel foundedChef = personnelService.findByCode(codeChef);
-        System.out.println("CCCCCCCCCCCCCCCCCCCCCCC:   "+foundedChef.getCode()+"fct     "+foundedChef.getFonction());
         if (foundedChef != null) {
             return foundedChef.getEntiteAdministrative();
         } else {
+            System.out.println("entite not found");
             return null;
         }
-        
+
     }
 
     @Override
@@ -232,7 +246,7 @@ public class EntiteAdministrativeServiceImpl implements EntiteAdministrativeServ
             return null;
         } else {
             List<Magasin> magasins = foundedEntite.getMagasins();
-            
+
             for (Magasin magasin : magasins) {
                 if (magasin.getNbrMaxEmploye() > magasin.getNbremploye()) {
                     magasinsDontNeedsEmployes.add(magasin);
@@ -246,19 +260,53 @@ public class EntiteAdministrativeServiceImpl implements EntiteAdministrativeServ
     @Override
     public List<Magasin> magasinsWithNoEmployes(String refEntite) {
         EntiteAdministrative foundedEntite = entiteAdministrativeRepository.findByReference(refEntite);
-        List<Magasin> magasinsDontNeedsEmployes = new ArrayList<>();
+        List<Magasin> magasinsWithNoEmployes = new ArrayList<Magasin>();
         if (foundedEntite == null) {
+            System.out.println("Entite not found");
             return null;
         } else {
-            List<Magasin> magasins = foundedEntite.getMagasins() ;
+            List<Magasin> magasins = foundedEntite.getMagasins();
 
             for (Magasin magasin : magasins) {
                 if (magasin.getNbremploye() == 0) {
-                    magasinsDontNeedsEmployes.add(magasin);
+                    magasinsWithNoEmployes.add(magasin);
                 }
             }
 
         }
-        return magasinsDontNeedsEmployes;
+        return magasinsWithNoEmployes;
     }
+
+    @Override
+    public List<ExpressionBesoinDetail> besoinsInMagasin(String refMag) {
+        Magasin foundedMagasin = magasinService.findByReference(refMag);
+        if (foundedMagasin == null) {
+            System.out.println("Magasin not found");
+            return null;
+        } else {
+            List<Stock> stocks = foundedMagasin.getStokes();
+//            System.out.println("mazal madkhlt l for");
+            for (Stock stock : stocks) {
+//                System.out.println("ana ldakhl d for");
+                if (stock.getQuantiteMax() > stock.getQte()) {
+//                    System.out.println("ana dkhlt l condition");
+                    ExpressionBesoin expressionBesoin = new ExpressionBesoin(Long.MIN_VALUE, Long.toHexString(Double.doubleToLongBits(Math.random())), new Date(), "not livred yet", foundedMagasin.getEntiteAdministrative().getChef(), foundedMagasin.getEntiteAdministrative());
+//                    System.out.println("3ad ghansauvgarder");
+                    expressionBesoinRepository.save(expressionBesoin);
+//                    System.out.println("sauvgarde success");
+                    ExpressionBesoin foundedExpressionBesoin = expressionBesoinRepository.findByReference(expressionBesoin.getReference());
+//                    System.out.println("l9A hadak l expression");
+                    ExpressionBesoinDetail expressionBesoinDetail = new ExpressionBesoinDetail(Long.MIN_VALUE, Long.toHexString(Double.doubleToLongBits(Math.random())), stock.getQuantiteMax() - stock.getQte(), null, foundedExpressionBesoin, stock.getProduit());
+//                    System.out.println("3ad ghansauvgarder detail");
+                    expressionBesoinDetailRepository.save(expressionBesoinDetail);
+//                    System.out.println("sauvgarde success");            
+                }
+
+            }
+        }
+        return expressionBesoinDetailRepository.findAll();
+    }
+
+    
 }
+

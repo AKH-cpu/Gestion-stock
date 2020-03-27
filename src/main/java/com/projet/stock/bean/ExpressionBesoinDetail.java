@@ -6,7 +6,6 @@
 package com.projet.stock.bean;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonProperty.Access;
 import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -28,14 +27,18 @@ public class ExpressionBesoinDetail implements Serializable {
     private Double qte;
     private Double qteLivre;
 
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @ManyToOne
-    @JsonProperty(access = Access.WRITE_ONLY)
     private ExpressionBesoin expressionBesoin;
 
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @ManyToOne
-    @JsonProperty(access = Access.WRITE_ONLY)
     private Produit produit;
 
+    public ExpressionBesoinDetail() {
+    }
+    
+    
     public ExpressionBesoinDetail(Long id, String reference, Double qte, Double qteLivre, ExpressionBesoin expressionBesoin, Produit produit) {
         this.id = id;
         this.reference = reference;

@@ -68,4 +68,33 @@ public class ExpressionBesoinDetailRest {
         return expressionBesoinDetailService.deleteByExpressionBesoinReference(reference);
     }
 
+   
+   
+    
+
+  
+
+//    @GetMapping("/onHold")
+//    public List<ExpressionBesoinDetail> findEDBOnHold() {
+//        return expressionBesoinDetailService.findEDBOnHold();
+//    }
+//
+//    @PostMapping("/expressionBesoinDetail/{expressionBesoinDetail}")
+//    public int save(@RequestBody ExpressionBesoinDetail expressionBesoinDetail) {
+//        return expressionBesoinDetailService.save(expressionBesoinDetail);
+//    }
+//
+//    @GetMapping("/Reference/{Reference}")
+//    public ExpressionBesoinDetail findByReference(@PathVariable String Reference) {
+//        return expressionBesoinDetailService.findByReference(Reference);
+//    }
+//
+//    @PutMapping("/Reference/{Reference}")
+//    public int deleteByReference(@PathVariable String Reference) {
+//        return expressionBesoinDetailService.deleteByReference(Reference);
+//    }
+//    
+    
+
+
 }

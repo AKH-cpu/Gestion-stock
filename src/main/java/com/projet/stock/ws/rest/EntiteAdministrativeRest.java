@@ -6,6 +6,7 @@
 package com.projet.stock.ws.rest;
 
 import com.projet.stock.bean.EntiteAdministrative;
+import com.projet.stock.bean.ExpressionBesoinDetail;
 import com.projet.stock.bean.Magasin;
 import com.projet.stock.service.facade.EntiteAdministrativeService;
 import java.util.List;
@@ -101,4 +102,8 @@ public class EntiteAdministrativeRest {
          return entiteAdministrativeService.magasinsWithNoEmployes(refEntite);
      }
      
+     @GetMapping("/expressionsBesoins/refMagasin/{refMag}")
+     public List<ExpressionBesoinDetail> besoinsInMagasin(@PathVariable String refMag){
+         return entiteAdministrativeService.besoinsInMagasin(refMag);
+     }
 }

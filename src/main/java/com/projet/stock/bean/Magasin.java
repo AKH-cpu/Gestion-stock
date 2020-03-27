@@ -42,10 +42,22 @@ public class Magasin implements Serializable {
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @ManyToOne
     private EntiteAdministrative entiteAdministrative;
+    
+    @OneToMany(mappedBy = "magasin")
+    List<Stock> stokes;
 
 //    @OneToMany(mappedBy = "magasin")
 //    List<Stock> produitsMagasin;
 
+    public List<Stock> getStokes() {
+        return stokes;
+    }
+
+    public void setStokes(List<Stock> stokes) {
+        this.stokes = stokes;
+    }
+
+    
     public List<Personnel> getEmployes() {
         return employes;
     }
@@ -150,5 +162,4 @@ public class Magasin implements Serializable {
     public String toString() {
         return "com.projet.stock.bean.Magasin[ id=" + id + " ]";
     }
-
 }

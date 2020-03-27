@@ -45,6 +45,20 @@ public class ExpressionBesoin implements Serializable {
     @ManyToOne
     private EntiteAdministrative entiteAdministrative;
 
+    public ExpressionBesoin() {
+    }
+
+    public ExpressionBesoin(Long id, String reference, Date dateExpressionBesoin, String etat, Personnel chef, EntiteAdministrative entiteAdministrative) {
+        this.id = id;
+        this.reference = reference;
+        this.dateExpressionBesoin = dateExpressionBesoin;
+        this.etat = etat;
+        this.chef = chef;
+        this.entiteAdministrative = entiteAdministrative;
+    }
+    
+    
+
     public ExpressionBesoin(Long id, String reference, Date dateExpressionBesoin, String etat, EntiteAdministrative entiteAdministrative, Personnel chef, List<ExpressionBesoinDetail> expressionBesoinDetails, Livraison livraison) {
         this.id = id;
         this.reference = reference;

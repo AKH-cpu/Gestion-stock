@@ -44,9 +44,14 @@ public class ExpressionBesoinRest {
         return expressionBesoinService.save(expressionBesoin);
     }
 
+
     @PutMapping("/reference/{reference}")
     public int deleteByReference(@PathVariable String reference) {
         return expressionBesoinService.deleteByReference(reference);
+//    @PutMapping("/Reference/{Reference}")
+//    public int deleteByReference(@PathVariable String Reference) {
+//        return expressionBesoinService.deleteByReference(Reference);
+//>>>>>>> 665f66e updates services
     }
 
     @GetMapping("/")

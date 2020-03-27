@@ -93,4 +93,8 @@ public class MagasinRest {
         return magasinService.removeProduitsfromMagasin(refProd, refMag, quantiteToRemove);
     }
     
+    @GetMapping("/stocksMagasin/refMagasin/{refMagasin}")
+     public List<Stock> findStocksByMagasin(@PathVariable String refMagasin){
+         return magasinService.findStocksByMagasin(refMagasin);
+     }
 }

@@ -248,6 +248,7 @@ public class MagasinServiceImpl implements MagasinService {
         return null;
     }
 
+    @Override
     public int updateQuantiteProdInStock(String refStock, String refMag, String refProd, double nvQuantite) {
         Stock foundedStock = stockService.findByReference(refStock);
         Magasin foundedMagasin = magasinRepository.findByReference(refMag);
@@ -268,9 +269,22 @@ public class MagasinServiceImpl implements MagasinService {
 
             return 1;
         } else {
+            //ce stock existe ms avec un autre produit ou un autre Magasin
             return -1111;
         }
 
     }
 
+    @Override
+    public List<Stock> findStocksByMagasin(String refMagasin) {
+        Magasin foundedMagasin = magasinRepository.findByReference(refMagasin);
+        if(foundedMagasin == null){
+            System.out.println("Magasin not found");
+            return null;
+        }else {
+            return foundedMagasin.getStokes();
+        }
+    }
+
+    
 }

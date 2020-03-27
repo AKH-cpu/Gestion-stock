@@ -22,9 +22,12 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class StockServiceImpl implements StockService{
+    //akhoya khalid khlli kola w7da b autowired dialha bach t instancia   maymknch tjm3ohom 7int fach kanji ntester kaytl3 lih nullpointer exception 
     @Autowired
      private StockRepository stockRepository;
+    @Autowired
      private MagasinService magasinService;
+    @Autowired
      private ProduitService produitService;
 
     @Override

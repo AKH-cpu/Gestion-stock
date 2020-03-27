@@ -5,6 +5,7 @@
  */
 package com.projet.stock.bean;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -31,7 +32,7 @@ public class Stock implements Serializable {
     //hada ana li zdthom (bartaouch) quantite max f kolo magasin
     private double quantiteMax;
 
-    
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @ManyToOne
     private Magasin magasin;
     @ManyToOne

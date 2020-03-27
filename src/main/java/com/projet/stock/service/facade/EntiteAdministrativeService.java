@@ -6,6 +6,7 @@
 package com.projet.stock.service.facade;
 
 import com.projet.stock.bean.EntiteAdministrative;
+import com.projet.stock.bean.ExpressionBesoinDetail;
 import com.projet.stock.bean.Magasin;
 import java.util.List;
 
@@ -44,5 +45,7 @@ public interface EntiteAdministrativeService {
     public List<Magasin> magasinsWithNoEmployes(String refEntite);
     
     public List<Magasin> magasinsNeedEmployes(String refEntite);
+    
+    public List<ExpressionBesoinDetail> besoinsInMagasin(String refMag);
 
 }
