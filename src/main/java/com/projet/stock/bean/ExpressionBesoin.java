@@ -51,9 +51,6 @@ public class ExpressionBesoin implements Serializable {
     public ExpressionBesoin() {
     }
 
-    public ExpressionBesoin() {
-    }
-
     public ExpressionBesoin(Long id, String reference, Date dateExpressionBesoin, String etat, Personnel chef, EntiteAdministrative entiteAdministrative) {
         this.id = id;
         this.reference = reference;
