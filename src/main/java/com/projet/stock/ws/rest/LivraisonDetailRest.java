@@ -10,6 +10,7 @@ import com.projet.stock.bean.LivraisonDetail;
 import com.projet.stock.service.facade.LivraisonDetailService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,6 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @author AKH
  */
 @RestController
+@CrossOrigin(origins = {"http://localhost:4200"})
 @RequestMapping("livraisonDetail-api/livraisonDetail")
 public class LivraisonDetailRest {
 

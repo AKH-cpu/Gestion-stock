@@ -48,13 +48,12 @@ public class ExpressionBesoinDetailServiceImpl implements ExpressionBesoinDetail
     }
 
     @Override
-    public int save(String expressionBesoinRef, String produitRef, List<ExpressionBesoinDetail> expressionBesoinDetail) {
-        Produit foundedproduct = produitService.findByReference(produitRef);
+    public int save(String expressionBesoinRef, List<ExpressionBesoinDetail> expressionBesoinDetail) {
         ExpressionBesoin foundedExpressionBesoin = expressionBesoinService.findByReference(expressionBesoinRef);
-
-        if (foundedproduct == null) {
+        if(setProduitToEDB(expressionBesoinDetail) == -1){
             return -1;
-        } else if (foundedExpressionBesoin != null) {
+        }
+        if (foundedExpressionBesoin == null) {
             return -2;
         } else {
             for (ExpressionBesoinDetail expressionBesoinDetails : expressionBesoinDetail) {
@@ -62,7 +61,6 @@ public class ExpressionBesoinDetailServiceImpl implements ExpressionBesoinDetail
                 if (foundedExpressionBesoinDetail != null) {
                     return -3;
                 } else {
-                    expressionBesoinDetails.setProduit(foundedproduct);
                     expressionBesoinDetails.setExpressionBesoin(foundedExpressionBesoin);
                     expressionBesoinDetailRepository.save(expressionBesoinDetails);
                 }
@@ -70,6 +68,19 @@ public class ExpressionBesoinDetailServiceImpl implements ExpressionBesoinDetail
             return 1;
         }
 
+    }
+
+    @Override
+    public int setProduitToEDB(List<ExpressionBesoinDetail> expressionBesoinDetail) {
+        for (ExpressionBesoinDetail expressionBesoinDetails : expressionBesoinDetail) {
+            Produit foundedproduct = produitService.findByReference(expressionBesoinDetails.getProduit().getReference());
+            if (foundedproduct == null) {
+                return -1;
+            } else {
+                expressionBesoinDetails.setProduit(foundedproduct);
+            }
+        }
+        return 1;
     }
 
     @Override

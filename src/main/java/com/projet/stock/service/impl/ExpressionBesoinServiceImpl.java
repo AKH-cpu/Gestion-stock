@@ -5,9 +5,11 @@
  */
 package com.projet.stock.service.impl;
 
+import com.projet.stock.bean.EntiteAdministrative;
 import com.projet.stock.bean.ExpressionBesoin;
 import com.projet.stock.bean.Personnel;
 import com.projet.stock.repository.ExpressionBesoinRepository;
+import com.projet.stock.service.facade.EntiteAdministrativeService;
 import com.projet.stock.service.facade.ExpressionBesoinDetailService;
 import com.projet.stock.service.facade.ExpressionBesoinService;
 import com.projet.stock.service.facade.PersonnelService;
@@ -31,6 +33,8 @@ public class ExpressionBesoinServiceImpl implements ExpressionBesoinService {
     private PersonnelService personnelService;
     @Autowired
     private ExpressionBesoinDetailService expressionBesoinDetailService;
+    @Autowired
+    private EntiteAdministrativeService entiteAdministrativeService;
 
     @Override
     public ExpressionBesoin findByReference(String reference) {
@@ -44,12 +48,24 @@ public class ExpressionBesoinServiceImpl implements ExpressionBesoinService {
 
     @Override
     public int save(ExpressionBesoin expressionBesoin) {
-        ExpressionBesoin foundedexpressionBesoin1 = expressionBesoinRepository.findByReference(expressionBesoin.getReference());
-        if (foundedexpressionBesoin1 != null) {
+        int exp = expressionBesoinDetailService.setProduitToEDB(expressionBesoin.getExpressionBesoinDetails());
+        ExpressionBesoin foundedexpressionBesoin = expressionBesoinRepository.findByReference(expressionBesoin.getReference());
+        EntiteAdministrative foundedEntAdm = entiteAdministrativeService.findByReference(expressionBesoin.getEntiteAdministrative().getReference());
+        Personnel foundedChef = personnelService.findByCode(expressionBesoin.getChef().getCode());
+        if (foundedexpressionBesoin != null) {
             return -1;
+        } else if (foundedEntAdm == null) {
+            return -2;
+        } else if (foundedChef == null) {
+            return -3;
+        } else if (exp == -1) {
+            return -4;
         } else {
             expressionBesoin.setDateExpressionBesoin(new Date());
-            expressionBesoinRepository.save(foundedexpressionBesoin1);
+            expressionBesoin.setEntiteAdministrative(foundedEntAdm);
+            expressionBesoin.setChef(foundedChef);
+            expressionBesoinRepository.save(expressionBesoin);
+            expressionBesoinDetailService.save(expressionBesoin.getReference(), expressionBesoin.getExpressionBesoinDetails());
             return 1;
         }
     }

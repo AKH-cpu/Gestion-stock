@@ -9,10 +9,12 @@ import com.projet.stock.bean.ExpressionBesoinDetail;
 import com.projet.stock.service.facade.ExpressionBesoinDetailService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -22,6 +24,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @author anoir
  */
 @RestController
+@CrossOrigin(origins = {"http://localhost:4200"})
 @RequestMapping("stock-api/ExpressionBesoinDetail")
 public class ExpressionBesoinDetailRest {
 
@@ -53,11 +56,6 @@ public class ExpressionBesoinDetailRest {
         return expressionBesoinDetailService.findByReference(reference);
     }
 
-    @PostMapping("/expressionBesoinRef/{expressionBesoinRef}/produitRef/{produitRef}")
-    public int save(@PathVariable String expressionBesoinRef, @PathVariable String produitRef, @RequestBody List<ExpressionBesoinDetail> expressionBesoinDetail) {
-        return expressionBesoinDetailService.save(expressionBesoinRef, produitRef, expressionBesoinDetail);
-    }
-
     @DeleteMapping("/reference/{reference}")
     public int deleteByReference(@PathVariable String reference) {
         return expressionBesoinDetailService.deleteByReference(reference);
@@ -68,33 +66,16 @@ public class ExpressionBesoinDetailRest {
         return expressionBesoinDetailService.deleteByExpressionBesoinReference(reference);
     }
 
-   
-   
+    @PostMapping("/expressionBesoinRef/{expressionBesoinRef}")
+    public int save(@PathVariable String expressionBesoinRef,@RequestBody List<ExpressionBesoinDetail> expressionBesoinDetail) {
+        return expressionBesoinDetailService.save(expressionBesoinRef, expressionBesoinDetail);
+    }
+
+    @PutMapping("/")
+    public int setProduitToEDB(@RequestBody List<ExpressionBesoinDetail> expressionBesoinDetail) {
+        return expressionBesoinDetailService.setProduitToEDB(expressionBesoinDetail);
+    }
     
-
-  
-
-//    @GetMapping("/onHold")
-//    public List<ExpressionBesoinDetail> findEDBOnHold() {
-//        return expressionBesoinDetailService.findEDBOnHold();
-//    }
-//
-//    @PostMapping("/expressionBesoinDetail/{expressionBesoinDetail}")
-//    public int save(@RequestBody ExpressionBesoinDetail expressionBesoinDetail) {
-//        return expressionBesoinDetailService.save(expressionBesoinDetail);
-//    }
-//
-//    @GetMapping("/Reference/{Reference}")
-//    public ExpressionBesoinDetail findByReference(@PathVariable String Reference) {
-//        return expressionBesoinDetailService.findByReference(Reference);
-//    }
-//
-//    @PutMapping("/Reference/{Reference}")
-//    public int deleteByReference(@PathVariable String Reference) {
-//        return expressionBesoinDetailService.deleteByReference(Reference);
-//    }
-//    
     
-
 
 }

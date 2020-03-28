@@ -24,7 +24,9 @@ public interface ExpressionBesoinDetailService {
 
     List<ExpressionBesoinDetail> findEDBOnHold();
 
-    int save(String expressionBesoinRef, String produitRef, List<ExpressionBesoinDetail> expressionBesoinDetail);
+    int save(String expressionBesoinRef, List<ExpressionBesoinDetail> expressionBesoinDetail);
+
+    int setProduitToEDB(List<ExpressionBesoinDetail> expressionBesoinDetail);
 
     int deleteByReference(String reference);
 

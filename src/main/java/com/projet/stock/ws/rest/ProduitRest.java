@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
  * @author AKH
  */
 @RestController
+@CrossOrigin(origins = {"http://localhost:4200"})
 @RequestMapping("produit-api/produit")
 public class ProduitRest {
 

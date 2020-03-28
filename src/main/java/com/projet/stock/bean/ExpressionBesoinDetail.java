@@ -37,8 +37,7 @@ public class ExpressionBesoinDetail implements Serializable {
 
     public ExpressionBesoinDetail() {
     }
-    
-    
+
     public ExpressionBesoinDetail(Long id, String reference, Double qte, Double qteLivre, ExpressionBesoin expressionBesoin, Produit produit) {
         this.id = id;
         this.reference = reference;
@@ -102,7 +101,6 @@ public class ExpressionBesoinDetail implements Serializable {
         hash += (id != null ? id.hashCode() : 0);
         return hash;
     }
-
 
     @Override
     public boolean equals(Object object) {

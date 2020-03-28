@@ -15,8 +15,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
 
 /**
  * @author AKH
@@ -34,16 +35,21 @@ public class ExpressionBesoin implements Serializable {
     private String etat;
 
     @ManyToOne
+    @JsonProperty(access = Access.WRITE_ONLY)
     private Personnel chef;
 
     @OneToMany(mappedBy = "expressionBesoin")
+    @JsonProperty(access = Access.WRITE_ONLY)
     private List<ExpressionBesoinDetail> expressionBesoinDetails;
 
-    @OneToOne(mappedBy = "expressionBesoin")
-    private Livraison livraison;
-
+//    @OneToOne(mappedBy = "expressionBesoin")
+//    private Livraison livraison;
     @ManyToOne
+    @JsonProperty(access = Access.WRITE_ONLY)
     private EntiteAdministrative entiteAdministrative;
+
+    public ExpressionBesoin() {
+    }
 
     public ExpressionBesoin() {
     }
@@ -63,11 +69,10 @@ public class ExpressionBesoin implements Serializable {
         this.id = id;
         this.reference = reference;
         this.dateExpressionBesoin = dateExpressionBesoin;
-        this.etat = etat;
+        this.etat = "non livre";
         this.entiteAdministrative = entiteAdministrative;
         this.chef = chef;
         this.expressionBesoinDetails = expressionBesoinDetails;
-        this.livraison = livraison;
     }
 
     public String getEtat() {
@@ -88,14 +93,6 @@ public class ExpressionBesoin implements Serializable {
 
     public void setExpressionBesoinDetails(List<ExpressionBesoinDetail> expressionBesoinDetails) {
         this.expressionBesoinDetails = expressionBesoinDetails;
-    }
-
-    public Livraison getLivraison() {
-        return livraison;
-    }
-
-    public void setLivraison(Livraison livraison) {
-        this.livraison = livraison;
     }
 
     public void setId(Long id) {
@@ -173,7 +170,7 @@ public class ExpressionBesoin implements Serializable {
 
     @Override
     public String toString() {
-        return "ExpressionBesoin{" + "id=" + id + ", reference=" + reference + ", dateExpressionBesoin=" + dateExpressionBesoin + ", etat=" + etat + ", chef=" + chef + ", expressionBesoinDetails=" + expressionBesoinDetails + ", livraison=" + livraison + ", entiteAdministrative=" + entiteAdministrative + '}';
+        return "ExpressionBesoin{" + "id=" + id + ", reference=" + reference + ", dateExpressionBesoin=" + dateExpressionBesoin + ", etat=" + etat + ", chef=" + chef + ", expressionBesoinDetails=" + expressionBesoinDetails + ", entiteAdministrative=" + entiteAdministrative + '}';
     }
 
 }

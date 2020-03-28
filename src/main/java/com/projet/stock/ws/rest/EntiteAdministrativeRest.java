@@ -6,11 +6,11 @@
 package com.projet.stock.ws.rest;
 
 import com.projet.stock.bean.EntiteAdministrative;
-import com.projet.stock.bean.ExpressionBesoinDetail;
 import com.projet.stock.bean.Magasin;
 import com.projet.stock.service.facade.EntiteAdministrativeService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @author lenovo
  */
 @RestController
+@CrossOrigin(origins = {"http://localhost:4200"})
 @RequestMapping("gestion-stock-v1/EntiteAdministrative")
 public class EntiteAdministrativeRest {
     
@@ -102,8 +103,4 @@ public class EntiteAdministrativeRest {
          return entiteAdministrativeService.magasinsWithNoEmployes(refEntite);
      }
      
-     @GetMapping("/expressionsBesoins/refMagasin/{refMag}")
-     public List<ExpressionBesoinDetail> besoinsInMagasin(@PathVariable String refMag){
-         return entiteAdministrativeService.besoinsInMagasin(refMag);
-     }
 }
