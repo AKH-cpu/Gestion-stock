@@ -45,7 +45,7 @@ public class FamilleProduitRest {
     }
 
     @DeleteMapping("/libelle/{libelle}")
-    public int deleteByLibelle(String libelle) {
+    public int deleteByLibelle(@PathVariable String libelle) {
         return familleProduitService.deleteByLibelle(libelle);
     }
     

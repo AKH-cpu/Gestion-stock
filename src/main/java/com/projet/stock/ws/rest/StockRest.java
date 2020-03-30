@@ -49,7 +49,7 @@ public class StockRest {
     }
 
     @GetMapping("/reference/like/{reference}")
-    public List<Stock> findByReferenceLike(String reference) {
+    public List<Stock> findByReferenceLike(@PathVariable String reference) {
         return stockService.findByReferenceLike(reference);
     }
     

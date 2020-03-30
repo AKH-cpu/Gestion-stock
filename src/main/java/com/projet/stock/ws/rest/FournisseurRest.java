@@ -46,7 +46,7 @@ public class FournisseurRest {
     }
 
     @DeleteMapping("/reference/{reference}")
-    public int deleteByReference(String reference) {
+    public int deleteByReference(@PathVariable String reference) {
         return fournisseurService.deleteByReference(reference);
     }
     
