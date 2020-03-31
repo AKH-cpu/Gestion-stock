@@ -5,9 +5,9 @@
  */
 package com.projet.stock.service.facade;
 
+import com.projet.stock.bean.Magasin;
 import com.projet.stock.bean.Stock;
 import java.util.List;
-import org.springframework.data.repository.query.Param;
 
 /**
  *
@@ -18,5 +18,8 @@ public interface StockService {
     public int save(Stock stock);
     public Stock findByReference(String reference);
     public int deleteByReference(String reference);
+    public int save(Magasin magasin,List<Stock> stocks);
+    public List<Stock> findByMagasinReference(String reference);
+    public int deleteByMagasinReference(String reference);
     public List<Stock> findByReferenceLike(String reference);
 }

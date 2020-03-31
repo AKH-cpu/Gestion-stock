@@ -66,5 +66,24 @@ public class StockServiceImpl implements StockService{
     public List<Stock> findByReferenceLike(String reference) {
        return stockRepository.findByReferenceLike(reference + "%");
     }
+
+    @Override
+    public int save(Magasin magasin, List<Stock> stocks) {
+        for (Stock stock : stocks) {
+            stock.setMagasin(magasin);
+            stockRepository.save(stock);
+        }
+        return 1;
+    }
+
+    @Override
+    public List<Stock> findByMagasinReference(String reference) {
+        return stockRepository.findByMagasinReference(reference);
+    }
+
+    @Override
+    public int deleteByMagasinReference(String reference) {
+         return stockRepository.deleteByMagasinReference(reference);
+    }
     
 }

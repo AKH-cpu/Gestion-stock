@@ -18,7 +18,7 @@ import org.springframework.stereotype.Repository;
 public interface MagasinRepository extends JpaRepository<Magasin, Long> {
 
     public Magasin findByReference(String reference);
-
+    public int deleteByReference(String reference);
 //    @Query(value = "delete from magasin where 	reference = reference", nativeQuery = true)
 //    public int deleteByReference(String reference);
     

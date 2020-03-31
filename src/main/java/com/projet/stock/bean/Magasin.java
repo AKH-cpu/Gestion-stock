@@ -7,6 +7,7 @@ package com.projet.stock.bean;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -44,7 +45,8 @@ public class Magasin implements Serializable {
     private EntiteAdministrative entiteAdministrative;
     
     @OneToMany(mappedBy = "magasin")
-    List<Stock> stokes;
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    List<Stock> stokes=new ArrayList<>();
 
 //    @OneToMany(mappedBy = "magasin")
 //    List<Stock> produitsMagasin;

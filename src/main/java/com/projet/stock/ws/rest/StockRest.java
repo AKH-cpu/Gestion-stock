@@ -5,6 +5,7 @@
  */
 package com.projet.stock.ws.rest;
 
+import com.projet.stock.bean.Magasin;
 import com.projet.stock.bean.Stock;
 import com.projet.stock.service.facade.StockService;
 import java.util.List;
@@ -51,6 +52,21 @@ public class StockRest {
     @GetMapping("/reference/like/{reference}")
     public List<Stock> findByReferenceLike(@PathVariable String reference) {
         return stockService.findByReferenceLike(reference);
+    }
+
+    @PostMapping("/save")
+    public int save(@RequestBody Magasin magasin) {
+        return stockService.save(magasin,magasin.getStokes());
+    }
+
+    @GetMapping("/magasin/reference/{reference}")
+    public List<Stock> findByMagasinReference(String reference) {
+        return stockService.findByMagasinReference(reference);
+    }
+    
+    @DeleteMapping("/magasin/reference/{reference}")
+    public int deleteByMagasinReference(String reference) {
+        return stockService.deleteByMagasinReference(reference);
     }
     
     

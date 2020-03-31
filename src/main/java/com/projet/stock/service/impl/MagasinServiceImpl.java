@@ -19,6 +19,7 @@ import com.projet.stock.service.facade.EntiteAdministrativeService;
 import com.projet.stock.service.facade.ProduitService;
 import com.projet.stock.service.facade.StockService;
 import java.util.ArrayList;
+import javax.transaction.Transactional;
 
 /**
  *
@@ -76,21 +77,17 @@ public class MagasinServiceImpl implements MagasinService {
             magasin.setEntiteAdministrative(foundedEntite);
 //            magasin.getEntiteAdministrative().setChef(foundedEntite.getChef());
             magasinRepository.save(magasin);
+            stockService.save(magasin,magasin.getStokes());
             return 1;
         }
     }
 
     @Override
+    @Transactional
     public int deleteByReference(String reference) {
-        Magasin foundedMagasin = magasinRepository.findByReference(reference);
-
-        if (foundedMagasin == null) {
-            //No Magasin matched with this reference
-            return -1;
-        } else {
-            magasinRepository.delete(foundedMagasin);
-            return 1;
-        }
+        int res1=stockService.deleteByMagasinReference(reference);
+        int res2=magasinRepository.deleteByReference(reference);
+        return res1+res2;
 
     }
 
