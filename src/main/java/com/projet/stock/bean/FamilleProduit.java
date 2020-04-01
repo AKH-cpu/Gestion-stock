@@ -5,6 +5,7 @@
  */
 package com.projet.stock.bean;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Entity;
@@ -24,7 +25,8 @@ public class FamilleProduit implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String libelle;
-    @OneToMany
+    @OneToMany(mappedBy = "familleProduit")
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private List<Produit> produits;
 
     public Long getId() {

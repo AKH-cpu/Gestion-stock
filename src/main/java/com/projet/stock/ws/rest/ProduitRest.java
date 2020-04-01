@@ -5,6 +5,7 @@
  */
 package com.projet.stock.ws.rest;
 
+import com.projet.stock.bean.FamilleProduit;
 import com.projet.stock.bean.Produit;
 import com.projet.stock.service.facade.ProduitService;
 
@@ -57,6 +58,16 @@ public class ProduitRest {
     @PutMapping("/update/reference/{reference}")
     public int update(@PathVariable String reference, Produit produit) {
        return produitService.update(reference, produit);
+    }
+
+    @DeleteMapping("familleProduit/libelle/{libelle}")
+    public int deleteByFamilleProduitLibelle(@PathVariable String Libelle) {
+        return produitService.deleteByFamilleProduitLibelle(Libelle);
+    }
+
+    @PostMapping("/save")
+    public int save(@RequestBody FamilleProduit familleProduit) {
+        return produitService.save(familleProduit,familleProduit.getProduits());
     }
 
 

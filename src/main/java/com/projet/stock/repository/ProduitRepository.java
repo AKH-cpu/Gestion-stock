@@ -28,6 +28,7 @@ public interface ProduitRepository extends JpaRepository<Produit, Long> {
     @Query(value = "SELECT * FROM produit p WHERE p.prix_unitairettc>= :prixMin AND p.prix_unitairettc= :prixMax ", nativeQuery = true)
     List<Produit> findByPrixBetween(@Param("prixMin") double prixMin, @Param("prixMax") double prixMax);
 
-
+     //ana khalid li zat had les methodes bax nkhdam fihom fFamilleProduit;
+    int deleteByFamilleProduitLibelle(String libelle);
 
 }

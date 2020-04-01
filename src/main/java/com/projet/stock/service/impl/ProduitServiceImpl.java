@@ -93,4 +93,20 @@ public class ProduitServiceImpl implements ProduitService {
     }
 
 
+    
+    
+
+    @Override
+    public int deleteByFamilleProduitLibelle(String libelle) {
+       return   produitRepository.deleteByFamilleProduitLibelle(libelle);
+    }
+
+    @Override
+    public int save(FamilleProduit familleProduit, List<Produit> produits) {
+        for (Produit produit : produits) {
+            produit.setFamilleProduit(familleProduit);
+            produitRepository.save(produit);
+        }
+        return 1;
+    }
 }

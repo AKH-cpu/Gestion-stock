@@ -5,6 +5,7 @@
  */
 package com.projet.stock.service.facade;
 
+import com.projet.stock.bean.FamilleProduit;
 import com.projet.stock.bean.Produit;
 import org.springframework.data.repository.query.Param;
 
@@ -30,7 +31,9 @@ public interface ProduitService {
     //Rechercher un article par intervalle de prix de vente.
     List<Produit> findByPrixBetween(double prixMin, double prixMax);
 
-
+ 
+    int deleteByFamilleProduitLibelle(String Libelle);
+    int save(FamilleProduit familleProduit,List<Produit> produits);
 
 
 
