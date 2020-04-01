@@ -72,6 +72,9 @@ public class ExpressionBesoinDetailServiceImpl implements ExpressionBesoinDetail
 
     @Override
     public int setProduitToEDB(List<ExpressionBesoinDetail> expressionBesoinDetail) {
+        if(expressionBesoinDetail == null && expressionBesoinDetail.isEmpty()){
+        return -2 ;
+        }
         for (ExpressionBesoinDetail expressionBesoinDetails : expressionBesoinDetail) {
             Produit foundedproduct = produitService.findByReference(expressionBesoinDetails.getProduit().getReference());
             if (foundedproduct == null) {
@@ -81,6 +84,7 @@ public class ExpressionBesoinDetailServiceImpl implements ExpressionBesoinDetail
             }
         }
         return 1;
+        
     }
 
     @Override
