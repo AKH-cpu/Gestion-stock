@@ -5,6 +5,8 @@
  */
 package com.projet.stock.bean;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.*;
@@ -22,13 +24,15 @@ public class EntiteAdministrative implements Serializable {
     private String reference;
     private String nom;
 
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @OneToMany(mappedBy = "entiteAdministrative")
     private List<ExpressionBesoin> expressionBesoins;
 
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @OneToMany(mappedBy = "entiteAdministrative")
     private List<Magasin> magasins;
 
-
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @OneToMany(mappedBy = "entiteAdministrative")
     private List<Personnel> employes;
     

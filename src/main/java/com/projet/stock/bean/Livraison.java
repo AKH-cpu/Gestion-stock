@@ -19,7 +19,6 @@ import javax.persistence.*;
 @Entity
 public class Livraison implements Serializable {
 
-   
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -29,14 +28,13 @@ public class Livraison implements Serializable {
     private String reference;
     private Double total;
 
-    @OneToOne
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    @OneToOne
     private ExpressionBesoin expressionBesoin;
 
     @ManyToOne
     private Fournisseur fournisseur;
 
-    
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @OneToMany(mappedBy = "livraison")
     private List<LivraisonDetail> livraisonDetails;
@@ -96,7 +94,6 @@ public class Livraison implements Serializable {
     public void setTotal(Double total) {
         this.total = total;
     }
-
 
     @Override
     public int hashCode() {

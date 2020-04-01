@@ -22,6 +22,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Service
 public class ProduitServiceImpl implements ProduitService {
+
     @Autowired
     ProduitRepository produitRepository;
 
@@ -51,6 +52,7 @@ public class ProduitServiceImpl implements ProduitService {
             return -2;
 
         } else {
+            produit.setExpressionBesoinDetails(null);
             produit.setFamilleProduit(familleProduit);
             produitRepository.save(produit);
             return 1;
@@ -69,14 +71,19 @@ public class ProduitServiceImpl implements ProduitService {
     }
 
     @Override
-    public void update(String reference, Produit produit) {
-        List<Produit> produits = produitRepository.findAll();
+    public int update(String reference, Produit produit) {
+        Produit produit1= findByReference(reference);
+        List<Produit> produits = findAll();
         for (int i = 0; i < produits.size(); i++) {
             Produit p = produits.get(i);
             if (p.getReference().equals(reference)) {
+
                 produits.set(i, produit);
+
+                return 1;
             }
         }
+        return -1;
 
     }
 
@@ -84,4 +91,6 @@ public class ProduitServiceImpl implements ProduitService {
     public List<Produit> findByPrixBetween(double prixMin, double prixMax) {
         return produitRepository.findByPrixBetween(prixMin, prixMax);
     }
+
+
 }

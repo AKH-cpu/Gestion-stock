@@ -15,7 +15,7 @@ import java.util.List;
  */
 public interface ProduitService {
 
-   Produit findByReference(String reference);
+    Produit findByReference(String reference);
 
     int deleteByReference(String reference);
 
@@ -24,11 +24,13 @@ public interface ProduitService {
     List<Produit> findAll();
 
     List<Produit> findByFamilleProduitLibelle(String libelle);
-    
-   void update(String reference, Produit produit);
-   
-   //Rechercher un article par intervalle de prix de vente.
-   List<Produit> findByPrixBetween(double prixMin,double prixMax);
+
+    int update(String reference, Produit produit);
+
+    //Rechercher un article par intervalle de prix de vente.
+    List<Produit> findByPrixBetween(double prixMin, double prixMax);
+
+
 
 
 

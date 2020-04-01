@@ -5,6 +5,8 @@
  */
 package com.projet.stock.bean;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -36,10 +38,11 @@ public class ExpressionBesoin implements Serializable {
     @ManyToOne
     private Personnel chef;
 
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @OneToMany(mappedBy = "expressionBesoin")
     private List<ExpressionBesoinDetail> expressionBesoinDetails;
 
-    @OneToOne(mappedBy = "expressionBesoin")
+    @OneToOne
     private Livraison livraison;
 
     @ManyToOne
@@ -55,6 +58,10 @@ public class ExpressionBesoin implements Serializable {
         this.expressionBesoinDetails = expressionBesoinDetails;
         this.livraison = livraison;
     }
+
+    public ExpressionBesoin() {
+    }
+    
 
     public String getEtat() {
         return etat;

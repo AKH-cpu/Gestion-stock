@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
  * @author AKH
  */
 @RestController
+@CrossOrigin(origins = {"http://localhost:4200"})
 @RequestMapping("produit-api/produit")
 public class ProduitRest {
 
@@ -53,9 +54,12 @@ public class ProduitRest {
         return produitService.findByPrixBetween(prixMin, prixMax);
     }
 
-    @PutMapping("update/reference/{reference}")
-    public void update(@PathVariable String reference,Produit produit) {
-         produitService.update(reference, produit);
+    @PutMapping("/update/reference/{reference}")
+    public int update(@PathVariable String reference, Produit produit) {
+       return produitService.update(reference, produit);
     }
+
+
+    
     
 }
