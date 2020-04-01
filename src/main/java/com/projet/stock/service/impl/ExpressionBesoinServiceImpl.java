@@ -7,6 +7,7 @@ package com.projet.stock.service.impl;
 
 import com.projet.stock.bean.EntiteAdministrative;
 import com.projet.stock.bean.ExpressionBesoin;
+import com.projet.stock.bean.ExpressionBesoinDetail;
 import com.projet.stock.bean.Personnel;
 import com.projet.stock.repository.ExpressionBesoinRepository;
 import com.projet.stock.service.facade.EntiteAdministrativeService;
@@ -52,6 +53,7 @@ public class ExpressionBesoinServiceImpl implements ExpressionBesoinService {
         ExpressionBesoin foundedexpressionBesoin = expressionBesoinRepository.findByReference(expressionBesoin.getReference());
         EntiteAdministrative foundedEntAdm = entiteAdministrativeService.findByReference(expressionBesoin.getEntiteAdministrative().getReference());
         Personnel foundedChef = personnelService.findByCode(expressionBesoin.getChef().getCode());
+
         if (foundedexpressionBesoin != null) {
             return -1;
         } else if (foundedEntAdm == null) {
@@ -101,18 +103,16 @@ public class ExpressionBesoinServiceImpl implements ExpressionBesoinService {
 //            return 1;
 //        }
 //    }
-
-    
-       @Override
+    @Override
     public List<ExpressionBesoin> findByChef(String codeEmp) {
         Personnel foundedPersonnel = personnelService.findByCode(codeEmp);
-       
+
         if (foundedPersonnel == null) {
             return null;
         } else {
             List<ExpressionBesoin> expressionBesoins = new ArrayList<>();
             for (ExpressionBesoin expressionBesoin : expressionBesoinRepository.findAll()) {
-                if(expressionBesoin.getChef().getCode().equals(codeEmp)){
+                if (expressionBesoin.getChef().getCode().equals(codeEmp)) {
 
                     expressionBesoins.add(expressionBesoin);
                 }

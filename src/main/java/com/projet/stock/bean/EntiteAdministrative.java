@@ -6,7 +6,6 @@
 package com.projet.stock.bean;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.*;
@@ -26,6 +25,7 @@ public class EntiteAdministrative implements Serializable {
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @OneToMany(mappedBy = "entiteAdministrative")
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private List<ExpressionBesoin> expressionBesoins;
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
@@ -35,7 +35,7 @@ public class EntiteAdministrative implements Serializable {
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @OneToMany(mappedBy = "entiteAdministrative")
     private List<Personnel> employes;
-    
+
     @OneToOne
     private Personnel chef;
 

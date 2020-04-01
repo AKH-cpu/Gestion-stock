@@ -31,7 +31,7 @@ public class ExpressionBesoinDetail implements Serializable {
     @ManyToOne
     private ExpressionBesoin expressionBesoin;
 
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    //@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @ManyToOne
     private Produit produit;
 
