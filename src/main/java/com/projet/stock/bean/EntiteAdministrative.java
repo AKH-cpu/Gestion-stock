@@ -23,7 +23,6 @@ public class EntiteAdministrative implements Serializable {
     private String reference;
     private String nom;
 
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @OneToMany(mappedBy = "entiteAdministrative")
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private List<ExpressionBesoin> expressionBesoins;

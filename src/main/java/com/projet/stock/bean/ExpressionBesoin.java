@@ -64,6 +64,10 @@ public class ExpressionBesoin implements Serializable {
 
     public ExpressionBesoin() {
     }
+
+    public ExpressionBesoin(long MIN_VALUE, String toHexString, Date date, String not_livred_yet, Personnel chef, EntiteAdministrative entiteAdministrative) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 
     public String getEtat() {
