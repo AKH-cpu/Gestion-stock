@@ -7,8 +7,8 @@ package com.projet.stock.bean;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
-import javax.persistence.Access;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -40,12 +40,26 @@ public class Magasin implements Serializable {
 //    @OneToMany
 //    private List<Produit> produitsMagasin;
     
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @ManyToOne
     private EntiteAdministrative entiteAdministrative;
-
+    
     @OneToMany(mappedBy = "magasin")
-    List<Stock> produitsMagasin;
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    List<Stock> stokes=new ArrayList<>();
 
+//    @OneToMany(mappedBy = "magasin")
+//    List<Stock> produitsMagasin;
+
+    public List<Stock> getStokes() {
+        return stokes;
+    }
+
+    public void setStokes(List<Stock> stokes) {
+        this.stokes = stokes;
+    }
+
+    
     public List<Personnel> getEmployes() {
         return employes;
     }
@@ -70,13 +84,13 @@ public class Magasin implements Serializable {
         this.nbrMAxProduit = nbrMAxProduit;
     }
 
-    public List<Stock> getProduitsMagasin() {
-        return produitsMagasin;
-    }
-
-    public void setProduitsMagasin(List<Stock> produitsMagasin) {
-        this.produitsMagasin = produitsMagasin;
-    }
+//    public List<Stock> getProduitsMagasin() {
+//        return produitsMagasin;
+//    }
+//
+//    public void setProduitsMagasin(List<Stock> produitsMagasin) {
+//        this.produitsMagasin = produitsMagasin;
+//    }
 
     public double getNbrMaxEmploye() {
         return nbrMaxEmploye;
@@ -150,5 +164,4 @@ public class Magasin implements Serializable {
     public String toString() {
         return "com.projet.stock.bean.Magasin[ id=" + id + " ]";
     }
-
 }

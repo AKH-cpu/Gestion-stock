@@ -5,10 +5,12 @@
  */
 package com.projet.stock.ws.rest;
 
+import com.projet.stock.bean.Magasin;
 import com.projet.stock.bean.Stock;
 import com.projet.stock.service.facade.StockService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,6 +24,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @author KHALID
  */
 @RestController
+@CrossOrigin(origins = {"http://localhost:4200"})
 @RequestMapping("Stock/stock")
 public class StockRest {
     @Autowired
@@ -47,8 +50,23 @@ public class StockRest {
     }
 
     @GetMapping("/reference/like/{reference}")
-    public List<Stock> findByReferenceLike(String reference) {
+    public List<Stock> findByReferenceLike(@PathVariable String reference) {
         return stockService.findByReferenceLike(reference);
+    }
+
+    @PostMapping("/save")
+    public int save(@RequestBody Magasin magasin) {
+        return stockService.save(magasin,magasin.getStokes());
+    }
+
+    @GetMapping("/magasin/reference/{reference}")
+    public List<Stock> findByMagasinReference(String reference) {
+        return stockService.findByMagasinReference(reference);
+    }
+    
+    @DeleteMapping("/magasin/reference/{reference}")
+    public int deleteByMagasinReference(String reference) {
+        return stockService.deleteByMagasinReference(reference);
     }
     
     

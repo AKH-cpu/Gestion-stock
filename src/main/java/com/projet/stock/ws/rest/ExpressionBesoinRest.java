@@ -10,6 +10,7 @@ import com.projet.stock.service.facade.ExpressionBesoinService;
 import java.util.Date;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,6 +24,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @author anoir
  */
 @RestController
+@CrossOrigin(origins = {"http://localhost:4200"})
 @RequestMapping("stock-api/ExpressionBesoin")
 public class ExpressionBesoinRest {
 
@@ -39,14 +41,19 @@ public class ExpressionBesoinRest {
         return expressionBesoinService.findBydateExpressionBesoin(dateExpressionBesoin);
     }
 
-    @PostMapping("/qteLivre/{qteLivre}")
+    @PostMapping("/")
     public int save(@RequestBody ExpressionBesoin expressionBesoin) {
         return expressionBesoinService.save(expressionBesoin);
     }
 
-    @PutMapping("/Reference/{Reference}")
-    public int deleteByReference(@PathVariable String Reference) {
-        return expressionBesoinService.deleteByReference(Reference);
+
+    @PutMapping("/reference/{reference}")
+    public int deleteByReference(@PathVariable String reference) {
+        return expressionBesoinService.deleteByReference(reference);
+//    @PutMapping("/Reference/{Reference}")
+//    public int deleteByReference(@PathVariable String Reference) {
+//        return expressionBesoinService.deleteByReference(Reference);
+//>>>>>>> 665f66e updates services
     }
 
     @GetMapping("/")

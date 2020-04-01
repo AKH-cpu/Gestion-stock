@@ -21,5 +21,5 @@ public interface EntiteAdministrativeRepository extends JpaRepository<EntiteAdmi
 
     public EntiteAdministrative findByReference(String reference);
 
-//    public EntiteAdministrative findByPersonnelCodeChef(String codeChef);
+//    public EntiteAdministrative findByPersonnelCode(String codeChef);
 }

@@ -20,13 +20,17 @@ public interface ExpressionBesoinDetailService {
 
     List<ExpressionBesoinDetail> findByQteLivre(Double qteLivre);
 
-    public ExpressionBesoinDetail findByReference(String Reference);
+    public ExpressionBesoinDetail findByReference(String reference);
 
     List<ExpressionBesoinDetail> findEDBOnHold();
 
-    int save(ExpressionBesoinDetail expressionBesoinDetail);
+    int save(String expressionBesoinRef, List<ExpressionBesoinDetail> expressionBesoinDetail);
 
-    int deleteByReference(String Reference);
+    int setProduitToEDB(List<ExpressionBesoinDetail> expressionBesoinDetail);
+
+    int deleteByReference(String reference);
+
+    int deleteByExpressionBesoinReference(String reference);
 
     // infos sur produit en besoin
 }

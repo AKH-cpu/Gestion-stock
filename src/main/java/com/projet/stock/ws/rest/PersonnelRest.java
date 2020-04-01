@@ -7,10 +7,9 @@ package com.projet.stock.ws.rest;
 
 import com.projet.stock.bean.Personnel;
 import com.projet.stock.service.facade.PersonnelService;
-import java.util.Date;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -24,6 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @author anoir
  */
 @RestController
+@CrossOrigin(origins = {"http://localhost:4200"})
 @RequestMapping("stock-api/Personnel")
 public class PersonnelRest {
 

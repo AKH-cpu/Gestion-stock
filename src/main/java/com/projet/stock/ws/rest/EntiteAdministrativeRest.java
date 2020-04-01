@@ -10,6 +10,7 @@ import com.projet.stock.bean.Magasin;
 import com.projet.stock.service.facade.EntiteAdministrativeService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,6 +25,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @author lenovo
  */
 @RestController
+@CrossOrigin(origins = {"http://localhost:4200"})
 @RequestMapping("gestion-stock-v1/EntiteAdministrative")
 public class EntiteAdministrativeRest {
     
@@ -57,8 +59,8 @@ public class EntiteAdministrativeRest {
     }
     
     @GetMapping("/findMagasinLibre/refEntite/{refEntite}")
-    public List<Magasin> findMagasinLibre(@PathVariable String refEntite){
-        return entiteAdministrativeService.findMagasinLibre(refEntite);
+    public List<Magasin> findMagasinVide(@PathVariable String refEntite){
+        return entiteAdministrativeService.findMagasinVide(refEntite);
     }
 
     @GetMapping("/findMagasinBesoinsDeProduits/refEntite/{refEntite}")
@@ -87,9 +89,18 @@ public class EntiteAdministrativeRest {
     }
 
     @GetMapping("/findEntiteByChef/codeChef/{codeChef}")
-    public EntiteAdministrative findByPersonnelCodeChef(@PathVariable String codeChef){
-        return entiteAdministrativeService.findByPersonnelCodeChef(codeChef);
+    public EntiteAdministrative findByPersonnelCode(@PathVariable String codeChef){
+        return entiteAdministrativeService.findByPersonnelCode(codeChef);
     }
     
+    @GetMapping("/findMagasinsNeedEmployes/refEntite/{refEntite}")
+     public List<Magasin> magasinsNeedEmployes(@PathVariable String refEntite){
+         return entiteAdministrativeService.magasinsNeedEmployes(refEntite);
+     }
     
+     @GetMapping("/findMagasinsWithNoEmploye/refEntite/{refEntite}")
+     public List<Magasin> magasinsWithNoEmployes(@PathVariable String refEntite){
+         return entiteAdministrativeService.magasinsWithNoEmployes(refEntite);
+     }
+     
 }

@@ -18,8 +18,10 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface StockRepository  extends JpaRepository<Stock,Long>{
-    public Stock findByReference(String reference);
     public int deleteByReference(String reference);
+    public Stock findByReference(String reference);
+    public List<Stock> findByMagasinReference(String reference);
+    public int deleteByMagasinReference(String reference);
     @Query("SELECT s FROM Stock s WHERE s.reference LIKE :ref")
     public List<Stock> findByReferenceLike(@Param(value = "ref")String reference);
     

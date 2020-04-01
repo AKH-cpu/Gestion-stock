@@ -6,6 +6,7 @@
 package com.projet.stock.service.facade;
 
 import com.projet.stock.bean.EntiteAdministrative;
+import com.projet.stock.bean.ExpressionBesoinDetail;
 import com.projet.stock.bean.Magasin;
 import java.util.List;
 
@@ -27,7 +28,7 @@ public interface EntiteAdministrativeService {
 
     public EntiteAdministrative findByNom(String nom);
 
-    public List<Magasin> findMagasinLibre(String refEntite);
+    public List<Magasin> findMagasinVide(String refEntite);
 
     public List<Magasin> magasinsBesoinsDeProduits(String refEntite);
 
@@ -39,6 +40,12 @@ public interface EntiteAdministrativeService {
 
     public Boolean isEployeExistInMagasin(String code, String refMagasin);
 
-    public EntiteAdministrative findByPersonnelCodeChef(String codeChef);
+    public EntiteAdministrative findByPersonnelCode(String codeChef);
+    
+    public List<Magasin> magasinsWithNoEmployes(String refEntite);
+    
+    public List<Magasin> magasinsNeedEmployes(String refEntite);
+    
+    public List<ExpressionBesoinDetail> besoinsInMagasin(String refMag);
 
 }

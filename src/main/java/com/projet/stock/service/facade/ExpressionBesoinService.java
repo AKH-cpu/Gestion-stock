@@ -6,6 +6,7 @@
 package com.projet.stock.service.facade;
 
 import com.projet.stock.bean.ExpressionBesoin;
+import com.projet.stock.bean.ExpressionBesoinDetail;
 import java.util.Date;
 import java.util.List;
 

@@ -5,12 +5,12 @@
  */
 package com.projet.stock.service.impl;
 
+import com.projet.stock.bean.ExpressionBesoin;
 import com.projet.stock.bean.ExpressionBesoinDetail;
-import com.projet.stock.bean.Livraison;
 import com.projet.stock.bean.Produit;
 import com.projet.stock.repository.ExpressionBesoinDetailRepository;
 import com.projet.stock.service.facade.ExpressionBesoinDetailService;
-import com.projet.stock.service.facade.LivraisonService;
+import com.projet.stock.service.facade.ExpressionBesoinService;
 import com.projet.stock.service.facade.ProduitService;
 import java.util.ArrayList;
 import java.util.List;
@@ -30,7 +30,7 @@ public class ExpressionBesoinDetailServiceImpl implements ExpressionBesoinDetail
     @Autowired
     private ProduitService produitService;
     @Autowired
-    private LivraisonService livraisonService;
+    private ExpressionBesoinService expressionBesoinService;
 
     @Override
     public List<ExpressionBesoinDetail> findByQte(Double qte) {
@@ -43,24 +43,44 @@ public class ExpressionBesoinDetailServiceImpl implements ExpressionBesoinDetail
     }
 
     @Override
-    public ExpressionBesoinDetail findByReference(String Reference) {
-        return expressionBesoinDetailRepository.findByReference(Reference);
+    public ExpressionBesoinDetail findByReference(String reference) {
+        return expressionBesoinDetailRepository.findByReference(reference);
     }
 
     @Override
-    public int save(ExpressionBesoinDetail expressionBesoinDetail) {
-        Produit foundedproduct = produitService.findByReference(expressionBesoinDetail.getProduit().getReference());
-        Livraison foundedlivraison = livraisonService.findByReference(expressionBesoinDetail.getExpressionBesoin().getLivraison().getReference());
-
-        if (foundedproduct == null) {
+    public int save(String expressionBesoinRef, List<ExpressionBesoinDetail> expressionBesoinDetail) {
+        ExpressionBesoin foundedExpressionBesoin = expressionBesoinService.findByReference(expressionBesoinRef);
+        if(setProduitToEDB(expressionBesoinDetail) == -1){
             return -1;
-        } else if (foundedlivraison != null) {
+        }
+        if (foundedExpressionBesoin == null) {
             return -2;
         } else {
-            expressionBesoinDetailRepository.save(expressionBesoinDetail);
+            for (ExpressionBesoinDetail expressionBesoinDetails : expressionBesoinDetail) {
+                ExpressionBesoinDetail foundedExpressionBesoinDetail = expressionBesoinDetailRepository.findByReference(expressionBesoinDetails.getReference());
+                if (foundedExpressionBesoinDetail != null) {
+                    return -3;
+                } else {
+                    expressionBesoinDetails.setExpressionBesoin(foundedExpressionBesoin);
+                    expressionBesoinDetailRepository.save(expressionBesoinDetails);
+                }
+            }
             return 1;
         }
 
+    }
+
+    @Override
+    public int setProduitToEDB(List<ExpressionBesoinDetail> expressionBesoinDetail) {
+        for (ExpressionBesoinDetail expressionBesoinDetails : expressionBesoinDetail) {
+            Produit foundedproduct = produitService.findByReference(expressionBesoinDetails.getProduit().getReference());
+            if (foundedproduct == null) {
+                return -1;
+            } else {
+                expressionBesoinDetails.setProduit(foundedproduct);
+            }
+        }
+        return 1;
     }
 
     @Override
@@ -82,7 +102,8 @@ public class ExpressionBesoinDetailServiceImpl implements ExpressionBesoinDetail
 
     @Override
     @Transactional
-    public int deleteByReference(String Reference) {
+    public int deleteByReference(String Reference
+    ) {
         ExpressionBesoinDetail foundedexpressionBesoin1Detail = expressionBesoinDetailRepository.findByReference(Reference);
 
         if (foundedexpressionBesoin1Detail == null) {
@@ -91,6 +112,11 @@ public class ExpressionBesoinDetailServiceImpl implements ExpressionBesoinDetail
             expressionBesoinDetailRepository.deleteByReference(Reference);
             return 1;
         }
+    }
+
+    @Override
+    public int deleteByExpressionBesoinReference(String reference) {
+        return expressionBesoinDetailRepository.deleteByExpressionBesoinReference(reference);
     }
 
 }

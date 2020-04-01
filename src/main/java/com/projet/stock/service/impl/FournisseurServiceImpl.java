@@ -11,6 +11,7 @@ import com.projet.stock.service.facade.FournisseurService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
@@ -44,6 +45,7 @@ public class FournisseurServiceImpl implements FournisseurService{
     }
 
     @Override
+    @Transactional
     public int deleteByReference(String reference) {
       return fournisseurRepository.deleteByReference(reference);
     }

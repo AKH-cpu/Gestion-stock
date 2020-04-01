@@ -5,6 +5,7 @@
  */
 package com.projet.stock.bean;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -26,11 +27,16 @@ public class ExpressionBesoinDetail implements Serializable {
     private Double qte;
     private Double qteLivre;
 
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @ManyToOne
     private ExpressionBesoin expressionBesoin;
 
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @ManyToOne
     private Produit produit;
+
+    public ExpressionBesoinDetail() {
+    }
 
     public ExpressionBesoinDetail(Long id, String reference, Double qte, Double qteLivre, ExpressionBesoin expressionBesoin, Produit produit) {
         this.id = id;
@@ -81,13 +87,6 @@ public class ExpressionBesoinDetail implements Serializable {
         this.qteLivre = qteLivre;
     }
 
-//    public ExpressionBesoin getExpressionBesoin() {
-//        return expressionBesoin;
-//    }
-//
-//    public void setExpressionBesoin(ExpressionBesoin expressionBesoin) {
-//        this.expressionBesoin = expressionBesoin;
-//    }
     public Produit getProduit() {
         return produit;
     }
@@ -102,7 +101,6 @@ public class ExpressionBesoinDetail implements Serializable {
         hash += (id != null ? id.hashCode() : 0);
         return hash;
     }
-
 
     @Override
     public boolean equals(Object object) {
