@@ -59,7 +59,7 @@ public class PersonnelServiceImpl implements PersonnelService {
     }
 
     @Override
-    public Personnel findBySeniorityScore(Double seniorityScore) {
+    public List<Personnel> findBySeniorityScore(Double seniorityScore) {
         return personnelRepository.findBySeniorityScore(seniorityScore);
     }
 
@@ -69,12 +69,12 @@ public class PersonnelServiceImpl implements PersonnelService {
     }
 
     @Override
-    public Personnel findBySalary(Double salary) {
+    public List<Personnel> findBySalary(Double salary) {
         return personnelRepository.findBySalary(salary);
     }
 
     @Override
-    public Personnel findByYearsExp(Double yearsExp) {
+    public List<Personnel> findByYearsExp(Double yearsExp) {
         return personnelRepository.findByYearsExp(yearsExp);
     }
 
@@ -86,18 +86,21 @@ public class PersonnelServiceImpl implements PersonnelService {
             return -1;
         } else if (fEntiteAdministrative == null) {
             return -2;
-        } //si il est un chef, il faut avoir un seul chef dans chaque entite.
-        else if (personnel.getFonction().equals("chef") && fEntiteAdministrative.getChef() != null) {
-            return -3;
         } else {
-            if (personnel.getFonction().equalsIgnoreCase("chef")) {
-                personnel.setCodeChef(null);
-                personnel.setSeniorityScore((double) 50);
-                //hadi zdtha (bartaouch) 7int makat2assosiach entite l had chef f la base de donnee
-                personnel.setEntiteAdministrative(fEntiteAdministrative);
-                fEntiteAdministrative.setChef(personnel);
-                personnel.setEntiteAdministrative(fEntiteAdministrative);
-                personnelRepository.save(personnel);
+            if (personnel.getFonction().equalsIgnoreCase("chef") && personnel.getCodeChef() == null) {
+                //si il est un chef, il faut avoir un seul chef dans chaque entite.
+                if (fEntiteAdministrative.getChef() != null) {
+                    return -3;
+                } else {
+                    personnel.setSeniorityScore((double) 50);
+                    personnel.setEntiteAdministrative(fEntiteAdministrative);
+                    personnel.setEntiteAdministrative(fEntiteAdministrative);
+                    fEntiteAdministrative.setChef(personnel);
+                    personnelRepository.save(personnel);
+
+                }
+            } else if (!personnel.getFonction().equalsIgnoreCase("chef") && personnel.getCodeChef() == null) {
+                return -4;
             } else {
                 personnel.setSeniorityScore((double) 50);
                 personnel.setEntiteAdministrative(fEntiteAdministrative);
@@ -110,45 +113,77 @@ public class PersonnelServiceImpl implements PersonnelService {
     @Override
     @Transactional
     public int deleteByCode(String code) {
-        return personnelRepository.deleteByCode(code);
+        Personnel foundedpersonnel = personnelRepository.findByCode(code);
+        if (foundedpersonnel == null) {
+            return -1;
+        } else {
+            if (foundedpersonnel.getFonction().equalsIgnoreCase("chef")) {
+                EntiteAdministrative fEntiteAdministrative = entiteAdministrativeService
+                        .findByNom(foundedpersonnel.getEntiteAdministrative().getNom());
+                for (Personnel employe : personnelRepository.findByCodeChef(code)) {
+                    employe.setCodeChef(null);
+                }
+                fEntiteAdministrative.setChef(null);
+                personnelRepository.deleteByCode(code);
+                return 1;
+            } else {
+                personnelRepository.deleteByCode(code);
+                return 2;
+            }
+        }
     }
 
     @Override
     public int transferEmp(String codeEmp, String newEAReference) {
         Personnel foundedpersonnel = personnelRepository.findByCode(codeEmp);
-        EntiteAdministrative foldEA = entiteAdministrativeService.findByReference(foundedpersonnel.getEntiteAdministrative().getReference());
         EntiteAdministrative fnewEA = entiteAdministrativeService.findByReference(newEAReference);
         if (foundedpersonnel == null) {
             return -1;
-        } else if (foldEA == null) {
-            return -2;
         } else if (fnewEA == null) {
-            return -3;
+            return -2;
         } else {
-            foundedpersonnel.setEntiteAdministrative(fnewEA);
-            personnelRepository.save(foundedpersonnel);
-            return 1;
+            EntiteAdministrative foldEA = entiteAdministrativeService
+                    .findByReference(foundedpersonnel.getEntiteAdministrative().getReference());
+            if (foldEA == null) {
+                return -3;
+            } else {
+                foundedpersonnel.setEntiteAdministrative(fnewEA);
+                personnelRepository.save(foundedpersonnel);
+                return 1;
+            }
         }
     }
 
     @Override
-    public int addChef(String newChefCode, String oldChefCode) {
+    public int addChef(String entiteAdminNom, String newChefCode, String oldChefCode) {
         Personnel foundednewChef = personnelRepository.findByCode(newChefCode);
-        Personnel foundedoldChef = personnelRepository.findByCode(oldChefCode);
-        EntiteAdministrative fEntiteAdministrative = entiteAdministrativeService.findByNom(foundedoldChef.getEntiteAdministrative().getNom());
         if (foundednewChef == null) {
             return -1;
-        } else if (foundedoldChef == null) {
-            return -2;
-        } else if (fEntiteAdministrative == null) {
-            return -3;
         } else {
-            fEntiteAdministrative.setChef(foundednewChef);
-            personnelRepository.findByCodeChef(foundedoldChef.getCodeChef()).forEach((employees) -> {
-                employees.setCode(foundednewChef.getCode());
-            });
-            personnelRepository.save(foundednewChef);
-            return 1;
+            Personnel foundedoldChef = personnelRepository.findByCode(oldChefCode);
+            EntiteAdministrative fEntiteAdministrative = entiteAdministrativeService.findByNom(entiteAdminNom);
+            if (fEntiteAdministrative == null) {
+                return -3;
+            } else if (foundednewChef.getEntiteAdministrative() != fEntiteAdministrative) {
+                return -4;
+            } else if (foundedoldChef == null) {
+                personnelRepository.findByEntiteAdministrativeNom(entiteAdminNom).forEach((employee) -> {
+                    employee.setCodeChef(newChefCode);
+                });
+                foundednewChef.setFonction("Chef");
+                fEntiteAdministrative.setChef(foundednewChef);
+                personnelRepository.save(foundednewChef);
+                return 1;
+            } else {
+                fEntiteAdministrative.setChef(foundednewChef);
+                personnelRepository.findByCodeChef(foundedoldChef.getCodeChef()).forEach((employees) -> {
+                    employees.setCode(foundednewChef.getCode());
+                });
+                foundednewChef.setFonction("Chef");
+                fEntiteAdministrative.setChef(foundednewChef);
+                personnelRepository.save(foundednewChef);
+                return 2;
+            }
         }
     }
 
@@ -198,7 +233,7 @@ public class PersonnelServiceImpl implements PersonnelService {
         Personnel foundedEmp = personnelRepository.findByCode(codeEmp);
         if (foundedEmp == null) {
             return -1;
-        } else  {
+        } else {
             return 1;
         }
     }

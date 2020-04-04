@@ -20,13 +20,13 @@ public interface PersonnelService {
 
     List<Personnel> findByFonction(String fonction);
 
-    Personnel findBySeniorityScore(Double seniorityScore);
+    List<Personnel> findBySeniorityScore(Double seniorityScore);
 
     List<Personnel> findBySeniorityScoreGreaterThanEqual(Double value);
 
-    Personnel findBySalary(Double salary);
+    List<Personnel> findBySalary(Double salary);
 
-    Personnel findByYearsExp(Double yearsExp);
+    List<Personnel> findByYearsExp(Double yearsExp);
 
     //EDB = Expression De Besoin
     Personnel findByEDB(String referenceEDB);
@@ -41,7 +41,7 @@ public interface PersonnelService {
 
     int transferEmp(String codeEmp, String newEAReference);
 
-    int addChef(String newChefCode, String oldChefCode);
+    int addChef( String entiteAdminNom, String newChefCode, String oldChefCode);
 
     List<Personnel> topFiveCondidatesToBePromoted();
 

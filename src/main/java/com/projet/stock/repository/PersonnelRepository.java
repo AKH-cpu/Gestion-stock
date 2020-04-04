@@ -20,13 +20,13 @@ public interface PersonnelRepository extends JpaRepository<Personnel, Long> {
 
     Personnel findByCode(String code);
 
-    Personnel findBySeniorityScore(Double seniorityScore);
+    List<Personnel> findBySeniorityScore(Double seniorityScore);
 
     List<Personnel> findBySeniorityScoreGreaterThanEqual(double value);
 
-    Personnel findBySalary(Double salary);
+    List<Personnel> findBySalary(Double salary);
 
-    Personnel findByYearsExp(Double yearsExp);
+    List<Personnel> findByYearsExp(Double yearsExp);
 
     List<Personnel> findByCodeChef(String codeChef);
 

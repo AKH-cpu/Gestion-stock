@@ -10,6 +10,7 @@ import com.projet.stock.service.facade.PersonnelService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -51,17 +52,17 @@ public class PersonnelRest {
     }
 
     @GetMapping("/seniorityScore/{seniorityScore}")
-    public Personnel findBySeniorityScore(@PathVariable Double seniorityScore) {
+    public List<Personnel> findBySeniorityScore(@PathVariable Double seniorityScore) {
         return personnelService.findBySeniorityScore(seniorityScore);
     }
 
     @GetMapping("/salary/{salary}")
-    public Personnel findBySalary(@PathVariable Double salary) {
+    public List<Personnel> findBySalary(@PathVariable Double salary) {
         return personnelService.findBySalary(salary);
     }
 
     @GetMapping("/yearsExp/{yearsExp}")
-    public Personnel findByYearsExp(@PathVariable Double yearsExp) {
+    public List<Personnel> findByYearsExp(@PathVariable Double yearsExp) {
         return personnelService.findByYearsExp(yearsExp);
     }
 
@@ -75,7 +76,7 @@ public class PersonnelRest {
         return personnelService.findByCodeChef(codeChef);
     }
 
-    @PutMapping("/code/{code}")
+    @DeleteMapping("/code/{code}")
     public int deleteByCode(@PathVariable String code) {
         return personnelService.deleteByCode(code);
     }
@@ -95,9 +96,9 @@ public class PersonnelRest {
         return personnelService.findBySeniorityScoreGreaterThanEqual(value);
     }
 
-    @PutMapping("/newChefCode/{newChefCode}/oldChefCode/{oldChefCode}")
-    public int addChef(@PathVariable String newChefCode,@PathVariable String oldChefCode) {
-        return personnelService.addChef(newChefCode, oldChefCode);
+    @PutMapping("/entiteAdminNom/{entiteAdminNom}/newChefCode/{newChefCode}/oldChefCode/{oldChefCode}")
+    public int addChef(@PathVariable String entiteAdminNom, @PathVariable String newChefCode, @PathVariable String oldChefCode) {
+        return personnelService.addChef(entiteAdminNom, newChefCode, oldChefCode);
     }
 
     @GetMapping("/topfive")
@@ -109,7 +110,5 @@ public class PersonnelRest {
     public int updateSeniorityScore(@PathVariable String codeEmp) {
         return personnelService.updateSeniorityScore(codeEmp);
     }
-
-  
 
 }
