@@ -49,6 +49,11 @@ public class FournisseurRest {
     public int deleteByReference(@PathVariable String reference) {
         return fournisseurService.deleteByReference(reference);
     }
+
+    @GetMapping("/reference/like/{reference}")
+    public List<Fournisseur> findByReferenceLike(@PathVariable String reference) {
+        return fournisseurService.findByReferenceLike(reference);
+    }
     
     
 }

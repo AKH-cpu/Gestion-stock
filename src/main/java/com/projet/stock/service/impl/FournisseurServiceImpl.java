@@ -49,5 +49,10 @@ public class FournisseurServiceImpl implements FournisseurService{
     public int deleteByReference(String reference) {
       return fournisseurRepository.deleteByReference(reference);
     }
+
+    @Override
+    public List<Fournisseur> findByReferenceLike(String reference) {
+        return fournisseurRepository.findByReferenceLike(reference + "%");
+    }
     
 }

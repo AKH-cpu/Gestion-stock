@@ -6,6 +6,7 @@
 package com.projet.stock.ws.rest;
 
 import com.projet.stock.bean.FamilleProduit;
+import com.projet.stock.bean.Produit;
 import com.projet.stock.service.facade.FamilleProduitService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,7 +49,7 @@ public class FamilleProduitRest {
     public int deleteByLibelle(@PathVariable String libelle) {
         return familleProduitService.deleteByLibelle(libelle);
     }
-    
-    
-    
+
+   
+     
 }

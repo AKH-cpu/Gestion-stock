@@ -31,7 +31,8 @@ public class Produit implements Serializable {
     private Double prixUnitaireHT;
     private Double tauxTVA;
     private Double prixUnitaireTTC;
-
+     //ana li zatha khalid
+    private Double tva;
     @ManyToOne
     private FamilleProduit familleProduit;
 
@@ -103,6 +104,15 @@ public class Produit implements Serializable {
         this.id = id;
     }
 
+    public Double getTva() {
+        return tva;
+    }
+
+    public void setTva(Double tva) {
+        this.tva = tva;
+    }
+
+    
     @Override
     public int hashCode() {
         int hash = 0;

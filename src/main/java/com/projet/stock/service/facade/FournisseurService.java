@@ -17,4 +17,5 @@ public interface FournisseurService {
     public List<Fournisseur> findAll();
     public int save(Fournisseur fournisseur);
     public int deleteByReference(String reference);
+    public List<Fournisseur> findByReferenceLike(String reference);
 }
