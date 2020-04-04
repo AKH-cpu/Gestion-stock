@@ -5,7 +5,6 @@
  */
 package com.projet.stock.bean;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -20,8 +19,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonProperty.Access;
-import com.oracle.webservices.internal.api.message.PropertySet;
 
 /**
  * @author AKH
